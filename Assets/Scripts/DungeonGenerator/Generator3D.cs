@@ -27,26 +27,17 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    [SerializeField]
-    Vector3Int size;
-    [SerializeField]
-    int roomCount;
-    [SerializeField]
-    Vector3Int roomMaxSize;
-    [SerializeField]
-    GameObject cubePrefab;
-    [SerializeField]
-    GameObject hallwayPrefab;
-    [SerializeField]
-    GameObject upStairwayPrefab, downStairwayPrefab;
+    [SerializeField] Vector3Int size;
+    [SerializeField] int roomCount;
+    [SerializeField] Vector3Int roomMaxSize;
+    [SerializeField] GameObject cubePrefab;
+    [SerializeField] List<Vector3Int> panicRooms, additionalRooms;
+    [SerializeField] GameObject hallwayPrefab;
+    [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
-
-    [SerializeField]
-    Material redMaterial;
-    [SerializeField]
-    Material blueMaterial;
-    [SerializeField]
-    Material greenMaterial;
+    [SerializeField] Material redMaterial;
+    [SerializeField] Material blueMaterial;
+    [SerializeField] Material greenMaterial;
 
     Random random;
     Grid3D<CellType> grid;
@@ -65,6 +56,92 @@ public class Generator3D : MonoBehaviour {
         PathfindHallways();
     }
 
+    void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
+    public void PlaceRooms()
+    {
+        // Primero, colocar las habitaciones de 'firstRoomSizes'
+        foreach (Vector3Int roomSize in panicRooms)
+        {
+            PlaceRoomAtRandomLocation(roomSize);
+        }
+
+        List<Vector3Int> shuffledRoomSizes = new List<Vector3Int>(additionalRooms);
+        Shuffle(shuffledRoomSizes); // Mezclar la lista
+
+        foreach (Vector3Int roomSize in shuffledRoomSizes)
+        {
+            if (ShouldPlaceRoom())
+            {
+                PlaceRoomAtRandomLocation(roomSize);
+            }
+        }
+    }
+
+    bool ShouldPlaceRoom()
+    {
+        // Definir una probabilidad de que una habitación se coloque
+        // Por ejemplo, 50% de probabilidad
+        return random.NextDouble() < 0.2;
+    }
+
+
+    void PlaceRoomAtRandomLocation(Vector3Int roomSize)
+    {
+        Vector3Int location = new Vector3Int(
+            random.Next(0, size.x),
+            random.Next(0, size.y),
+            random.Next(0, size.z)
+        );
+
+        bool add = true;
+        Room newRoom = new Room(location, roomSize);
+        Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
+
+        foreach (var room in rooms)
+        {
+            if (Room.Intersect(room, buffer))
+            {
+                add = false;
+                break;
+            }
+        }
+        
+        if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
+            || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
+            || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z)
+        {
+            add = false;
+        }
+        
+        if (add)
+        {
+            rooms.Add(newRoom);
+            PlaceRoom(newRoom.bounds.position, newRoom.bounds.size);
+
+            foreach (var pos in newRoom.bounds.allPositionsWithin)
+            {
+                grid[pos] = CellType.Room;
+            }
+        }
+        
+    }
+
+
+
+
+    /*
     void PlaceRooms() {
         for (int i = 0; i < roomCount; i++) {
             Vector3Int location = new Vector3Int(
@@ -105,7 +182,7 @@ public class Generator3D : MonoBehaviour {
                 }
             }
         }
-    }
+    }*/
 
     void Triangulate() {
         List<Vertex> vertices = new List<Vertex>();

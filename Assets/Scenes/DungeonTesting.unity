@@ -167,11 +167,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547a5b9f3c9562d469dd59dd043935a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 40, y: 5, z: 40}
+  size: {x: 60, y: 5, z: 60}
   roomCount: 50
   roomMaxSize: {x: 6, y: 2, z: 6}
   cubePrefab: {fileID: 7893673706923132279, guid: e4958132bd217194882d599999fe283a,
     type: 3}
+  panicRooms:
+  - {x: 5, y: 2, z: 5}
+  - {x: 4, y: 2, z: 4}
+  - {x: 2, y: 1, z: 2}
+  - {x: 3, y: 3, z: 3}
+  - {x: 5, y: 1, z: 2}
+  - {x: 7, y: 1, z: 3}
+  additionalRooms:
+  - {x: 2, y: 1, z: 3}
+  - {x: 3, y: 1, z: 2}
+  - {x: 2, y: 1, z: 2}
+  - {x: 1, y: 1, z: 2}
+  - {x: 2, y: 1, z: 1}
   hallwayPrefab: {fileID: 7893673706923132279, guid: 66100796625dcc043a9051b668fffb7f,
     type: 3}
   upStairwayPrefab: {fileID: 7893673706923132279, guid: 27bb765bfefc67e4cbc8e938f526a43e,
