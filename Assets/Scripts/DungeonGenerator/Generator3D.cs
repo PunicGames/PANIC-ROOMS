@@ -4,6 +4,14 @@ using UnityEngine;
 using Random = System.Random;
 using Graphs;
 using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
+
+[System.Serializable]
+public struct PanicRoom
+{
+    public Vector3Int size;
+    public GameObject prefab;
+}
 
 public class Generator3D : MonoBehaviour {
     enum CellType {
@@ -31,7 +39,7 @@ public class Generator3D : MonoBehaviour {
     [SerializeField] int roomCount;
     [SerializeField] Vector3Int roomMaxSize;
     [SerializeField] GameObject cubePrefab;
-    [SerializeField] List<Vector3Int> panicRooms, additionalRooms;
+    [SerializeField] List<PanicRoom> panicRooms, additionalRooms;
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
@@ -55,7 +63,6 @@ public class Generator3D : MonoBehaviour {
         CreateHallways();
         PathfindHallways();
     }
-
     void Shuffle<T>(List<T> list)
     {
         int n = list.Count;
@@ -72,78 +79,84 @@ public class Generator3D : MonoBehaviour {
     public void PlaceRooms()
     {
         // Primero, colocar las habitaciones de 'firstRoomSizes'
-        foreach (Vector3Int roomSize in panicRooms)
+        foreach (PanicRoom room in panicRooms)
         {
-            PlaceRoomAtRandomLocation(roomSize);
+            PlaceRoomAtRandomLocation(room);
         }
 
-        List<Vector3Int> shuffledRoomSizes = new List<Vector3Int>(additionalRooms);
+        List<PanicRoom> shuffledRoomSizes = new List<PanicRoom>(additionalRooms);
         Shuffle(shuffledRoomSizes); // Mezclar la lista
 
-        foreach (Vector3Int roomSize in shuffledRoomSizes)
+        foreach (PanicRoom room in shuffledRoomSizes)
         {
             if (ShouldPlaceRoom())
             {
-                PlaceRoomAtRandomLocation(roomSize);
+                PlaceRoomAtRandomLocation(room);
             }
         }
     }
 
     bool ShouldPlaceRoom()
     {
-        // Definir una probabilidad de que una habitación se coloque
-        // Por ejemplo, 50% de probabilidad
-        return random.NextDouble() < 0.2;
+        return random.NextDouble() < 0.5;
     }
 
 
-    void PlaceRoomAtRandomLocation(Vector3Int roomSize)
+    void PlaceRoomAtRandomLocation(PanicRoom room)
     {
-        Vector3Int location = new Vector3Int(
-            random.Next(0, size.x),
-            random.Next(0, size.y),
-            random.Next(0, size.z)
-        );
+        Vector3Int roomSize = room.size;
+        while (true) 
+        { 
+            Vector3Int location = new Vector3Int(
+                random.Next(0, size.x),
+                random.Next(0, size.y),
+                random.Next(0, size.z)
+            );
 
-        bool add = true;
-        Room newRoom = new Room(location, roomSize);
-        Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
+            bool add = true;
+            Room newRoom = new Room(location, roomSize);
+            Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
 
-        foreach (var room in rooms)
-        {
-            if (Room.Intersect(room, buffer))
+            foreach (var r in rooms)
+            {
+                if (Room.Intersect(r, buffer))
+                {
+                    add = false;
+                    break;
+                }
+            }
+        
+            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
+                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
+                || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z)
             {
                 add = false;
-                break;
             }
-        }
         
-        if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
-            || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
-            || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z)
-        {
-            add = false;
-        }
-        
-        if (add)
-        {
-            rooms.Add(newRoom);
-            PlaceRoom(newRoom.bounds.position, newRoom.bounds.size);
-
-            foreach (var pos in newRoom.bounds.allPositionsWithin)
+            if (add)
             {
-                grid[pos] = CellType.Room;
+                rooms.Add(newRoom);
+                PlaceRoom(newRoom.bounds.position, room);
+
+                foreach (var pos in newRoom.bounds.allPositionsWithin)
+                {
+                    grid[pos] = CellType.Room;
+                }
+                return;
             }
         }
-        
-    }
 
+    }
 
 
 
     /*
     void PlaceRooms() {
-        for (int i = 0; i < roomCount; i++) {
+        int i = 0;
+
+        //for (int i = 0; i < roomCount; i++)
+        while ( i < roomCount)
+        {
             Vector3Int location = new Vector3Int(
                 random.Next(0, size.x),
                 random.Next(0, size.y),
@@ -176,14 +189,16 @@ public class Generator3D : MonoBehaviour {
             if (add) {
                 rooms.Add(newRoom);
                 PlaceRoom(newRoom.bounds.position, newRoom.bounds.size);
+                Debug.Log(newRoom.bounds.size);
+                i++;
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin) {
                     grid[pos] = CellType.Room;
                 }
             }
         }
-    }*/
-
+    }
+    */
     void Triangulate() {
         List<Vertex> vertices = new List<Vertex>();
 
@@ -208,9 +223,11 @@ public class Generator3D : MonoBehaviour {
         remainingEdges.ExceptWith(selectedEdges);
 
         foreach (var edge in remainingEdges) {
+            /*
             if (random.NextDouble() < 0.125) {
                 selectedEdges.Add(edge);
-            }
+            }*/
+            selectedEdges.Add(edge);
         }
     }
 
@@ -375,10 +392,17 @@ public class Generator3D : MonoBehaviour {
 
     void PlaceCube(Vector3Int location, Vector3Int size, Material material) {
         GameObject go = Instantiate(cubePrefab, location, Quaternion.identity);
+        go.name = size.ToString();
         go.GetComponent<Transform>().localScale = size;
         go.GetComponent<DCubeTint>().material = material;
     } 
 
+
+    void PlaceRoom(Vector3Int location, PanicRoom room)
+    {
+        GameObject go = Instantiate(room.prefab, location, Quaternion.identity);
+        go.GetComponent<DCubeTint>().material = redMaterial;
+    }
     void PlaceRoom(Vector3Int location, Vector3Int size) {
         PlaceCube(location, size, redMaterial);
     }

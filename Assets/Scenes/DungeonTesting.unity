@@ -168,23 +168,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 60, y: 5, z: 60}
-  roomCount: 50
+  roomCount: 10
   roomMaxSize: {x: 6, y: 2, z: 6}
   cubePrefab: {fileID: 7893673706923132279, guid: e4958132bd217194882d599999fe283a,
     type: 3}
   panicRooms:
-  - {x: 5, y: 2, z: 5}
-  - {x: 4, y: 2, z: 4}
-  - {x: 2, y: 1, z: 2}
-  - {x: 3, y: 3, z: 3}
-  - {x: 5, y: 1, z: 2}
-  - {x: 7, y: 1, z: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 5}
+    prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
+      type: 3}
+  - size: {x: 5, y: 2, z: 5}
+    prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
+      type: 3}
+  - size: {x: 4, y: 2, z: 4}
+    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
+      type: 3}
+  - size: {x: 4, y: 2, z: 4}
+    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
+      type: 3}
   additionalRooms:
-  - {x: 2, y: 1, z: 3}
-  - {x: 3, y: 1, z: 2}
-  - {x: 2, y: 1, z: 2}
-  - {x: 1, y: 1, z: 2}
-  - {x: 2, y: 1, z: 1}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+      type: 3}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+      type: 3}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+      type: 3}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+      type: 3}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+      type: 3}
   hallwayPrefab: {fileID: 7893673706923132279, guid: 66100796625dcc043a9051b668fffb7f,
     type: 3}
   upStairwayPrefab: {fileID: 7893673706923132279, guid: 27bb765bfefc67e4cbc8e938f526a43e,
