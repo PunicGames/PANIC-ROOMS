@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547a5b9f3c9562d469dd59dd043935a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: Nada
   size: {x: 60, y: 5, z: 60}
   roomCount: 10
   roomMaxSize: {x: 6, y: 2, z: 6}
