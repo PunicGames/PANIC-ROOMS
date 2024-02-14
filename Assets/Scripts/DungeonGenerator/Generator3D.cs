@@ -5,6 +5,7 @@ using Random = System.Random;
 using Graphs;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
+using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
 public struct PanicRoom
@@ -24,11 +25,13 @@ public class Generator3D : MonoBehaviour {
     class Room {
         public BoundsInt bounds;
 
-        public Room(Vector3Int location, Vector3Int size) {
+        public Room(Vector3Int location, Vector3Int size) 
+        {
             bounds = new BoundsInt(location, size);
         }
 
-        public static bool Intersect(Room a, Room b) {
+        public static bool Intersect(Room a, Room b) 
+        {
             return !((a.bounds.position.x >= (b.bounds.position.x + b.bounds.size.x)) || ((a.bounds.position.x + a.bounds.size.x) <= b.bounds.position.x)
                 || (a.bounds.position.y >= (b.bounds.position.y + b.bounds.size.y)) || ((a.bounds.position.y + a.bounds.size.y) <= b.bounds.position.y)
                 || (a.bounds.position.z >= (b.bounds.position.z + b.bounds.size.z)) || ((a.bounds.position.z + a.bounds.size.z) <= b.bounds.position.z));
@@ -38,9 +41,7 @@ public class Generator3D : MonoBehaviour {
     public string seed;
 
     [SerializeField] Vector3Int size;
-    [SerializeField] int roomCount;
-    [SerializeField] Vector3Int roomMaxSize;
-    [SerializeField] GameObject cubePrefab;
+    Dictionary<Vector3Int, GameObject> dRooms;
     [SerializeField] List<PanicRoom> panicRooms, additionalRooms;
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
@@ -56,29 +57,32 @@ public class Generator3D : MonoBehaviour {
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
 
+    //TO-DO LIST
+    // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte.
+    // Es posible que se generen mazmorras que no estan conectadas con el resto, o que se generen 2 gupos de mazmorras
+
     void Start() {
-        random = new Random(seed.GetHashCode());
+
+        if (string.IsNullOrEmpty(seed))
+        {
+            string randomString = RandomSeed.GenerateRandomAlphanumericString(8);
+            Debug.Log("SEED: \t"+ randomString);
+            random = new Random(randomString.GetHashCode());
+        }
+        else
+        {
+            random = new Random(seed.GetHashCode());
+        }
+
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
+        dRooms = new Dictionary<Vector3Int, GameObject>();
 
         PlaceRooms();
         Triangulate();
         CreateHallways();
         PathfindHallways();
     }
-    void Shuffle<T>(List<T> list)
-    {
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = random.Next(n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
-        }
-    }
-
     public void PlaceRooms()
     {
         // Primero, colocar las habitaciones de 'firstRoomSizes'
@@ -87,10 +91,7 @@ public class Generator3D : MonoBehaviour {
             PlaceRoomAtRandomLocation(room);
         }
 
-        List<PanicRoom> shuffledRoomSizes = new List<PanicRoom>(additionalRooms);
-        Shuffle(shuffledRoomSizes); // Mezclar la lista
-
-        foreach (PanicRoom room in shuffledRoomSizes)
+        foreach (PanicRoom room in additionalRooms)
         {
             if (ShouldPlaceRoom())
             {
@@ -139,11 +140,12 @@ public class Generator3D : MonoBehaviour {
             if (add)
             {
                 rooms.Add(newRoom);
-                PlaceRoom(newRoom.bounds.position, room);
+                GameObject placedRoom = PlaceRoom(newRoom.bounds.position, room);
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin)
                 {
                     grid[pos] = CellType.Room;
+                    dRooms[pos] = placedRoom;
                 }
                 return;
             }
@@ -227,7 +229,7 @@ public class Generator3D : MonoBehaviour {
 
         foreach (var edge in remainingEdges) {
             
-            if (random.NextDouble() < 0.125)
+            if (random.NextDouble() < 0.25)
             {
                 selectedEdges.Add(edge);
             }
@@ -237,8 +239,10 @@ public class Generator3D : MonoBehaviour {
 
     void PathfindHallways() {
         DungeonPathfinder3D aStar = new DungeonPathfinder3D(size);
+        List<Vector3Int> hallways = new List<Vector3Int>();
 
-        foreach (var edge in selectedEdges) {
+        foreach (var edge in selectedEdges)
+        {
             var startRoom = (edge.U as Vertex<Room>).Item;
             var endRoom = (edge.V as Vertex<Room>).Item;
 
@@ -247,25 +251,34 @@ public class Generator3D : MonoBehaviour {
             var startPos = new Vector3Int((int)startPosf.x, (int)startPosf.y, (int)startPosf.z);
             var endPos = new Vector3Int((int)endPosf.x, (int)endPosf.y, (int)endPosf.z);
 
-            var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) => {
+            var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) =>
+            {
                 var pathCost = new DungeonPathfinder3D.PathCost();
 
                 var delta = b.Position - a.Position;
 
-                if (delta.y == 0) {
+                if (delta.y == 0)
+                {
                     //flat hallway
                     pathCost.cost = Vector3Int.Distance(b.Position, endPos);    //heuristic
 
-                    if (grid[b.Position] == CellType.Stairs) {
+                    if (grid[b.Position] == CellType.Stairs)
+                    {
                         return pathCost;
-                    } else if (grid[b.Position] == CellType.Room) {
+                    }
+                    else if (grid[b.Position] == CellType.Room)
+                    {
                         pathCost.cost += 5;
-                    } else if (grid[b.Position] == CellType.None) {
+                    }
+                    else if (grid[b.Position] == CellType.None)
+                    {
                         pathCost.cost += 1;
                     }
 
                     pathCost.traversable = true;
-                } else {
+                }
+                else
+                {
                     //staircase
                     if ((grid[a.Position] != CellType.None && grid[a.Position] != CellType.Hallway)
                         || (grid[b.Position] != CellType.None && grid[b.Position] != CellType.Hallway)) return pathCost;
@@ -279,14 +292,16 @@ public class Generator3D : MonoBehaviour {
 
                     if (!grid.InBounds(a.Position + verticalOffset)
                         || !grid.InBounds(a.Position + horizontalOffset)
-                        || !grid.InBounds(a.Position + verticalOffset + horizontalOffset)) {
+                        || !grid.InBounds(a.Position + verticalOffset + horizontalOffset))
+                    {
                         return pathCost;
                     }
 
                     if (grid[a.Position + horizontalOffset] != CellType.None
                         || grid[a.Position + horizontalOffset * 2] != CellType.None
                         || grid[a.Position + verticalOffset + horizontalOffset] != CellType.None
-                        || grid[a.Position + verticalOffset + horizontalOffset * 2] != CellType.None) {
+                        || grid[a.Position + verticalOffset + horizontalOffset * 2] != CellType.None)
+                    {
                         return pathCost;
                     }
 
@@ -297,15 +312,19 @@ public class Generator3D : MonoBehaviour {
                 return pathCost;
             });
 
-            if (path != null) {
-                for (int i = 0; i < path.Count; i++) {
+            if (path != null)
+            {
+                for (int i = 0; i < path.Count; i++)
+                {
                     var current = path[i];
 
-                    if (grid[current] == CellType.None) {
+                    if (grid[current] == CellType.None)
+                    {
                         grid[current] = CellType.Hallway;
                     }
 
-                    if (i > 0) {
+                    if (i > 0)
+                    {
                         var prev = path[i - 1];
 
                         var delta = current - prev;
@@ -330,7 +349,7 @@ public class Generator3D : MonoBehaviour {
                         if (delta.y != 0)
                         {
                             Quaternion orientation = Quaternion.identity;
-                            bool up = delta.y > 0; 
+                            bool up = delta.y > 0;
 
                             int xDir = Mathf.Clamp(delta.x, -1, 1);
                             int zDir = Mathf.Clamp(delta.z, -1, 1);
@@ -349,15 +368,16 @@ public class Generator3D : MonoBehaviour {
                                 // Movimiento principal en el eje x
                                 orientation = delta.x > 0 ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, 270, 0);
 
-                                if (delta.x > 0 )
+                                if (delta.x > 0)
                                 {
                                     orientation = Quaternion.Euler(0, 90, 0);
                                     horizontalOffset += new Vector3Int(1, 0, 1);
-                                    
-                                } else
+
+                                }
+                                else
                                 {
-                                    orientation = Quaternion.Euler(0,270,0);
-                                    
+                                    orientation = Quaternion.Euler(0, 270, 0);
+
                                 }
                             }
                             else
@@ -366,9 +386,10 @@ public class Generator3D : MonoBehaviour {
                                 if (delta.z < 0)
                                 {
                                     orientation = Quaternion.Euler(0, 180, 0);
-                                    horizontalOffset += new Vector3Int(1,0,0);
-                                    
-                                } else
+                                    horizontalOffset += new Vector3Int(1, 0, 0);
+
+                                }
+                                else
                                 {
                                     orientation = Quaternion.identity;
                                     horizontalOffset += new Vector3Int(0, 0, 1);
@@ -384,43 +405,81 @@ public class Generator3D : MonoBehaviour {
                         Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), Color.blue, 100, false);
                     }
                 }
+                Vector3Int firstHallwayPos = new Vector3Int(), lastHallwayPos = new Vector3Int();
+                bool isFirstHallwayFound = false;
 
-                foreach (var pos in path) {
-                    if (grid[pos] == CellType.Hallway) {
-                        PlaceHallway(pos);
+                for (int i = 0; i < path.Count; i++)
+                {
+                    Vector3Int pos = path[i];
+
+                    if (grid[pos] == CellType.Hallway)
+                    {
+                        if (!isFirstHallwayFound)
+                        {
+                            firstHallwayPos = pos;
+                            isFirstHallwayFound = true;
+                        }
+
+                        lastHallwayPos = pos;
+
+                        hallways.Add(pos);
+                        //PlaceHallway(pos);
                     }
                 }
+
+
+                CheckRoom(firstHallwayPos);
+                CheckRoom(lastHallwayPos);
             }
+
         }
+
+        foreach (var hallway in hallways)
+        {
+            PlaceHallway(hallway);
+        }
+
     }
+        
+    private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
 
     //TO-DO : Checkear que en primer y ultimo pasillo si hay pared
     // Acceder al prefab del room y quitarle la pared (llamando a una funcion de quitar paredes del room)
-    void CheckRoom()
+    void CheckRoom(Vector3Int position)
     {
+        for( int i = 0; i < testPos.Length; i++ )
+        {
+            Vector3Int move = testPos[i];
+
+            if (dRooms.TryGetValue(position + move, out var room))
+            {
+                room.GetComponent<DCubeTint>().material = greenMaterial;
+                room.GetComponent<DCubeTint>().Start();
+
+                room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
+            }
+            
+        }
     }
 
-    void PlaceCube(Vector3Int location, Vector3Int size, Material material) {
-        GameObject go = Instantiate(cubePrefab, location, Quaternion.identity);
-        go.name = size.ToString();
-        go.GetComponent<Transform>().localScale = size;
-        go.GetComponent<DCubeTint>().material = material;
-    } 
 
-
-    void PlaceRoom(Vector3Int location, PanicRoom room)
+    GameObject PlaceRoom(Vector3Int location, PanicRoom room)
     {
         GameObject go = Instantiate(room.prefab, location, Quaternion.identity);
         go.GetComponent<DCubeTint>().material = redMaterial;
-    }
-    void PlaceRoom(Vector3Int location, Vector3Int size) {
-        PlaceCube(location, size, redMaterial);
+        return go;
     }
 
     void PlaceHallway(Vector3Int location) {
         GameObject go = Instantiate(hallwayPrefab, location, Quaternion.identity);
-        go.GetComponent<Transform>().localScale = new Vector3Int(1, 1, 1);
-        go.GetComponent<DCubeTint>().material = blueMaterial;
+        for (int i = 0; i < testPos.Length; i++)
+        {
+            Vector3Int move = testPos[i];
+            if (grid[location + move] != CellType.None)
+            {
+                go.GetComponent<HallwayWallController>().MakeWalls(move);
+            }
+        }
     }
 
     void PlaceStairs(Vector3Int location, Quaternion orientation, bool up) {

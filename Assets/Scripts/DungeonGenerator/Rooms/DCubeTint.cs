@@ -13,7 +13,7 @@ public class DCubeTint : MonoBehaviour
         m_MeshRenderer = new List<MeshRenderer>(gameObject.GetComponentsInChildren<MeshRenderer>());
     }
 
-    private void Start()
+    public void Start()
     {
         if (material)
         {
