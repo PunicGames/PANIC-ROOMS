@@ -53,9 +53,11 @@ public class CharacterMovement : MonoBehaviour
         if (activate_lantern)
         {
             lantern_behavior.ActivateLantern();
+            character_sounds_manager.PlayLanternActivateSound();
         }
         else { 
             lantern_behavior.DeactivateLantern();
+            character_sounds_manager.PlayLanternDeactivateSound();
         }
     }
 
