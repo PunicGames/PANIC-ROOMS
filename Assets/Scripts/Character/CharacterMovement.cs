@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
         // Basic movement
     private Vector2 player_translation;
     private float translation_speed = 1.0f;
+    private bool is_moving = false;
     // Camera movement
     [HideInInspector] Camera camera;
     private Vector2 camera_movement;
@@ -17,7 +18,7 @@ public class CharacterMovement : MonoBehaviour
     private float camera_pitch = 0.0f;
     // Camera swing effect
     private Vector3 initial_camera_position;
-    public float swing_frequency = 5f;
+    public float swing_frequency = 4.2f;
     public float swing_horizontal_amplitude = 0.1f;
     public float swing_vertical_amplitude = 0.1f;
     private float swing_timer = 0.0f;
@@ -29,6 +30,9 @@ public class CharacterMovement : MonoBehaviour
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
     bool activate_lantern = true;
+
+    // *** Other componenets ***
+    [SerializeField] CharacterSounds character_sounds_manager;
 
     public void OnMovement(InputValue input) {
         player_translation = input.Get<Vector2>();
@@ -91,6 +95,13 @@ public class CharacterMovement : MonoBehaviour
     private void ApplySwingEffect() {
         if (player_translation.x != 0 || player_translation.y != 0)
         {
+            if (!is_moving)
+            {
+                // Start playing footstep sounds
+                character_sounds_manager.PlayFootstepSound();
+                is_moving = true;
+            }
+
             swing_timer += Time.deltaTime * swing_frequency;
 
             // Calculate the horizontal and vertical offsets
@@ -102,6 +113,13 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
+            if (is_moving)
+            {
+                // Stop playing footstep sounds when the player stops moving
+                character_sounds_manager.StopFootstepSound();
+                is_moving = false;
+            }
+
             // Reset the bobTimer if the player is not moving to avoid sudden jumps in camera position
             swing_timer = Mathf.PI / 2;
             // Reset to the initial position when not moving
