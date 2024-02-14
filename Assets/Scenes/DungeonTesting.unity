@@ -173,12 +173,6 @@ MonoBehaviour:
   cubePrefab: {fileID: 7893673706923132279, guid: e4958132bd217194882d599999fe283a,
     type: 3}
   panicRooms:
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
   - size: {x: 5, y: 2, z: 5}
     prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
       type: 3}
@@ -190,6 +184,24 @@ MonoBehaviour:
       type: 3}
   - size: {x: 4, y: 2, z: 4}
     prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 6, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
+      type: 3}
+  - size: {x: 6, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
       type: 3}
   additionalRooms:
   - size: {x: 2, y: 1, z: 6}

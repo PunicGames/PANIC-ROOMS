@@ -35,6 +35,8 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
+    public string seed;
+
     [SerializeField] Vector3Int size;
     [SerializeField] int roomCount;
     [SerializeField] Vector3Int roomMaxSize;
@@ -47,6 +49,7 @@ public class Generator3D : MonoBehaviour {
     [SerializeField] Material blueMaterial;
     [SerializeField] Material greenMaterial;
 
+
     Random random;
     Grid3D<CellType> grid;
     List<Room> rooms;
@@ -54,7 +57,7 @@ public class Generator3D : MonoBehaviour {
     HashSet<Prim.Edge> selectedEdges;
 
     void Start() {
-        random = new Random(0);
+        random = new Random(seed.GetHashCode());
         grid = new Grid3D<CellType>(size, Vector3Int.zero);
         rooms = new List<Room>();
 
@@ -223,11 +226,12 @@ public class Generator3D : MonoBehaviour {
         remainingEdges.ExceptWith(selectedEdges);
 
         foreach (var edge in remainingEdges) {
-            /*
-            if (random.NextDouble() < 0.125) {
+            
+            if (random.NextDouble() < 0.125)
+            {
                 selectedEdges.Add(edge);
-            }*/
-            selectedEdges.Add(edge);
+            }
+            //selectedEdges.Add(edge);
         }
     }
 
@@ -388,6 +392,12 @@ public class Generator3D : MonoBehaviour {
                 }
             }
         }
+    }
+
+    //TO-DO : Checkear que en primer y ultimo pasillo si hay pared
+    // Acceder al prefab del room y quitarle la pared (llamando a una funcion de quitar paredes del room)
+    void CheckRoom()
+    {
     }
 
     void PlaceCube(Vector3Int location, Vector3Int size, Material material) {
