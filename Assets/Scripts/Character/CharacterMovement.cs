@@ -25,6 +25,11 @@ public class CharacterMovement : MonoBehaviour
     private float jump_force = 7.0f;
     private bool jump_trigger;
 
+
+    // *** Lantern ***
+    [SerializeField] Lantern_Bahavior lantern_behavior;
+    bool activate_lantern = true;
+
     public void OnMovement(InputValue input) {
         player_translation = input.Get<Vector2>();
     }
@@ -38,6 +43,18 @@ public class CharacterMovement : MonoBehaviour
         jump_trigger = input.isPressed;
     }
 
+    public void OnLantern(InputValue input) {
+        activate_lantern = !activate_lantern;
+
+        if (activate_lantern)
+        {
+            lantern_behavior.ActivateLantern();
+        }
+        else { 
+            lantern_behavior.DeactivateLantern();
+        }
+    }
+
     private void Awake()
     {
         LockCursor();
@@ -47,6 +64,9 @@ public class CharacterMovement : MonoBehaviour
     {
         camera = GetComponentInChildren<Camera>();
         initial_camera_position = camera.transform.localPosition;
+
+        // Activate lantern by default
+        lantern_behavior.ActivateLantern();
     }
 
     void Update()
