@@ -167,12 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547a5b9f3c9562d469dd59dd043935a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: Nada
+  seed: Y3P3ERGK
   size: {x: 60, y: 5, z: 60}
-  roomCount: 10
-  roomMaxSize: {x: 6, y: 2, z: 6}
-  cubePrefab: {fileID: 7893673706923132279, guid: e4958132bd217194882d599999fe283a,
-    type: 3}
   panicRooms:
   - size: {x: 5, y: 2, z: 5}
     prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
