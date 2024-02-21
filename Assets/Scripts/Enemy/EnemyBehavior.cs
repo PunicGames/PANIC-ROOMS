@@ -14,21 +14,22 @@ public class EnemyBehavior : MonoBehaviour
 
     // Detection
     private MeshRenderer enemy_mesh;
-    private float catch_distance = 1.5f;
+    private float catch_distance = 2.5f;
     public GameObject enemy_cam;
     public EnemyRayCasting enemy_ray_caster;
 
     // Movement
     public Transform enemy_transform;
-    private float enemy_speed = 1.0f;
+    private float enemy_speed = 0.8f;
     private int teleportation_chance;
     private float distance_to_player;
-    public List<Transform> teleportation_spots;
+    private bool trigger_teleport = false;
 
     // Player related
     private GameObject player;
     [SerializeField] private Camera player_camera;
-    private float health_increase_rate, health_decrease_rate;
+    private float health_increase_rate = 40.0f;
+    private float health_decrease_rate = 20.0f;
     private float player_health = 100;
     public Transform player_transform;
 
@@ -37,6 +38,13 @@ public class EnemyBehavior : MonoBehaviour
 
     // Enemy Camera
     [SerializeField] private Camera enemy_camera;
+    [SerializeField] private AudioListener enemy_audio_listener;
+
+    // Sounds
+    [SerializeField] private AudioSource static_sound;
+    float static_volume = 0;
+    private float sound_increase_rate = 0.2f;
+    private float sound_decrease_rate = 0.4f;
 
     // Others
     private bool kill_player = false;
@@ -74,13 +82,15 @@ public class EnemyBehavior : MonoBehaviour
         if (GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds))
         {
             //**Debug.Log("Dentro de frustrum");
-            //enemy_nav_mesh.speed = 0;
-            //enemy_nav_mesh.SetDestination(transform.position); // Set destination to itself
             enemy_nav_mesh.enabled = false; // Stop enemie's movement
 
             // If there's direct vision between enemy and player
-            if (enemy_ray_caster.DetectPlayer() == true) { 
-            
+            if (enemy_ray_caster.DetectPlayer() == true) {
+
+                DecreaseSanity();
+
+                // Enable trigger to teleport again
+                trigger_teleport = true;
             }
 
         }
@@ -90,11 +100,24 @@ public class EnemyBehavior : MonoBehaviour
             enemy_nav_mesh.speed = enemy_speed;
             enemy_destination = player_transform.position;
             enemy_nav_mesh.SetDestination(enemy_destination);
+
+            // Teleportation
+            if (trigger_teleport) {
+                TeleportToNewPosition();
+                trigger_teleport = false;
+            }
+
+            // If enemy is not close enough to player
+            if (distance_to_player > catch_distance)
+            {
+                IncreaseSanity();
+            }
+            // If enemy is so close to player even if it's not in sight
+            else {
+                DecreaseSanity();
+            }
         }
 
-
-        // Update UI
-        UpdateUI();
 
         // Update LookAt to player
         this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
@@ -102,9 +125,92 @@ public class EnemyBehavior : MonoBehaviour
         // Update distance to player
         distance_to_player = Vector3.Distance(this.transform.position, player_transform.position);
 
-        // Catch player
         if (distance_to_player <= catch_distance) {
-            CatchPlayer();
+            player_health -= health_decrease_rate * Time.deltaTime;
+        }
+
+
+        // Update UI
+        UpdateUI();
+
+        // Update sounds
+        static_sound.volume = static_volume;
+    }
+
+    private void TeleportToNewPosition() {
+
+        // TODO: Meter random de mantener posicion o calcular una nueva
+
+        // METHOD 2
+        Vector3 random_position = Vector3.zero;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(player_camera);
+        float teleport_distance = 20.0f;
+        bool found_spot = false;
+        int current_sample = 0;
+        int max_samples = 50;
+        RaycastHit hit;
+
+        while (!found_spot && (current_sample < max_samples))
+        {
+            // Generate a random direction at a specified distance in a disk centered in player
+            Vector2 random_point_in_disk = Random.insideUnitCircle.normalized * teleport_distance;
+            Vector3 random_direction = new Vector3(random_point_in_disk.x, 0, random_point_in_disk.y);
+            random_position = player_transform.position + random_direction;
+
+            // Cast a ray downwards from the randomPosition to find the ground
+            if (Physics.Raycast(random_position + Vector3.up, Vector3.down, out hit, Mathf.Infinity))
+            {
+
+                // Check if the hit object has the "Floor" tag
+                if (hit.collider.CompareTag("Floor"))
+                {
+                    random_position = hit.point;
+
+                    // Check if new position is not in frustum
+                    this.transform.position = random_position;
+                    if (!GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds)) { 
+                        found_spot = true;
+                    }
+                }
+            }
+
+            // Accumulate num samples to keep control
+            current_sample++;
+        }
+
+        // Teleport the enemy to the new position
+        if (found_spot) { 
+            transform.position = random_position;
+        }
+
+        Debug.Log(current_sample);
+    }
+
+
+    private void IncreaseSanity() {
+        // Increase sanity
+        player_health += health_increase_rate * Time.deltaTime;
+        if (player_health > 100)
+        {
+            player_health = 100;
+        }
+
+        // Update volume values
+        static_volume -= sound_decrease_rate * Time.deltaTime;
+        if (static_volume < 0)
+        {
+            static_volume = 0;
+        }
+    }
+    private void DecreaseSanity() {
+        // Decrease sanity
+        player_health -= health_decrease_rate * Time.deltaTime * 0.5f;
+
+        // Update volume values
+        static_volume += sound_increase_rate * Time.deltaTime * 0.5f;
+        if (static_volume > 1)
+        {
+            static_volume = 1;
         }
     }
 
@@ -120,6 +226,7 @@ public class EnemyBehavior : MonoBehaviour
         player_camera.enabled = false;
 
         enemy_camera.enabled = true;
+        enemy_audio_listener.enabled = true;
 
         StartCoroutine(PlayKillAnimation());
     }
@@ -128,10 +235,6 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         // Kill or whatever...
         
-    }
-
-    private void CatchPlayer() {
-        player_health = 0;
     }
 
     private void UpdateUI()
