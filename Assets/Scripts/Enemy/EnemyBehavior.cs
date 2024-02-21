@@ -23,7 +23,6 @@ public class EnemyBehavior : MonoBehaviour
     private float enemy_speed = 0.8f;
     private int teleportation_chance;
     private float distance_to_player;
-    public List<Transform> teleportation_spots;
     private bool trigger_teleport = false;
 
     // Player related
@@ -140,13 +139,51 @@ public class EnemyBehavior : MonoBehaviour
 
     private void TeleportToNewPosition() {
 
-        // Random teleportation.
-        teleportation_chance = Random.Range(0, 2);
-        if (teleportation_chance == 0) 
+        // TODO: Meter random de mantener posicion o calcular una nueva
+
+        // METHOD 2
+        Vector3 random_position = Vector3.zero;
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(player_camera);
+        float teleport_distance = 20.0f;
+        bool found_spot = false;
+        int current_sample = 0;
+        int max_samples = 50;
+        RaycastHit hit;
+
+        while (!found_spot && (current_sample < max_samples))
         {
-            int rand_num = Random.Range(0, teleportation_spots.Count);
-            this.transform.position = teleportation_spots[rand_num].position;
+            // Generate a random direction at a specified distance in a disk centered in player
+            Vector2 random_point_in_disk = Random.insideUnitCircle.normalized * teleport_distance;
+            Vector3 random_direction = new Vector3(random_point_in_disk.x, 0, random_point_in_disk.y);
+            random_position = player_transform.position + random_direction;
+
+            // Cast a ray downwards from the randomPosition to find the ground
+            if (Physics.Raycast(random_position + Vector3.up, Vector3.down, out hit, Mathf.Infinity))
+            {
+
+                // Check if the hit object has the "Floor" tag
+                if (hit.collider.CompareTag("Floor"))
+                {
+                    random_position = hit.point;
+
+                    // Check if new position is not in frustum
+                    this.transform.position = random_position;
+                    if (!GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds)) { 
+                        found_spot = true;
+                    }
+                }
+            }
+
+            // Accumulate num samples to keep control
+            current_sample++;
         }
+
+        // Teleport the enemy to the new position
+        if (found_spot) { 
+            transform.position = random_position;
+        }
+
+        Debug.Log(current_sample);
     }
 
 

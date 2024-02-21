@@ -104,7 +104,6 @@ MonoBehaviour:
   enemy_cam: {fileID: 0}
   enemy_ray_caster: {fileID: 0}
   enemy_transform: {fileID: 0}
-  teleportation_spots: []
   player_camera: {fileID: 0}
   player_transform: {fileID: 0}
   health_slider: {fileID: 0}
