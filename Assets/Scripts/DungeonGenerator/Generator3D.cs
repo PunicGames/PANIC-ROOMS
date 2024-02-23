@@ -453,8 +453,8 @@ public class Generator3D : MonoBehaviour {
 
             if (dRooms.TryGetValue(position + move, out var room))
             {
-                room.GetComponent<DCubeTint>().material = greenMaterial;
-                room.GetComponent<DCubeTint>().Start();
+                //room.GetComponent<DCubeTint>().material = greenMaterial;
+                //room.GetComponent<DCubeTint>().Start();
 
                 room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
             }
@@ -466,7 +466,6 @@ public class Generator3D : MonoBehaviour {
     GameObject PlaceRoom(Vector3Int location, PanicRoom room)
     {
         GameObject go = Instantiate(room.prefab, location, Quaternion.identity);
-        go.GetComponent<DCubeTint>().material = redMaterial;
         return go;
     }
 
