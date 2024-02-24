@@ -112,7 +112,6 @@ public class Generator3D : MonoBehaviour {
         return random.NextDouble() < 0.5;
     }
 
-
     void PlaceRoomAtRandomLocation(PanicRoom room)
     {
         Vector3Int roomSize = room.size;
@@ -412,31 +411,43 @@ public class Generator3D : MonoBehaviour {
                         Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), Color.blue, 100, false);
                     }
                 }
-                Vector3Int firstHallwayPos = new Vector3Int(), lastHallwayPos = new Vector3Int();
-                bool isFirstHallwayFound = false;
 
-                for (int i = 0; i < path.Count; i++)
+                List<Vector3Int> transitionHallways = new List<Vector3Int>(); // Lista para guardar las posiciones de los pasillos de transición
+
+                // Asegúrate de tener al menos 2 celdas en el camino para comparar
+                if (path.Count > 1)
                 {
-                    Vector3Int pos = path[i];
-
-                    if (grid[pos] == CellType.Hallway)
+                    // Comenzar desde 1 ya que vamos a comparar cada posición con la anterior
+                    for (int i = 1; i < path.Count; i++)
                     {
-                        if (!isFirstHallwayFound)
+                        Vector3Int currentPos = path[i];
+                        Vector3Int previousPos = path[i - 1];
+
+                        // Chequear si hubo un cambio de Room a Hallway o de Hallway a Room
+                        if ((grid[currentPos] == CellType.Hallway && grid[previousPos] == CellType.Room) ||
+                            (grid[currentPos] == CellType.Room && grid[previousPos] == CellType.Hallway))
                         {
-                            firstHallwayPos = pos;
-                            isFirstHallwayFound = true;
+                            // Si es un Hallway y la celda anterior o la siguiente es una Room, guardarlo
+                            if (grid[currentPos] == CellType.Hallway)
+                            {
+                                transitionHallways.Add(currentPos);
+                            }
+                            // También queremos guardar el Hallway si la celda actual es una Room pero la anterior era un Hallway
+                            else if (grid[previousPos] == CellType.Hallway)
+                            {
+                                transitionHallways.Add(previousPos);
+                            }
                         }
 
-                        lastHallwayPos = pos;
-
-                        hallways.Add(pos);
-                        //PlaceHallway(pos);
+                        hallways.Add(currentPos);
                     }
                 }
 
 
-                CheckRoom(firstHallwayPos);
-                CheckRoom(lastHallwayPos);
+                foreach (var pos in transitionHallways)
+                {
+                    CheckRoom(pos);
+                }
             }
 
         }
