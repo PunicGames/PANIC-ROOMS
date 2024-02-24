@@ -422,6 +422,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs
       objectReference: {fileID: 0}
+    - target: {fileID: 6881058810339267884, guid: 72f88f65f651bcd47a23b5aff592f7a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8357720870360975834, guid: 72f88f65f651bcd47a23b5aff592f7a7,
         type: 3}
       propertyPath: m_RootOrder
@@ -435,12 +440,12 @@ PrefabInstance:
     - target: {fileID: 8357720870360975834, guid: 72f88f65f651bcd47a23b5aff592f7a7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.002
+      value: -1.0003
       objectReference: {fileID: 0}
     - target: {fileID: 8357720870360975834, guid: 72f88f65f651bcd47a23b5aff592f7a7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.009
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8357720870360975834, guid: 72f88f65f651bcd47a23b5aff592f7a7,
         type: 3}
