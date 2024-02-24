@@ -88,7 +88,7 @@ public class Generator3D : MonoBehaviour {
         CreateHallways();
         PathfindHallways();
 
-        navMeshSurface.BuildNavMesh();
+        navMeshSurface?.BuildNavMesh();
     }
     public void PlaceRooms()
     {
