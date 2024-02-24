@@ -6,6 +6,7 @@ using Graphs;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 using static UnityEditor.PlayerSettings;
+using Unity.AI.Navigation;
 
 [System.Serializable]
 public struct PanicRoom
@@ -57,11 +58,15 @@ public class Generator3D : MonoBehaviour {
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
 
+    private NavMeshSurface navMeshSurface;
+
     //TO-DO LIST
     // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte.
     // Es posible que se generen mazmorras que no estan conectadas con el resto, o que se generen 2 gupos de mazmorras
 
-    void Start() {
+    void Start()
+    {
+        navMeshSurface = GetComponent<NavMeshSurface>();
 
         if (string.IsNullOrEmpty(seed))
         {
@@ -82,6 +87,8 @@ public class Generator3D : MonoBehaviour {
         Triangulate();
         CreateHallways();
         PathfindHallways();
+
+        navMeshSurface?.BuildNavMesh();
     }
     public void PlaceRooms()
     {
