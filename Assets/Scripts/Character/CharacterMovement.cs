@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
     private Vector2 player_translation;
     private float translation_speed = 1.0f;
     private bool is_moving = false;
+    private bool is_running = false;
+    private bool is_stealth = false;
     // Camera movement
     [HideInInspector] Camera camera;
     private Vector2 camera_movement;
@@ -46,6 +48,68 @@ public class CharacterMovement : MonoBehaviour
     {
         jump_trigger = input.isPressed;
     }
+
+    public void OnRun(InputValue input)
+    {
+        is_running = input.isPressed;
+
+        if (is_running)
+        {
+            is_stealth = false;
+
+            // Values related with running movement
+            translation_speed = 2.0f;
+            swing_frequency = 5.2f;
+            swing_horizontal_amplitude = 0.15f;
+            swing_vertical_amplitude = 0.15f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadRunningSound();
+        }
+        else {
+            // Values related with normal movement
+            translation_speed = 1.0f;
+            swing_frequency = 4.2f;
+            swing_horizontal_amplitude = 0.1f;
+            swing_vertical_amplitude = 0.1f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadWalkingSound();
+        }
+    }
+
+    public void OnStealth(InputValue input) 
+    { 
+        is_stealth = input.isPressed;
+
+        if (is_stealth)
+        {
+            is_running = false;
+
+            // Values related with stealth movement
+            translation_speed = 0.6f;
+            swing_frequency = 2.2f;
+            swing_horizontal_amplitude = 0.07f;
+            swing_vertical_amplitude = 0.07f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadStealthSound();
+            
+        }
+        else {
+            // Values related with normal movement
+            translation_speed = 1.0f;
+            swing_frequency = 4.2f;
+            swing_horizontal_amplitude = 0.1f;
+            swing_vertical_amplitude = 0.1f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadWalkingSound();
+        }
+
+        Debug.Log(is_stealth);
+    }
+
 
     public void OnLantern(InputValue input) {
         activate_lantern = !activate_lantern;
@@ -100,7 +164,7 @@ public class CharacterMovement : MonoBehaviour
             if (!is_moving)
             {
                 // Start playing footstep sounds
-                character_sounds_manager.PlayFootstepSound();
+                character_sounds_manager.PlayMovingSound();
                 is_moving = true;
             }
 
@@ -118,7 +182,7 @@ public class CharacterMovement : MonoBehaviour
             if (is_moving)
             {
                 // Stop playing footstep sounds when the player stops moving
-                character_sounds_manager.StopFootstepSound();
+                character_sounds_manager.StopMovingSound();
                 is_moving = false;
             }
 
