@@ -14,22 +14,24 @@ public class EnemyBehavior : MonoBehaviour
 
     // Detection
     private MeshRenderer enemy_mesh;
-    private float catch_distance = 2.5f;
+    private float catch_distance;
     public GameObject enemy_cam;
     public EnemyRayCasting enemy_ray_caster;
 
     // Movement
     public Transform enemy_transform;
-    private float enemy_speed = 0.8f;
-    private int teleportation_chance;
+    private float enemy_speed;
     private float distance_to_player;
+
     private bool trigger_teleport = false;
+    private float teleportation_chance;
+    private float teleport_distance;
 
     // Player related
     private GameObject player;
     [SerializeField] private Camera player_camera;
-    private float health_increase_rate = 40.0f;
-    private float health_decrease_rate = 20.0f;
+    private float health_increase_rate;
+    private float health_decrease_rate;
     private float player_health = 100;
     public Transform player_transform;
 
@@ -48,6 +50,7 @@ public class EnemyBehavior : MonoBehaviour
 
     // Others
     private bool kill_player = false;
+    private EnemyStats enemy_stats;
 
 
     // Start is called before the first frame update
@@ -61,13 +64,16 @@ public class EnemyBehavior : MonoBehaviour
         enemy_ray_caster.SetPlayerTransform(player_transform);
         enemy_transform = GetComponent<Transform>();
         enemy_camera.enabled = false;
+        enemy_stats = GetComponent<EnemyStats>();
+
+        // Set initial values
+        enemy_stats.UpdateStats(8);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Compute enemy behavior if it hasn't ever triggered killing animation
-        
+
         // Kill player if health below 0
         if (player_health <= 0) {
             if (!kill_player) // Just a trigger to run KillPlayer() once
@@ -81,8 +87,20 @@ public class EnemyBehavior : MonoBehaviour
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(player_camera);
         if (GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds))
         {
-            //**Debug.Log("Dentro de frustrum");
-            enemy_nav_mesh.enabled = false; // Stop enemie's movement
+
+            // Stop enemie's movement in case its kinda close. We dont want to stop its
+            // movement being really far, even if its inside the frustum
+            if (distance_to_player < 20.0f)
+            {
+                enemy_nav_mesh.enabled = false;
+            }
+            else {
+                // If its inside the frustum but kinda far, we activate again persecution
+                enemy_nav_mesh.enabled = true;
+                enemy_nav_mesh.speed = enemy_speed;
+                enemy_destination = player_transform.position;
+                enemy_nav_mesh.SetDestination(enemy_destination);
+            }
 
             // If there's direct vision between enemy and player
             if (enemy_ray_caster.DetectPlayer() == true) {
@@ -95,7 +113,6 @@ public class EnemyBehavior : MonoBehaviour
 
         }
         else {
-            //**Debug.Log("Fuera de frustrum");
             enemy_nav_mesh.enabled = true; // Enable enemie's movement
             enemy_nav_mesh.speed = enemy_speed;
             enemy_destination = player_transform.position;
@@ -139,12 +156,13 @@ public class EnemyBehavior : MonoBehaviour
 
     private void TeleportToNewPosition() {
 
-        // TODO: Meter random de mantener posicion o calcular una nueva
+        // Teleport at random ocassions, not only when enemy goes out of frustum.
+        float random_teleport_sample = Random.Range(0.0f, 1.0f);
+        if (random_teleport_sample > teleportation_chance) return;
 
-        // METHOD 2
+        // Compute teleportation in the disk area
         Vector3 random_position = Vector3.zero;
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(player_camera);
-        float teleport_distance = 20.0f;
         bool found_spot = false;
         int current_sample = 0;
         int max_samples = 50;
@@ -182,8 +200,6 @@ public class EnemyBehavior : MonoBehaviour
         if (found_spot) { 
             transform.position = random_position;
         }
-
-        Debug.Log(current_sample);
     }
 
 
@@ -241,4 +257,31 @@ public class EnemyBehavior : MonoBehaviour
     {
         health_slider.value = player_health;
     }
+
+
+    public void SetHealthIncreaseRate(float new_value) 
+    {
+        health_increase_rate = new_value;
+    }
+    public void SetHealthDecreaseRate(float new_value) 
+    {
+        health_decrease_rate = new_value;
+    }
+    public void SetCatchDistance(float new_value) 
+    {
+        catch_distance = new_value;
+    }
+    public void SetSpeed(float new_value) 
+    {
+        enemy_speed = new_value;
+    }
+    public void SetTeleportationChance(float new_value)
+    {
+        teleportation_chance = new_value;
+    }
+    public void SetTeleportDistance(float new_value) 
+    {
+        teleport_distance = new_value;
+    }
+
 }
