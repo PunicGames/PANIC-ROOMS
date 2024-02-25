@@ -106,8 +106,6 @@ public class CharacterMovement : MonoBehaviour
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
         }
-
-        Debug.Log(is_stealth);
     }
 
 
