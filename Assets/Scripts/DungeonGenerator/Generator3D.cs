@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using Random = System.Random;
 using Graphs;
@@ -7,6 +8,7 @@ using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 using static UnityEditor.PlayerSettings;
 using Unity.AI.Navigation;
+using System;
 
 [System.Serializable]
 public struct PanicRoom
@@ -43,6 +45,7 @@ public class Generator3D : MonoBehaviour {
 
     [SerializeField] Vector3Int size;
     Dictionary<Vector3Int, GameObject> dRooms;
+    Dictionary<GameObject, bool> connectedRooms;
     [SerializeField] List<PanicRoom> panicRooms, additionalRooms;
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
@@ -61,7 +64,7 @@ public class Generator3D : MonoBehaviour {
     private NavMeshSurface navMeshSurface;
 
     //TO-DO LIST
-    // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte.
+    // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte. DONE 28/02/2024
     // Es posible que se generen mazmorras que no estan conectadas con el resto, o que se generen 2 gupos de mazmorras
 
     void Start()
@@ -71,7 +74,7 @@ public class Generator3D : MonoBehaviour {
         if (string.IsNullOrEmpty(seed))
         {
             string randomString = RandomSeed.GenerateRandomAlphanumericString(8);
-            Debug.Log("SEED: \t"+ randomString);
+            UnityEngine.Debug.Log("SEED: \t"+ randomString);
             random = new Random(randomString.GetHashCode());
         }
         else
@@ -79,23 +82,51 @@ public class Generator3D : MonoBehaviour {
             random = new Random(seed.GetHashCode());
         }
 
-        grid = new Grid3D<CellType>(size, Vector3Int.zero);
-        rooms = new List<Room>();
-        dRooms = new Dictionary<Vector3Int, GameObject>();
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
 
-        PlaceRooms();
-        Triangulate();
-        CreateHallways();
-        PathfindHallways();
+        bool success = false;
+        int maxTries = 10;
+        int tries = 0;
+        while (!success || tries > maxTries)
+        {
+            try
+            {
+                grid = new Grid3D<CellType>(size, Vector3Int.zero);
+                rooms = new List<Room>();
+                dRooms = new Dictionary<Vector3Int, GameObject>();
+                connectedRooms = new Dictionary<GameObject, bool>();
 
-        navMeshSurface?.BuildNavMesh();
+                PlaceRooms();
+                Triangulate();
+                CreateHallways();
+                PathfindHallways();
+
+                navMeshSurface?.BuildNavMesh();
+                success = true;
+            }
+            catch (System.Exception e)
+            {
+                tries++;
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+            }
+        }
+        stopwatch.Stop();
+        UnityEngine.Debug.Log("Tries: " + tries);
+        UnityEngine.Debug.Log("Tiempo transcurrido: "+ stopwatch.ElapsedMilliseconds + " milisegundos");
     }
     public void PlaceRooms()
     {
         // Primero, colocar las habitaciones de 'firstRoomSizes'
+
+        int roomCount = 0;
         foreach (PanicRoom room in panicRooms)
         {
             PlaceRoomAtRandomLocation(room);
+            roomCount++;
         }
 
         foreach (PanicRoom room in additionalRooms)
@@ -110,6 +141,12 @@ public class Generator3D : MonoBehaviour {
     bool ShouldPlaceRoom()
     {
         return random.NextDouble() < 0.5;
+    }
+
+
+    bool ShouldPlaceHallway()
+    {
+        return random.NextDouble() < 0.10;
     }
 
     void PlaceRoomAtRandomLocation(PanicRoom room)
@@ -147,6 +184,7 @@ public class Generator3D : MonoBehaviour {
             {
                 rooms.Add(newRoom);
                 GameObject placedRoom = PlaceRoom(newRoom.bounds.position, room);
+                connectedRooms.Add(placedRoom, false);
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin)
                 {
@@ -159,61 +197,12 @@ public class Generator3D : MonoBehaviour {
 
     }
 
-
-
-    /*
-    void PlaceRooms() {
-        int i = 0;
-
-        //for (int i = 0; i < roomCount; i++)
-        while ( i < roomCount)
-        {
-            Vector3Int location = new Vector3Int(
-                random.Next(0, size.x),
-                random.Next(0, size.y),
-                random.Next(0, size.z)
-            );
-
-            Vector3Int roomSize = new Vector3Int(
-                random.Next(3, roomMaxSize.x + 1),
-                random.Next(1, roomMaxSize.y + 1),
-                random.Next(3, roomMaxSize.z + 1)
-            );
-
-            bool add = true;
-            Room newRoom = new Room(location, roomSize);
-            Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
-
-            foreach (var room in rooms) {
-                if (Room.Intersect(room, buffer)) {
-                    add = false;
-                    break;
-                }
-            }
-
-            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
-                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
-                || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z) {
-                add = false;
-            }
-
-            if (add) {
-                rooms.Add(newRoom);
-                PlaceRoom(newRoom.bounds.position, newRoom.bounds.size);
-                Debug.Log(newRoom.bounds.size);
-                i++;
-
-                foreach (var pos in newRoom.bounds.allPositionsWithin) {
-                    grid[pos] = CellType.Room;
-                }
-            }
-        }
-    }
-    */
-    void Triangulate() {
+    void Triangulate()
+    {
         List<Vertex> vertices = new List<Vertex>();
 
-        foreach (var room in rooms) {
+        foreach (var room in rooms)
+        {
             vertices.Add(new Vertex<Room>((Vector3)room.bounds.position + ((Vector3)room.bounds.size) / 2, room));
         }
 
@@ -223,27 +212,36 @@ public class Generator3D : MonoBehaviour {
     void CreateHallways() {
         List<Prim.Edge> edges = new List<Prim.Edge>();
 
-        foreach (var edge in delaunay.Edges) {
+        foreach (var edge in delaunay.Edges) 
+        {
             edges.Add(new Prim.Edge(edge.U, edge.V));
         }
 
+
         List<Prim.Edge> minimumSpanningTree = Prim.MinimumSpanningTree(edges, edges[0].U);
 
+
         selectedEdges = new HashSet<Prim.Edge>(minimumSpanningTree);
+
+        foreach (var edge in selectedEdges)
+        {
+            UnityEngine.Debug.DrawLine(edge.U.Position, edge.V.Position, Color.red, 1000);
+        }
+
         var remainingEdges = new HashSet<Prim.Edge>(edges);
         remainingEdges.ExceptWith(selectedEdges);
 
         foreach (var edge in remainingEdges) {
             
-            if (random.NextDouble() < 0.25)
+            if (ShouldPlaceHallway())
             {
                 selectedEdges.Add(edge);
             }
-            //selectedEdges.Add(edge);
         }
     }
 
-    void PathfindHallways() {
+    void PathfindHallways() 
+    {
         DungeonPathfinder3D aStar = new DungeonPathfinder3D(size);
         List<Vector3Int> hallways = new List<Vector3Int>();
 
@@ -256,6 +254,8 @@ public class Generator3D : MonoBehaviour {
             var endPosf = endRoom.bounds.center;
             var startPos = new Vector3Int((int)startPosf.x, (int)startPosf.y, (int)startPosf.z);
             var endPos = new Vector3Int((int)endPosf.x, (int)endPosf.y, (int)endPosf.z);
+
+            bool pathFound = false;
 
             var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) =>
             {
@@ -405,10 +405,6 @@ public class Generator3D : MonoBehaviour {
                             // Ajusta la posición si es necesario antes de colocar la escalera
                             PlaceStairs(prev + horizontalOffset, orientation, up); // Usa la orientación calculada
                         }
-
-
-
-                        Debug.DrawLine(prev + new Vector3(0.5f, 0.5f, 0.5f), current + new Vector3(0.5f, 0.5f, 0.5f), Color.blue, 100, false);
                     }
                 }
 
@@ -438,8 +434,6 @@ public class Generator3D : MonoBehaviour {
                                 transitionHallways.Add(previousPos);
                             }
                         }
-
-                        hallways.Add(currentPos);
                     }
                 }
 
@@ -448,16 +442,27 @@ public class Generator3D : MonoBehaviour {
                 {
                     CheckRoom(pos);
                 }
+
+                pathFound = true;
+            }
+
+            if (!pathFound)
+            {
+                throw new System.Exception("No path found");
             }
 
         }
-
-
+        
+        foreach (var connectedRoom in connectedRooms)
+        {
+            if (!connectedRoom.Value)
+            {
+                throw new System.Exception("Room not connected");
+            }
+        }
 
         for (int i = 0; i < size.x; i++)
-        {
             for (int j = 0; j < size.y; j++)
-            {
                 for (int k = 0; k < size.z; k++)
                 {
                     Vector3Int pos = new Vector3Int(i, j, k);
@@ -466,16 +471,10 @@ public class Generator3D : MonoBehaviour {
                         PlaceHallway(pos);
                     }
                 }
-            }
-
-        }
-
     }
         
     private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
 
-    //TO-DO : Checkear que en primer y ultimo pasillo si hay pared
-    // Acceder al prefab del room y quitarle la pared (llamando a una funcion de quitar paredes del room)
     void CheckRoom(Vector3Int position)
     {
         for( int i = 0; i < testPos.Length; i++ )
@@ -486,7 +485,7 @@ public class Generator3D : MonoBehaviour {
             {
                 //room.GetComponent<DCubeTint>().material = greenMaterial;
                 //room.GetComponent<DCubeTint>().Start();
-
+                connectedRooms[room] = true;
                 room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
             }
             
@@ -497,11 +496,13 @@ public class Generator3D : MonoBehaviour {
     GameObject PlaceRoom(Vector3Int location, PanicRoom room)
     {
         GameObject go = Instantiate(room.prefab, location, Quaternion.identity);
+        go.transform.parent = transform;
         return go;
     }
 
     void PlaceHallway(Vector3Int location) {
         GameObject go = Instantiate(hallwayPrefab, location, Quaternion.identity);
+        go.transform.parent = transform;
         for (int i = 0; i < testPos.Length; i++)
         {
             Vector3Int move = testPos[i];
@@ -516,6 +517,7 @@ public class Generator3D : MonoBehaviour {
         GameObject prefab = up ? upStairwayPrefab : downStairwayPrefab;
         
         GameObject go = Instantiate(prefab, location, orientation);
+        go.transform.parent = transform;
         go.GetComponent<DCubeTint>().material = greenMaterial;
     }
 }
