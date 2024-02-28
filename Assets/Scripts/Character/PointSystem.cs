@@ -7,8 +7,12 @@ public class PointSystem : MonoBehaviour
     private int num_points = 0;
     private int max_points = 8;
 
-    [SerializeField] private EnemyStats enemy_stats;
+    private EnemyStats enemy_stats;
 
+    private void Start()
+    {
+        enemy_stats = GameObject.FindGameObjectWithTag("UI").GetComponent<EnemyStats>();
+    }
     public void IncrementPoint() { 
         num_points++;
         if (num_points > max_points) { 
