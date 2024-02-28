@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
     private Vector2 player_translation;
     private float translation_speed = 1.0f;
     private bool is_moving = false;
+    private bool is_running = false;
+    private bool is_stealth = false;
     // Camera movement
     [HideInInspector] Camera camera;
     private Vector2 camera_movement;
@@ -26,19 +28,32 @@ public class CharacterMovement : MonoBehaviour
     private float jump_force = 7.0f;
     private bool jump_trigger;
 
+    // *** Stats ***
+    private float player_health = 100;
+    private bool finished_round = true;
 
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
     bool activate_lantern = true;
 
+    // *** UI ***
+    [SerializeField] private InGameUI game_ui;
+    private bool menu_paused = false;
+
+
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
+    [SerializeField] private CharacterObjectives character_objectives;
 
     public void OnMovement(InputValue input) {
+        if (!finished_round) return;
+        if (menu_paused) return;
         player_translation = input.Get<Vector2>();
     }
 
     public void OnLook(InputValue input) {
+        if (!finished_round) return;
+        if (menu_paused) return;
         camera_movement = input.Get<Vector2>();
     }
 
@@ -46,6 +61,66 @@ public class CharacterMovement : MonoBehaviour
     {
         jump_trigger = input.isPressed;
     }
+
+    public void OnRun(InputValue input)
+    {
+        is_running = input.isPressed;
+
+        if (is_running)
+        {
+            is_stealth = false;
+
+            // Values related with running movement
+            translation_speed = 2.0f;
+            swing_frequency = 5.2f;
+            swing_horizontal_amplitude = 0.15f;
+            swing_vertical_amplitude = 0.15f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadRunningSound();
+        }
+        else {
+            // Values related with normal movement
+            translation_speed = 1.0f;
+            swing_frequency = 4.2f;
+            swing_horizontal_amplitude = 0.1f;
+            swing_vertical_amplitude = 0.1f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadWalkingSound();
+        }
+    }
+
+    public void OnStealth(InputValue input) 
+    { 
+        is_stealth = input.isPressed;
+
+        if (is_stealth)
+        {
+            is_running = false;
+
+            // Values related with stealth movement
+            translation_speed = 0.6f;
+            swing_frequency = 2.2f;
+            swing_horizontal_amplitude = 0.07f;
+            swing_vertical_amplitude = 0.07f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadStealthSound();
+            
+        }
+        else {
+            // Values related with normal movement
+            translation_speed = 1.0f;
+            swing_frequency = 4.2f;
+            swing_horizontal_amplitude = 0.1f;
+            swing_vertical_amplitude = 0.1f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadWalkingSound();
+        }
+    }
+
 
     public void OnLantern(InputValue input) {
         activate_lantern = !activate_lantern;
@@ -59,6 +134,29 @@ public class CharacterMovement : MonoBehaviour
             lantern_behavior.DeactivateLantern();
             character_sounds_manager.PlayLanternDeactivateSound();
         }
+    }
+
+
+    public void OnPauseMenu(InputValue input) { 
+        if(!finished_round) { return; }
+
+        menu_paused = !menu_paused;
+
+        if (menu_paused)
+        {
+            UnlockCursor();
+            game_ui.PauseMenu();
+            player_translation = Vector2.zero;
+            camera_movement = Vector2.zero;
+        }
+        else if (!menu_paused) {
+            LockCursor();
+            game_ui.UnpauseMenu();
+        }
+    }
+
+    public void OnCollect(InputValue input) {
+        character_objectives.CollectCollectible(camera.transform);
     }
 
     private void Awake()
@@ -77,6 +175,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+
         // Apply basic translation (WASD)
         float translation_factor = Time.deltaTime * translation_speed;
         transform.Translate(translation_factor * player_translation.x, 0, translation_factor * player_translation.y);
@@ -100,7 +199,7 @@ public class CharacterMovement : MonoBehaviour
             if (!is_moving)
             {
                 // Start playing footstep sounds
-                character_sounds_manager.PlayFootstepSound();
+                character_sounds_manager.PlayMovingSound();
                 is_moving = true;
             }
 
@@ -118,7 +217,7 @@ public class CharacterMovement : MonoBehaviour
             if (is_moving)
             {
                 // Stop playing footstep sounds when the player stops moving
-                character_sounds_manager.StopFootstepSound();
+                character_sounds_manager.StopMovingSound();
                 is_moving = false;
             }
 
@@ -130,8 +229,38 @@ public class CharacterMovement : MonoBehaviour
     }
 
 
+    public void SetHealth(float new_value) {
+        player_health = new_value;
+        game_ui.UpdateHealth(player_health);
+    }
 
+    public float GetHealth() {
+        return player_health;
+    }
 
+    public void SetPauseMenu(bool option) { 
+        menu_paused = option;
+    }
+
+    public void WinGame() {
+        finished_round = false;
+        player_translation = Vector2.zero;
+        camera_movement = Vector2.zero;
+        menu_paused = true;
+        UnlockCursor();
+        game_ui.PauseMenu();
+        game_ui.WinGameUI();
+    }
+
+    public void LoseGame() {
+        finished_round = false;
+        player_translation = Vector2.zero;
+        camera_movement = Vector2.zero;
+        menu_paused = true;
+        UnlockCursor();
+        game_ui.PauseMenu();
+        game_ui.LoseGameUI();
+    }
 
 
     private void LockCursor()

@@ -452,25 +452,7 @@ public class Generator3D : MonoBehaviour {
 
         }
 
-        /*
-        foreach (var hallway in hallways)
-        {
-            CellType type = CellType.None;
-            if (grid.TryGet(hallway, out type))
-            {
-                if (type == CellType.Hallway)
-                {
-                    PlaceHallway(hallway);
-                    grid[hallway] = CellType.Hallway;
-                }
-                
-            } else
-            {
-                PlaceHallway(hallway);
-                grid[hallway] = CellType.Hallway;
-            }
-        }
-        */
+
 
         for (int i = 0; i < size.x; i++)
         {
@@ -485,6 +467,7 @@ public class Generator3D : MonoBehaviour {
                     }
                 }
             }
+
         }
 
     }
