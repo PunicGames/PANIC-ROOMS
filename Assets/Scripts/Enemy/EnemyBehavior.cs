@@ -246,9 +246,9 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     IEnumerator PlayKillAnimation() { 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         // Kill or whatever...
-        
+        character_movement.LoseGame();
     }
 
 

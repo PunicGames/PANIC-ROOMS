@@ -30,6 +30,7 @@ public class CharacterMovement : MonoBehaviour
 
     // *** Stats ***
     private float player_health = 100;
+    private bool finished_round = true;
 
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
@@ -42,13 +43,16 @@ public class CharacterMovement : MonoBehaviour
 
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
+    [SerializeField] private CharacterObjectives character_objectives;
 
     public void OnMovement(InputValue input) {
+        if (!finished_round) return;
         if (menu_paused) return;
         player_translation = input.Get<Vector2>();
     }
 
     public void OnLook(InputValue input) {
+        if (!finished_round) return;
         if (menu_paused) return;
         camera_movement = input.Get<Vector2>();
     }
@@ -134,6 +138,8 @@ public class CharacterMovement : MonoBehaviour
 
 
     public void OnPauseMenu(InputValue input) { 
+        if(!finished_round) { return; }
+
         menu_paused = !menu_paused;
 
         if (menu_paused)
@@ -149,6 +155,9 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public void OnCollect(InputValue input) {
+        character_objectives.CollectCollectible(camera.transform);
+    }
 
     private void Awake()
     {
@@ -231,6 +240,26 @@ public class CharacterMovement : MonoBehaviour
 
     public void SetPauseMenu(bool option) { 
         menu_paused = option;
+    }
+
+    public void WinGame() {
+        finished_round = false;
+        player_translation = Vector2.zero;
+        camera_movement = Vector2.zero;
+        menu_paused = true;
+        UnlockCursor();
+        game_ui.PauseMenu();
+        game_ui.WinGameUI();
+    }
+
+    public void LoseGame() {
+        finished_round = false;
+        player_translation = Vector2.zero;
+        camera_movement = Vector2.zero;
+        menu_paused = true;
+        UnlockCursor();
+        game_ui.PauseMenu();
+        game_ui.LoseGameUI();
     }
 
 
