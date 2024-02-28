@@ -67,7 +67,7 @@ public class EnemyBehavior : MonoBehaviour
         enemy_stats = GetComponent<EnemyStats>();
 
         // Set initial values
-        enemy_stats.UpdateStats(8);
+        enemy_stats.UpdateStats(0);
     }
 
     // Update is called once per frame
