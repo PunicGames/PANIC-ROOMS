@@ -2799,6 +2799,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 326377350670319343, guid: 3e502247c2875ba4b80d39771b773039,
+        type: 3}
+      propertyPath: enemy_behavior
+      value: 
+      objectReference: {fileID: 5887074930718382589}
     - target: {fileID: 2225946320809862038, guid: 3e502247c2875ba4b80d39771b773039,
         type: 3}
       propertyPath: health_slider
@@ -2884,5 +2889,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f86278a0b924b5419fc6b06525b564a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5887074930718382589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2225946320809862038, guid: 3e502247c2875ba4b80d39771b773039,
+    type: 3}
+  m_PrefabInstance: {fileID: 5887074930718382583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd2d657d5d4f42478fe69f97b3b01f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
