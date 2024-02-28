@@ -446,8 +446,7 @@ public class Generator3D : MonoBehaviour {
 
                 foreach (var pos in transitionHallways)
                 {
-                    if (grid[hallway] != CellType.Room)
-                        PlaceHallway(hallway);
+                    CheckRoom(pos);
                 }
             }
 
