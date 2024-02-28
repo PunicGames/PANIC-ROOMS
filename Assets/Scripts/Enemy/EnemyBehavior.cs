@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class EnemyBehavior : MonoBehaviour
 {
 
-    // Ai related
+    // AI related
     private NavMeshAgent enemy_nav_mesh;
     private Vector3 enemy_destination;
 
@@ -29,14 +29,11 @@ public class EnemyBehavior : MonoBehaviour
 
     // Player related
     private GameObject player;
+    private CharacterMovement character_movement;
     [SerializeField] private Camera player_camera;
     private float health_increase_rate;
     private float health_decrease_rate;
-    private float player_health = 100;
     public Transform player_transform;
-
-    // UI related
-    public Slider health_slider;
 
     // Enemy Camera
     [SerializeField] private Camera enemy_camera;
@@ -59,6 +56,7 @@ public class EnemyBehavior : MonoBehaviour
         enemy_mesh = GetComponent<MeshRenderer>();
         enemy_nav_mesh = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        character_movement = player.GetComponent<CharacterMovement>();
         player_transform = player.GetComponent<Transform>();
         enemy_ray_caster = GetComponent<EnemyRayCasting>();
         enemy_ray_caster.SetPlayerTransform(player_transform);
@@ -75,7 +73,7 @@ public class EnemyBehavior : MonoBehaviour
     {
 
         // Kill player if health below 0
-        if (player_health <= 0) {
+        if (character_movement.GetHealth() <= 0) {
             if (!kill_player) // Just a trigger to run KillPlayer() once
             {
                 KillPlayer();
@@ -143,12 +141,9 @@ public class EnemyBehavior : MonoBehaviour
         distance_to_player = Vector3.Distance(this.transform.position, player_transform.position);
 
         if (distance_to_player <= catch_distance) {
-            player_health -= health_decrease_rate * Time.deltaTime;
+            float current_health = character_movement.GetHealth();
+            character_movement.SetHealth(current_health - health_decrease_rate * Time.deltaTime);
         }
-
-
-        // Update UI
-        UpdateUI();
 
         // Update sounds
         static_sound.volume = static_volume;
@@ -205,10 +200,11 @@ public class EnemyBehavior : MonoBehaviour
 
     private void IncreaseSanity() {
         // Increase sanity
-        player_health += health_increase_rate * Time.deltaTime;
-        if (player_health > 100)
+        float current_health = character_movement.GetHealth();
+        character_movement.SetHealth(current_health + health_increase_rate * Time.deltaTime);
+        if (character_movement.GetHealth() > 100)
         {
-            player_health = 100;
+            character_movement.SetHealth(100);
         }
 
         // Update volume values
@@ -219,8 +215,10 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
     private void DecreaseSanity() {
+
         // Decrease sanity
-        player_health -= health_decrease_rate * Time.deltaTime * 0.5f;
+        float current_health = character_movement.GetHealth();
+        character_movement.SetHealth(current_health - health_decrease_rate * Time.deltaTime * 0.5f);
 
         // Update volume values
         static_volume += sound_increase_rate * Time.deltaTime * 0.5f;
@@ -251,11 +249,6 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         // Kill or whatever...
         
-    }
-
-    private void UpdateUI()
-    {
-        health_slider.value = player_health;
     }
 
 
