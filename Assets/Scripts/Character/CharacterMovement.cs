@@ -20,9 +20,9 @@ public class CharacterMovement : MonoBehaviour
     private float camera_pitch = 0.0f;
     // Camera swing effect
     private Vector3 initial_camera_position;
-    public float swing_frequency = 4.2f;
-    public float swing_horizontal_amplitude = 0.1f;
-    public float swing_vertical_amplitude = 0.1f;
+    private float swing_frequency = 4.2f;
+    private float swing_horizontal_amplitude = 0.1f;
+    private float swing_vertical_amplitude = 0.1f;
     private float swing_timer = 0.0f;
     // Jumping
     private float jump_force = 7.0f;
@@ -37,7 +37,7 @@ public class CharacterMovement : MonoBehaviour
     bool activate_lantern = true;
 
     // *** UI ***
-    [SerializeField] private InGameUI game_ui;
+    private InGameUI game_ui;
     private bool menu_paused = false;
 
 
@@ -166,6 +166,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         camera = GetComponentInChildren<Camera>();
         initial_camera_position = camera.transform.localPosition;
 

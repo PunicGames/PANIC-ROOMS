@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 5774749411802604160}
   m_Layer: 5
   m_Name: GameplayUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1094,7 +1094,6 @@ MonoBehaviour:
   win_ui: {fileID: 2164016866607747812}
   lost_ui: {fileID: 8644612859590302546}
   health_slider: {fileID: 309343290110750638}
-  character_movement: {fileID: 0}
 --- !u!1 &6147431069909754831
 GameObject:
   m_ObjectHideFlags: 0

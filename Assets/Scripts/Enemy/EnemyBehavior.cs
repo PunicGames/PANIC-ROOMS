@@ -30,7 +30,7 @@ public class EnemyBehavior : MonoBehaviour
     // Player related
     private GameObject player;
     private CharacterMovement character_movement;
-    [SerializeField] private Camera player_camera;
+    private Camera player_camera;
     private float health_increase_rate;
     private float health_decrease_rate;
     public Transform player_transform;
@@ -41,7 +41,7 @@ public class EnemyBehavior : MonoBehaviour
 
     // Sounds
     [SerializeField] private AudioSource static_sound;
-    float static_volume = 0;
+    private float static_volume = 0;
     private float sound_increase_rate = 0.2f;
     private float sound_decrease_rate = 0.4f;
 
@@ -56,6 +56,7 @@ public class EnemyBehavior : MonoBehaviour
         enemy_mesh = GetComponent<MeshRenderer>();
         enemy_nav_mesh = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+        player_camera = player.GetComponentInChildren<Camera>();
         character_movement = player.GetComponent<CharacterMovement>();
         player_transform = player.GetComponent<Transform>();
         enemy_ray_caster = GetComponent<EnemyRayCasting>();

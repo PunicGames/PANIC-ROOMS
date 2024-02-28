@@ -6,16 +6,17 @@ public class CharacterObjectives : MonoBehaviour
 {
 
     [SerializeField] private GameObject[] collectibles;
-    [SerializeField] private EnemyStats enemy_stats;
+    private EnemyStats enemy_stats;
     [SerializeField] private CharacterMovement character_movement;
     private int num_collectibles = 0;
     private int num_max_collectibles;
     private float min_distance_to_collect = 2.0f;
-    public float angle_threshold = 5.0f;
+    private float angle_threshold = 20.0f;
 
 
     private void Start()
     {
+        enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
         num_max_collectibles = collectibles.Length;
     }
 

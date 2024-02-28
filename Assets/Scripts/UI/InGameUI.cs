@@ -11,7 +11,12 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject win_ui;
     [SerializeField] private GameObject lost_ui;
     [SerializeField] private Slider health_slider;
-    [SerializeField] private CharacterMovement character_movement;
+    private CharacterMovement character_movement;
+
+    private void Start()
+    {
+        character_movement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+    }
 
     public void PauseMenu() {
         //Debug.Log("Pause menu");
