@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 2723266925881808205}
   - component: {fileID: 6021309635966318369}
   - component: {fileID: 98255043138362096}
-  - component: {fileID: 9149561836340250226}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -266,13 +265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d323e5b8d5352154c8914718dcbf5d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swing_frequency: 4.2
-  swing_horizontal_amplitude: 0.1
-  swing_vertical_amplitude: 0.1
   lantern_behavior: {fileID: 1813267302141941773}
-  game_ui: {fileID: 0}
   character_sounds_manager: {fileID: 3925602586812431036}
-  character_objectives: {fileID: 9149561836340250226}
+  walk_sound_trigger: 0
+  character_point_system: {fileID: 4236453533992830131}
 --- !u!114 &5566984993888555112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdc3dcd5c815a64cb4b99067c3c6952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_stats: {fileID: 0}
 --- !u!114 &3925602586812431036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,11 +327,15 @@ MonoBehaviour:
   noise_audio_source: {fileID: 6021309635966318369}
   noise_sound: {fileID: 8300000, guid: 2f9c39584fe441a409796cb337b37599, type: 3}
   moving_audio_source: {fileID: 2723266925881808205}
-  walking_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  walking_sounds:
+  - {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  - {fileID: 8300000, guid: eacebd693b549034fa3581c142747d57, type: 3}
   running_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
   stealth_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
   lantern_audio_source: {fileID: 98255043138362096}
   lantern_click_sound: {fileID: 8300000, guid: 741624b4117eeb249a9b7c879cadcaa0, type: 3}
+  min_pitch: 0.5
+  max_pitch: 1
 --- !u!82 &2723266925881808205
 AudioSource:
   m_ObjectHideFlags: 0
@@ -625,25 +624,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9149561836340250226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140104229450293144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7c86c70ecafaf46a1ce0ac779f07d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectibles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemy_stats: {fileID: 0}
-  character_movement: {fileID: 6206294044809674864}
-  angle_threshold: 30
 --- !u!1001 &850609191213379387
 PrefabInstance:
   m_ObjectHideFlags: 0

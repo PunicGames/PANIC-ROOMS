@@ -43,7 +43,8 @@ public class CharacterMovement : MonoBehaviour
 
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
-    [SerializeField] private CharacterObjectives character_objectives;
+    public bool walk_sound_trigger = false;
+    [SerializeField] private PointSystem character_point_system;
 
     public void OnMovement(InputValue input) {
         if (!finished_round) return;
@@ -156,7 +157,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void OnCollect(InputValue input) {
-        character_objectives.CollectCollectible(camera.transform);
+        character_point_system.CollectCollectible(camera.transform);
     }
 
     private void Awake()
@@ -197,11 +198,11 @@ public class CharacterMovement : MonoBehaviour
     private void ApplySwingEffect() {
         if (player_translation.x != 0 || player_translation.y != 0)
         {
-            if (!is_moving)
+            if (!walk_sound_trigger)
             {
-                // Start playing footstep sounds
+                // Triggers one step sound
                 character_sounds_manager.PlayMovingSound();
-                is_moving = true;
+                walk_sound_trigger = true;
             }
 
             swing_timer += Time.deltaTime * swing_frequency;
@@ -215,12 +216,12 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            if (is_moving)
-            {
-                // Stop playing footstep sounds when the player stops moving
-                character_sounds_manager.StopMovingSound();
-                is_moving = false;
-            }
+            //if (is_moving)
+            //{
+            //    // Stop playing footstep sounds when the player stops moving
+            //    character_sounds_manager.StopMovingSound();
+            //    is_moving = false;
+            //}
 
             // Reset the bobTimer if the player is not moving to avoid sudden jumps in camera position
             swing_timer = Mathf.PI / 2;
