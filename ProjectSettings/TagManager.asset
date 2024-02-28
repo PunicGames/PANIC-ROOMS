@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Floor
   - UI
+  - Collectible
   layers:
   - Default
   - TransparentFX

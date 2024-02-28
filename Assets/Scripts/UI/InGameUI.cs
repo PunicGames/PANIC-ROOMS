@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class InGameUI : MonoBehaviour
         pause_ui.active = false;
 
         // Go main menu
+        //SceneManager.LoadScene("MainMenu");
         Debug.Log("Coming back to main menu");
     }
 

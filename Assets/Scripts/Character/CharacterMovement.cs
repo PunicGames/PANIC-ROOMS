@@ -43,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
 
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
-    [SerializeField] private CharacterObjectives character_objectives;
+    [SerializeField] private PointSystem character_point_system;
 
     public void OnMovement(InputValue input) {
         if (!finished_round) return;
@@ -156,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void OnCollect(InputValue input) {
-        character_objectives.CollectCollectible(camera.transform);
+        character_point_system.CollectCollectible(camera.transform);
     }
 
     private void Awake()
