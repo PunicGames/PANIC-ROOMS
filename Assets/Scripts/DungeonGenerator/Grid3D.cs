@@ -57,11 +57,19 @@ public class Grid3D<T> : IEnumerable<T>
     {
         get {
             pos += Offset;
-            return data[GetIndex(pos)];
+            int index = GetIndex(pos);
+
+            if (index < 0 || index >= data.Length)
+                return default;
+            return data[index];
         }
         set {
             pos += Offset;
-            data[GetIndex(pos)] = value;
+            int index = GetIndex(pos);
+
+            if (index < 0 || index >= data.Length)
+                return;
+            data[index] = value;
         }
     }
 
