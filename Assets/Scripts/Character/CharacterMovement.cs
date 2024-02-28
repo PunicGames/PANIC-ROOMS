@@ -28,19 +28,28 @@ public class CharacterMovement : MonoBehaviour
     private float jump_force = 7.0f;
     private bool jump_trigger;
 
+    // *** Stats ***
+    private float player_health = 100;
 
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
     bool activate_lantern = true;
 
+    // *** UI ***
+    [SerializeField] private InGameUI game_ui;
+    private bool menu_paused = false;
+
+
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
 
     public void OnMovement(InputValue input) {
+        if (menu_paused) return;
         player_translation = input.Get<Vector2>();
     }
 
     public void OnLook(InputValue input) {
+        if (menu_paused) return;
         camera_movement = input.Get<Vector2>();
     }
 
@@ -123,6 +132,24 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+
+    public void OnPauseMenu(InputValue input) { 
+        menu_paused = !menu_paused;
+
+        if (menu_paused)
+        {
+            UnlockCursor();
+            game_ui.PauseMenu();
+            player_translation = Vector2.zero;
+            camera_movement = Vector2.zero;
+        }
+        else if (!menu_paused) {
+            LockCursor();
+            game_ui.UnpauseMenu();
+        }
+    }
+
+
     private void Awake()
     {
         LockCursor();
@@ -139,6 +166,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+
         // Apply basic translation (WASD)
         float translation_factor = Time.deltaTime * translation_speed;
         transform.Translate(translation_factor * player_translation.x, 0, translation_factor * player_translation.y);
@@ -192,8 +220,18 @@ public class CharacterMovement : MonoBehaviour
     }
 
 
+    public void SetHealth(float new_value) {
+        player_health = new_value;
+        game_ui.UpdateHealth(player_health);
+    }
 
+    public float GetHealth() {
+        return player_health;
+    }
 
+    public void SetPauseMenu(bool option) { 
+        menu_paused = option;
+    }
 
 
     private void LockCursor()
