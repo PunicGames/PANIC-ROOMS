@@ -164,108 +164,127 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!1 &582381954
-GameObject:
+--- !u!1001 &1455801581
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 582381956}
-  - component: {fileID: 582381955}
-  m_Layer: 0
-  m_Name: DungeonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &582381955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582381954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 547a5b9f3c9562d469dd59dd043935a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seed: Y3P3ERGK
-  size: {x: 60, y: 5, z: 60}
-  panicRooms:
-  - size: {x: 5, y: 2, z: 5}
-    prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
-      type: 3}
-  - size: {x: 5, y: 2, z: 5}
-    prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
-      type: 3}
-  - size: {x: 4, y: 2, z: 4}
-    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
-      type: 3}
-  - size: {x: 4, y: 2, z: 4}
-    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
-      type: 3}
-  - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
-      type: 3}
-  additionalRooms:
-  - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
-      type: 3}
-  - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
-      type: 3}
-  - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
-      type: 3}
-  - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
-      type: 3}
-  - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
-      type: 3}
-  hallwayPrefab: {fileID: 7893673706923132279, guid: 66100796625dcc043a9051b668fffb7f,
-    type: 3}
-  upStairwayPrefab: {fileID: 7893673706923132279, guid: 27bb765bfefc67e4cbc8e938f526a43e,
-    type: 3}
-  downStairwayPrefab: {fileID: 7893673706923132279, guid: cc9585e04073506468d1d3c715be3b9e,
-    type: 3}
-  redMaterial: {fileID: 2100000, guid: 8c68d30b523fe8b449660c5feff1f316, type: 2}
-  blueMaterial: {fileID: 2100000, guid: ac82b7527f5e0044e9f5d869fc6ae075, type: 2}
-  greenMaterial: {fileID: 2100000, guid: a6b4f45a8e238b04383a4d2b8be22662, type: 2}
---- !u!4 &582381956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582381954}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.233322, y: 1.9695816, z: 26.288128}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: 22c08230c193e7942bbfd85365d887c0,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: 22c08230c193e7942bbfd85365d887c0,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: a3d3753d02c9df34189509ac1e6d2fbc,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: a3d3753d02c9df34189509ac1e6d2fbc,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[6].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[9].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
+        type: 3}
+    - target: {fileID: 4781141200843308330, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_Name
+      value: DungeonGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072073583296714069, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 215c7451243415247991b7bdf4088c56, type: 3}
 --- !u!1 &1633245197
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +332,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1911048491
 PrefabInstance:
@@ -351,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
