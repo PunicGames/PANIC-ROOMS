@@ -192,7 +192,19 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
+      propertyPath: panicRooms.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
       propertyPath: panicRooms.Array.data[6].prefab
+      value: 
+      objectReference: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
+        type: 3}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: panicRooms.Array.data[7].prefab
       value: 
       objectReference: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
         type: 3}
@@ -790,7 +802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdc3dcd5c815a64cb4b99067c3c6952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_stats: {fileID: 0}
 --- !u!1 &4280242897012381833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,12 +1082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d323e5b8d5352154c8914718dcbf5d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swing_frequency: 4.2
-  swing_horizontal_amplitude: 0.1
-  swing_vertical_amplitude: 0.1
   lantern_behavior: {fileID: 1813267303482528038}
-  game_ui: {fileID: 0}
   character_sounds_manager: {fileID: 3925602588714038167}
+  character_objectives: {fileID: 0}
 --- !u!4 &6658071767267124270
 Transform:
   m_ObjectHideFlags: 0
