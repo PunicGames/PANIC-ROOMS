@@ -267,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lantern_behavior: {fileID: 1813267302141941773}
   character_sounds_manager: {fileID: 3925602586812431036}
+  walk_sound_trigger: 0
   character_point_system: {fileID: 4236453533992830131}
 --- !u!114 &5566984993888555112
 MonoBehaviour:
@@ -326,11 +327,15 @@ MonoBehaviour:
   noise_audio_source: {fileID: 6021309635966318369}
   noise_sound: {fileID: 8300000, guid: 2f9c39584fe441a409796cb337b37599, type: 3}
   moving_audio_source: {fileID: 2723266925881808205}
-  walking_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  walking_sounds:
+  - {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  - {fileID: 8300000, guid: eacebd693b549034fa3581c142747d57, type: 3}
   running_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
   stealth_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
   lantern_audio_source: {fileID: 98255043138362096}
   lantern_click_sound: {fileID: 8300000, guid: 741624b4117eeb249a9b7c879cadcaa0, type: 3}
+  min_pitch: 0.5
+  max_pitch: 1
 --- !u!82 &2723266925881808205
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class CharacterSounds : MonoBehaviour
     public AudioClip noise_sound;
 
     public AudioSource moving_audio_source;
-    public AudioClip walking_sound;
+    public AudioClip[] walking_sounds;
     public AudioClip running_sound;
     public AudioClip stealth_sound;
 
@@ -54,6 +54,7 @@ public class CharacterSounds : MonoBehaviour
 
     public void PlayMovingSound()
     {
+        moving_audio_source.clip = walking_sounds[Random.Range(0, walking_sounds.Length)];
         moving_audio_source.pitch = Random.Range(min_pitch, max_pitch);
         moving_audio_source.Play();
         StartCoroutine(DetectSoundFinish(moving_audio_source));
@@ -66,7 +67,6 @@ public class CharacterSounds : MonoBehaviour
     }
 
     public void LoadWalkingSound() {
-        moving_audio_source.clip = walking_sound;
         moving_audio_source.volume = 0.75f;
         min_pitch = 0.74f;
         max_pitch = 0.78f;
