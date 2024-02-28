@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch10_body
-    second: {fileID: 2100000, guid: ac82b7527f5e0044e9f5d869fc6ae075, type: 2}
+    second: {fileID: 2100000, guid: abdda984a37d4bb41941ec1375bf0b45, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ch10_body1
-    second: {fileID: 2100000, guid: 173234aeebe7ff140b22b3338f2e5a4a, type: 2}
+    second: {fileID: 2100000, guid: d7942925fadb7d24f9fdc71316246d25, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -42,7 +42,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

@@ -65,7 +65,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7001315494233120483}
-  - component: {fileID: 5699299916331495275}
   m_Layer: 0
   m_Name: Countdown_Graffiti
   m_TagString: Untagged
@@ -91,30 +90,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5699299916331495275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4202150488455526553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 533da5ae1b8761d4fb3f241f10236d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_numbers:
-  - {fileID: 2800000, guid: 28d53fbf0e305b841b4ea4de8a0a15c0, type: 3}
-  - {fileID: 2800000, guid: b817f863f8fbc7241b5e93f5fef3d2bc, type: 3}
-  - {fileID: 2800000, guid: c2f0206ae6fa6a046ad5524cd869c0c1, type: 3}
-  - {fileID: 2800000, guid: 69481484c6c172f49bd2866d9d3dbe36, type: 3}
-  - {fileID: 2800000, guid: 322f6b1607512274989b679626613583, type: 3}
-  - {fileID: 2800000, guid: 5982185c5d4c45947a4922fbe19c101d, type: 3}
-  - {fileID: 2800000, guid: f0ea7a173c8c0dc4ba60c2a47dbd8e1f, type: 3}
-  - {fileID: 2800000, guid: b6960053ce85b454a88d4704f3f7ec39, type: 3}
-  - {fileID: 2800000, guid: d1ef7c0c4cbdbed44b75a1c8dae0a66a, type: 3}
-  - {fileID: 2800000, guid: 3e31d93c2e3e19748918274d08e28f9a, type: 3}
-  m_material: {fileID: 2100000, guid: 131a980162c42d842ae102ae66a896ef, type: 2}
 --- !u!1 &5916245887381207889
 GameObject:
   m_ObjectHideFlags: 0
