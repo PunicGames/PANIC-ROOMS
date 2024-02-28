@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 2723266925881808205}
   - component: {fileID: 6021309635966318369}
   - component: {fileID: 98255043138362096}
+  - component: {fileID: 9149561836340250226}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -269,7 +270,9 @@ MonoBehaviour:
   swing_horizontal_amplitude: 0.1
   swing_vertical_amplitude: 0.1
   lantern_behavior: {fileID: 1813267302141941773}
+  game_ui: {fileID: 0}
   character_sounds_manager: {fileID: 3925602586812431036}
+  character_objectives: {fileID: 9149561836340250226}
 --- !u!114 &5566984993888555112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +625,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9149561836340250226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140104229450293144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7c86c70ecafaf46a1ce0ac779f07d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemy_stats: {fileID: 0}
+  character_movement: {fileID: 6206294044809674864}
+  angle_threshold: 30
 --- !u!1001 &850609191213379387
 PrefabInstance:
   m_ObjectHideFlags: 0
