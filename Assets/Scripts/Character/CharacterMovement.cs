@@ -14,7 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private bool is_running = false;
     private bool is_stealth = false;
     // Camera movement
-    [HideInInspector] Camera camera;
+    [SerializeField] private Camera camera;
     private Vector2 camera_movement;
     private float camera_speed = 5.0f;
     private float camera_pitch = 0.0f;
@@ -168,7 +168,6 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
-        camera = GetComponentInChildren<Camera>();
         initial_camera_position = camera.transform.localPosition;
 
         // Activate lantern by default

@@ -13,12 +13,16 @@ public class PointSystem : MonoBehaviour
     private EnemyStats enemy_stats;
     private CharacterMovement character_movement;
 
+    [SerializeField] private SprayNumBehaviour sprayUI;
+
     private void Start()
     {
         character_movement = GetComponent<CharacterMovement>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
-        enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
         max_points = collectibles.Length;
+        sprayUI.UpdateNumbersLeft(max_points);
+        enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
+        
     }
     public void IncrementPoint() { 
         num_points++;
@@ -67,6 +71,8 @@ public class PointSystem : MonoBehaviour
 
                         // Update num collectibles
                         num_points++;
+                        //Update spray paint UI
+                        sprayUI.UpdateNumbersLeft(max_points-num_points);
                         // Update enemy stats
                         enemy_stats.UpdateStats(num_points);
 
