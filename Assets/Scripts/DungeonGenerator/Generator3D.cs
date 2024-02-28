@@ -452,10 +452,22 @@ public class Generator3D : MonoBehaviour {
 
         }
 
-        foreach (var hallway in hallways)
+
+
+        for (int i = 0; i < size.x; i++)
         {
-            if (grid[hallway] != CellType.Room)
-                PlaceHallway(hallway);
+            for (int j = 0; j < size.y; j++)
+            {
+                for (int k = 0; k < size.z; k++)
+                {
+                    Vector3Int pos = new Vector3Int(i, j, k);
+                    if (grid[pos] == CellType.Hallway)
+                    {
+                        PlaceHallway(pos);
+                    }
+                }
+            }
+
         }
 
     }
