@@ -452,9 +452,39 @@ public class Generator3D : MonoBehaviour {
 
         }
 
+        /*
         foreach (var hallway in hallways)
         {
-            PlaceHallway(hallway);
+            CellType type = CellType.None;
+            if (grid.TryGet(hallway, out type))
+            {
+                if (type == CellType.Hallway)
+                {
+                    PlaceHallway(hallway);
+                    grid[hallway] = CellType.Hallway;
+                }
+                
+            } else
+            {
+                PlaceHallway(hallway);
+                grid[hallway] = CellType.Hallway;
+            }
+        }
+        */
+
+        for (int i = 0; i < size.x; i++)
+        {
+            for (int j = 0; j < size.y; j++)
+            {
+                for (int k = 0; k < size.z; k++)
+                {
+                    Vector3Int pos = new Vector3Int(i, j, k);
+                    if (grid[pos] == CellType.Hallway)
+                    {
+                        PlaceHallway(pos);
+                    }
+                }
+            }
         }
 
     }
