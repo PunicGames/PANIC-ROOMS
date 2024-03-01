@@ -40,4 +40,14 @@ public class ButtonColorChange : MonoBehaviour, IPointerEnterHandler, IPointerEx
             buttonText.text = normalText;
         }
     }
+
+    private void OnEnable()
+    {
+        if (button != null)
+        {
+            buttonText.color = normalColor;
+            buttonText.fontStyle = normalFontStyle;
+            buttonText.text = normalText;
+        }
+    }
 }
