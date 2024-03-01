@@ -573,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &501682629539015234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1564,11 +1564,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: SwitchMenu
-        m_Mode: 2
+        m_MethodName: OptionsButtonClicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8245932064164917889}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2133,6 +2133,7 @@ MonoBehaviour:
   customGameMenu: {fileID: 1741822522937716127}
   optionsMenu: {fileID: 8245932064164917889}
   creditsMenu: {fileID: 8162952287018945737}
+  titleMenu: {fileID: 1241397108421789092}
 --- !u!1 &6030486508586491063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,7 +2397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -121, y: -437}
+  m_AnchoredPosition: {x: -121, y: -383}
   m_SizeDelta: {x: 750, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8193273100625627186
@@ -2709,11 +2710,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: SwitchMenu
-        m_Mode: 2
+        m_MethodName: CreditsButtonClicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8162952287018945737}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2862,11 +2863,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: SwitchMenu
-        m_Mode: 2
+        m_MethodName: CustomGameButtonClicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1741822522937716127}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
