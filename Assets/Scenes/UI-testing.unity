@@ -229,8 +229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 358, y: 64}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 369, y: 64}
+  m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432654436
 MonoBehaviour:
@@ -867,6 +867,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1741822522937716127, guid: a55b95978d662f74db0132dd6ec3e88f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2760474314828638824, guid: a55b95978d662f74db0132dd6ec3e88f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1192,7 +1197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SEED
+  m_text: SEED...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -1220,7 +1225,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 56.05
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
