@@ -13,13 +13,14 @@ public class PointSystem : MonoBehaviour
     private EnemyStats enemy_stats;
     private CharacterMovement character_movement;
 
-    [SerializeField] private SprayNumBehaviour sprayUI;
+    private SprayNumBehaviour sprayUI;
 
     private void Start()
     {
         character_movement = GetComponent<CharacterMovement>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         max_points = collectibles.Length;
+        sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
         sprayUI.UpdateNumbersLeft(max_points);
         enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
         
