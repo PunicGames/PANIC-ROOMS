@@ -178,7 +178,7 @@ Transform:
   m_Children:
   - {fileID: 7342016975892914895}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4631786007621857783
 MeshFilter:
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d323e5b8d5352154c8914718dcbf5d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 7518774156204557177}
   lantern_behavior: {fileID: 1813267302141941773}
   character_sounds_manager: {fileID: 3925602586812431036}
   walk_sound_trigger: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdc3dcd5c815a64cb4b99067c3c6952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprayUI: {fileID: 0}
 --- !u!114 &3925602586812431036
 MonoBehaviour:
   m_ObjectHideFlags: 0
