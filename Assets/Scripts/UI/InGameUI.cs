@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class InGameUI : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject ingame_ui;
     [SerializeField] private GameObject win_ui;
     [SerializeField] private GameObject lost_ui;
+    [SerializeField] private TextMeshProUGUI collect_ui;
     [SerializeField] private Slider health_slider;
+    [SerializeField] private Slider battery_slider;
     private CharacterMovement character_movement;
 
     private void Start()
@@ -48,6 +51,20 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateHealth(float health_player) {
         health_slider.value = health_player;
+    }
+
+    public void UpdateBattery(float current_battery)
+    {
+        battery_slider.value = current_battery;
+    }
+
+    public void ActivateCollectInfo(string message) {
+        collect_ui.text = message;
+        collect_ui.enabled = true;
+    }
+    public void DeactivateCollectInfo()
+    {
+        collect_ui.enabled = false;
     }
 
     public void WinGameUI() {

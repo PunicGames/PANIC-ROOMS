@@ -269,7 +269,7 @@ MonoBehaviour:
   lantern_behavior: {fileID: 1813267302141941773}
   character_sounds_manager: {fileID: 3925602586812431036}
   walk_sound_trigger: 0
-  character_point_system: {fileID: 4236453533992830131}
+  character_collection_system: {fileID: 4236453533992830131}
 --- !u!114 &5566984993888555112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdc3dcd5c815a64cb4b99067c3c6952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprayUI: {fileID: 0}
+  lantern_behavior: {fileID: 1813267302141941773}
+  player_camera_transform: {fileID: 7342016975892914895}
 --- !u!114 &3925602586812431036
 MonoBehaviour:
   m_ObjectHideFlags: 0

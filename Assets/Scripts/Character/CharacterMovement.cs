@@ -10,7 +10,6 @@ public class CharacterMovement : MonoBehaviour
         // Basic movement
     private Vector2 player_translation;
     private float translation_speed = 1.0f;
-    private bool is_moving = false;
     private bool is_running = false;
     private bool is_stealth = false;
     // Camera movement
@@ -44,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
     // *** Other componenets ***
     [SerializeField] CharacterSounds character_sounds_manager;
     public bool walk_sound_trigger = false;
-    [SerializeField] private PointSystem character_point_system;
+    [SerializeField] private CharacterCollectionSystem character_collection_system;
 
     public void OnMovement(InputValue input) {
         if (!finished_round) return;
@@ -157,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void OnCollect(InputValue input) {
-        character_point_system.CollectCollectible(camera.transform);
+        character_collection_system.CollectObject();
     }
 
     private void Awake()
@@ -215,12 +214,6 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            //if (is_moving)
-            //{
-            //    // Stop playing footstep sounds when the player stops moving
-            //    character_sounds_manager.StopMovingSound();
-            //    is_moving = false;
-            //}
 
             // Reset the bobTimer if the player is not moving to avoid sudden jumps in camera position
             swing_timer = Mathf.PI / 2;
