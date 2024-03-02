@@ -441,18 +441,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203409051}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &279792191 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1234931016235392949, guid: d7884f9b3507cf8418bb3c5d34ab5327,
-    type: 3}
-  m_PrefabInstance: {fileID: 8681980373160535796}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &307443214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2664,11 +2652,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1234931016235392949, guid: d7884f9b3507cf8418bb3c5d34ab5327,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1636860041559700883, guid: d7884f9b3507cf8418bb3c5d34ab5327,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2683,11 +2666,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3346883528221919283, guid: d7884f9b3507cf8418bb3c5d34ab5327,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5527671095003914127, guid: d7884f9b3507cf8418bb3c5d34ab5327,
         type: 3}
@@ -2709,11 +2687,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5774749411802604160, guid: d7884f9b3507cf8418bb3c5d34ab5327,
-        type: 3}
-      propertyPath: collect_ui
-      value: 
-      objectReference: {fileID: 279792191}
     - target: {fileID: 5935567665671393705, guid: d7884f9b3507cf8418bb3c5d34ab5327,
         type: 3}
       propertyPath: m_Pivot.x

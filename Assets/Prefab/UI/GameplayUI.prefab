@@ -830,7 +830,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3346883528221919283}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   ingame_ui: {fileID: 393477232081474337}
   win_ui: {fileID: 2164016866607747812}
   lost_ui: {fileID: 8644612859590302546}
-  collect_ui: {fileID: 3346883528221919283}
+  collect_ui: {fileID: 1234931016235392949}
   health_slider: {fileID: 309343290110750638}
   battery_slider: {fileID: 4840303130999806829}
 --- !u!114 &-5339450159467952302
