@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Random = System.Random;
 using Graphs;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
-using static UnityEditor.PlayerSettings;
 using Unity.AI.Navigation;
-using System;
 
 [System.Serializable]
 public struct PanicRoom
