@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 7452405597111049497}
   m_Layer: 0
   m_Name: First Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

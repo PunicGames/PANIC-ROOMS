@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3651597641422607982}
   m_Layer: 0
   m_Name: Second Floor (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2941,6 +2941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: floor_424
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6238543015077554da76359cfbb901f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 4736522598244849991, guid: 6238543015077554da76359cfbb901f1,
         type: 3}
