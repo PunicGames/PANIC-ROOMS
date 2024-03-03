@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 28d53fbf0e305b841b4ea4de8a0a15c0, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2f0206ae6fa6a046ad5524cd869c0c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -77,7 +77,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Opacity:
-        m_Texture: {fileID: 2800000, guid: 28d53fbf0e305b841b4ea4de8a0a15c0, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2f0206ae6fa6a046ad5524cd869c0c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
