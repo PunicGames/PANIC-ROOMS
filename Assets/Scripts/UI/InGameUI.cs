@@ -45,8 +45,8 @@ public class InGameUI : MonoBehaviour
         pause_ui.active = false;
 
         // Go main menu
-        //SceneManager.LoadScene("MainMenu");
-        Debug.Log("Coming back to main menu");
+        SceneManager.LoadScene("UI-testing");
+        //Debug.Log("Coming back to main menu");
     }
 
     public void UpdateHealth(float health_player) {
