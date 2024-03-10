@@ -15,6 +15,11 @@ public class Lantern_Bahavior : MonoBehaviour
     private float flicker_intensity = 0.2f;
     private bool trigger_flicker = true;
 
+    // Sounds
+    [SerializeField] private AudioSource flicker_sound;
+    [SerializeField] private AudioClip[] flicker_sound_clips;
+
+    //  UI
     private InGameUI game_ui;
 
     private void Awake()
@@ -26,6 +31,9 @@ public class Lantern_Bahavior : MonoBehaviour
     {
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         light_intensity = spotlight.intensity;
+        if (flicker_sound_clips.Length > 0) {
+            flicker_sound.clip = flicker_sound_clips[0];
+        }
     }
 
     private void Update()
@@ -78,6 +86,14 @@ public class Lantern_Bahavior : MonoBehaviour
 
     IEnumerator Flicker() {
         spotlight.enabled = false;
+
+        // Play random flicker sound if not playing a sound already
+        if(flicker_sound.isPlaying == false){
+            flicker_sound.clip = flicker_sound_clips[Random.Range(0, flicker_sound_clips.Length)];
+            flicker_sound.Play();
+        }
+
+        // Flicker time ranges
         yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
         spotlight.enabled = true;
         yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
