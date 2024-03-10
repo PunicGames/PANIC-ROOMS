@@ -8,9 +8,7 @@ public class CharacterSounds : MonoBehaviour
     public AudioClip noise_sound;
 
     public AudioSource moving_audio_source;
-    public AudioClip[] walking_sounds;
-    public AudioClip running_sound;
-    public AudioClip stealth_sound;
+    public AudioClip[] carpet_sounds;
 
     public AudioSource lantern_audio_source;
     public AudioClip lantern_click_sound;
@@ -54,7 +52,7 @@ public class CharacterSounds : MonoBehaviour
 
     public void PlayMovingSound()
     {
-        moving_audio_source.clip = walking_sounds[Random.Range(0, walking_sounds.Length)];
+        moving_audio_source.clip = carpet_sounds[Random.Range(0, carpet_sounds.Length)];
         moving_audio_source.pitch = Random.Range(min_pitch, max_pitch);
         moving_audio_source.Play();
         StartCoroutine(DetectSoundFinish(moving_audio_source));
@@ -73,17 +71,17 @@ public class CharacterSounds : MonoBehaviour
     }
     public void LoadRunningSound()
     {
-        moving_audio_source.clip = running_sound;
+        moving_audio_source.clip = carpet_sounds[Random.Range(0, carpet_sounds.Length)];
         moving_audio_source.volume = 1.0f;
         min_pitch = 0.94f;
         max_pitch = 0.97f;
     }
     public void LoadStealthSound()
     {
-        moving_audio_source.clip = stealth_sound;
+        moving_audio_source.clip = carpet_sounds[Random.Range(0, carpet_sounds.Length)];
         moving_audio_source.volume = 0.5f;
-        min_pitch = 0.39f;
-        max_pitch = 0.42f;
+        min_pitch = 0.49f;
+        max_pitch = 0.52f;
     }
 
     public void PlayLanternActivateSound()

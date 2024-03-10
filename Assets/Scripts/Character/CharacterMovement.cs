@@ -131,7 +131,7 @@ public class CharacterMovement : MonoBehaviour
             // Values related with stealth movement
             translation_speed = 0.5f;
 
-            // Apply sounds variations
+            // Apply sounds variations. Stealth is fine for crouching
             character_sounds_manager.LoadStealthSound();
         }
         else {
