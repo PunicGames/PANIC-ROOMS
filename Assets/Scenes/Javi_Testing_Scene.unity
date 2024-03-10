@@ -467,7 +467,7 @@ PrefabInstance:
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.88
+      value: 0.8800001
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
@@ -477,17 +477,17 @@ PrefabInstance:
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.6478675
+      value: -0.6427876
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.76175314
+      value: 0.7660445
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
@@ -502,7 +502,7 @@ PrefabInstance:
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 260.762
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
@@ -2012,12 +2012,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584608666}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!20 &1608030591 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7518774156204557177, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
-    type: 3}
-  m_PrefabInstance: {fileID: 307443214}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1657029596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,11 +2484,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2225946320809862038, guid: 3e502247c2875ba4b80d39771b773039,
-        type: 3}
-      propertyPath: player_camera
-      value: 
-      objectReference: {fileID: 1608030591}
     - target: {fileID: 3264843739831243250, guid: 3e502247c2875ba4b80d39771b773039,
         type: 3}
       propertyPath: m_RootOrder

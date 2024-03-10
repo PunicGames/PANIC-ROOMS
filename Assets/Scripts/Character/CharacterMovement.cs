@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
+
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -13,16 +15,17 @@ public class CharacterMovement : MonoBehaviour
     private bool is_running = false;
     private bool is_stealth = false;
     // Camera movement
-    [SerializeField] private Camera camera;
     private Vector2 camera_movement;
-    private float camera_speed = 5.0f;
-    private float camera_pitch = 0.0f;
-    // Camera swing effect
+    private float camera_vertical_sensitivity = 0.04f;
+    private float camera_horizontal_sensitivity = 5.0f;
+    // Camera
+    [SerializeField] private CinemachineVirtualCamera virtual_camera;
+    private CinemachinePOV pov;
+    private CinemachineBasicMultiChannelPerlin noise;
+    private float target_camera_noise_amplitude_gain;
+    private float target_camera_noise_frecuency_gain;
+    private float camera_noise_transition_speed = 1.0f;
     private Vector3 initial_camera_position;
-    private float swing_frequency = 4.2f;
-    private float swing_horizontal_amplitude = 0.1f;
-    private float swing_vertical_amplitude = 0.1f;
-    private float swing_timer = 0.0f;
     // Jumping
     private float jump_force = 7.0f;
     private bool jump_trigger;
@@ -54,7 +57,9 @@ public class CharacterMovement : MonoBehaviour
     public void OnLook(InputValue input) {
         if (!finished_round) return;
         if (menu_paused) return;
+
         camera_movement = input.Get<Vector2>();
+        pov.m_VerticalAxis.Value -= camera_movement.y * camera_vertical_sensitivity;
     }
 
     public void OnJump(InputValue input)
@@ -72,9 +77,6 @@ public class CharacterMovement : MonoBehaviour
 
             // Values related with running movement
             translation_speed = 2.0f;
-            swing_frequency = 5.2f;
-            swing_horizontal_amplitude = 0.15f;
-            swing_vertical_amplitude = 0.15f;
 
             // Apply sounds variations
             character_sounds_manager.LoadRunningSound();
@@ -82,9 +84,6 @@ public class CharacterMovement : MonoBehaviour
         else {
             // Values related with normal movement
             translation_speed = 1.0f;
-            swing_frequency = 4.2f;
-            swing_horizontal_amplitude = 0.1f;
-            swing_vertical_amplitude = 0.1f;
 
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
@@ -101,9 +100,6 @@ public class CharacterMovement : MonoBehaviour
 
             // Values related with stealth movement
             translation_speed = 0.6f;
-            swing_frequency = 2.2f;
-            swing_horizontal_amplitude = 0.07f;
-            swing_vertical_amplitude = 0.07f;
 
             // Apply sounds variations
             character_sounds_manager.LoadStealthSound();
@@ -112,9 +108,6 @@ public class CharacterMovement : MonoBehaviour
         else {
             // Values related with normal movement
             translation_speed = 1.0f;
-            swing_frequency = 4.2f;
-            swing_horizontal_amplitude = 0.1f;
-            swing_vertical_amplitude = 0.1f;
 
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
@@ -148,6 +141,8 @@ public class CharacterMovement : MonoBehaviour
             game_ui.PauseMenu();
             player_translation = Vector2.zero;
             camera_movement = Vector2.zero;
+            pov.m_VerticalAxis.Value = camera_movement.y;
+            pov.m_HorizontalAxis.Value = camera_movement.x;
         }
         else if (!menu_paused) {
             LockCursor();
@@ -167,7 +162,9 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
-        initial_camera_position = camera.transform.localPosition;
+        pov = virtual_camera.GetCinemachineComponent<CinemachinePOV>();
+        noise = virtual_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        initial_camera_position = virtual_camera.transform.localPosition;
 
         // Activate lantern by default
         lantern_behavior.ActivateLantern();
@@ -181,44 +178,62 @@ public class CharacterMovement : MonoBehaviour
         transform.Translate(translation_factor * player_translation.x, 0, translation_factor * player_translation.y);
 
 
-        // Apply camera movement and player rotation (MOUSE)
-        Vector2 delta_look = camera_movement * camera_speed * Time.deltaTime;
+        // Apply player rotation (MOUSE)
+        Vector2 delta_look = camera_movement * camera_horizontal_sensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up, delta_look.x);
-        // Threshold for the camera to prevent gimbal lock
-        camera_pitch -= delta_look.y;
-        camera_pitch = Mathf.Clamp(camera_pitch, -85.0f, 85.0f);
-        camera.transform.localEulerAngles = new Vector3(camera_pitch, 0, 0);
+
         // Apply camera swing effect
         ApplySwingEffect();
+
+
+        // Camera noise transition
+        if (noise != null)
+        {
+            noise.m_AmplitudeGain = Mathf.Lerp(noise.m_AmplitudeGain, target_camera_noise_amplitude_gain, Time.deltaTime * camera_noise_transition_speed);
+            noise.m_FrequencyGain = Mathf.Lerp(noise.m_FrequencyGain, target_camera_noise_frecuency_gain, Time.deltaTime * camera_noise_transition_speed);
+        }
     }
 
 
-    private void ApplySwingEffect() {
+    private void ApplySwingEffect()
+    {
         if (player_translation.x != 0 || player_translation.y != 0)
         {
+            if (is_running)
+            {
+                target_camera_noise_amplitude_gain = 2.0f;
+                target_camera_noise_frecuency_gain = 2.0f;
+            }
+            else if (is_stealth) 
+            {
+                target_camera_noise_amplitude_gain = 0.8f;
+                target_camera_noise_frecuency_gain = 0.8f;
+            } else 
+            {
+                target_camera_noise_amplitude_gain = 1.1f;
+                target_camera_noise_frecuency_gain = 1.1f;
+            }
+            
+
             if (!walk_sound_trigger)
             {
                 // Triggers one step sound
                 character_sounds_manager.PlayMovingSound();
                 walk_sound_trigger = true;
             }
-
-            swing_timer += Time.deltaTime * swing_frequency;
-
-            // Calculate the horizontal and vertical offsets
-            float horizontal_offset = Mathf.Sin(swing_timer) * swing_horizontal_amplitude;
-            float vertical_offset = Mathf.Cos(swing_timer * 2) * swing_vertical_amplitude;
-
-            // Apply the offsets to the camera position
-            camera.transform.localPosition = new Vector3(horizontal_offset, vertical_offset, 0) + initial_camera_position;
         }
-        else
-        {
 
-            // Reset the bobTimer if the player is not moving to avoid sudden jumps in camera position
-            swing_timer = Mathf.PI / 2;
-            // Reset to the initial position when not moving
-            camera.transform.localPosition = initial_camera_position;
+        // Not moving
+        if (player_translation.x == 0 && player_translation.y == 0)
+        {
+            target_camera_noise_amplitude_gain = 0.5f;
+            target_camera_noise_frecuency_gain = 0.5f;
+        }
+
+        // Reset walk sound trigger if stopped
+        if (player_translation.x == 0 && player_translation.y == 0 && walk_sound_trigger)
+        {
+            walk_sound_trigger = false;
         }
     }
 
@@ -240,6 +255,8 @@ public class CharacterMovement : MonoBehaviour
         finished_round = false;
         player_translation = Vector2.zero;
         camera_movement = Vector2.zero;
+        pov.m_VerticalAxis.Value = camera_movement.y;
+        pov.m_HorizontalAxis.Value = camera_movement.x;
         menu_paused = true;
         UnlockCursor();
         game_ui.PauseMenu();
@@ -250,6 +267,8 @@ public class CharacterMovement : MonoBehaviour
         finished_round = false;
         player_translation = Vector2.zero;
         camera_movement = Vector2.zero;
+        pov.m_VerticalAxis.Value = camera_movement.y;
+        pov.m_HorizontalAxis.Value = camera_movement.x;
         menu_paused = true;
         UnlockCursor();
         game_ui.PauseMenu();
