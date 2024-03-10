@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "7b303696-6b88-4794-ae8a-8231f5c1c5ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -181,7 +190,7 @@
                 {
                     "name": "",
                     "id": "93692f16-2960-4dd5-a468-4ea13ba7830d",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/alt",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
@@ -208,6 +217,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Collect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b0cf734-c599-4f75-89d2-552fc56e3c0a",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

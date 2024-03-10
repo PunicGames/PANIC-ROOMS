@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private float translation_speed = 1.0f;
     private bool is_running = false;
     private bool is_stealth = false;
+    private bool is_crouch = false;
     // Camera movement
     private Vector2 camera_movement;
     private float camera_vertical_sensitivity = 0.04f;
@@ -25,7 +26,10 @@ public class CharacterMovement : MonoBehaviour
     private float target_camera_noise_amplitude_gain;
     private float target_camera_noise_frecuency_gain;
     private float camera_noise_transition_speed = 1.0f;
-    private Vector3 initial_camera_position;
+    [SerializeField] private Transform raised_camera_transform;
+    [SerializeField] private Transform crouch_camera_transform;
+    private float camera_transition_speed = 3.5f;
+
     // Jumping
     private float jump_force = 7.0f;
     private bool jump_trigger;
@@ -74,9 +78,10 @@ public class CharacterMovement : MonoBehaviour
         if (is_running)
         {
             is_stealth = false;
+            is_crouch = false;
 
             // Values related with running movement
-            translation_speed = 2.0f;
+            translation_speed = 2.7f;
 
             // Apply sounds variations
             character_sounds_manager.LoadRunningSound();
@@ -97,6 +102,7 @@ public class CharacterMovement : MonoBehaviour
         if (is_stealth)
         {
             is_running = false;
+            is_crouch = false;
 
             // Values related with stealth movement
             translation_speed = 0.6f;
@@ -104,6 +110,29 @@ public class CharacterMovement : MonoBehaviour
             // Apply sounds variations
             character_sounds_manager.LoadStealthSound();
             
+        }
+        else {
+            // Values related with normal movement
+            translation_speed = 1.0f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadWalkingSound();
+        }
+    }
+
+    public void OnCrouch(InputValue input) {
+        is_crouch = input.isPressed;
+
+        if (is_crouch)
+        {
+            is_running = false;
+            is_stealth = false;
+
+            // Values related with stealth movement
+            translation_speed = 0.5f;
+
+            // Apply sounds variations
+            character_sounds_manager.LoadStealthSound();
         }
         else {
             // Values related with normal movement
@@ -164,7 +193,7 @@ public class CharacterMovement : MonoBehaviour
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         pov = virtual_camera.GetCinemachineComponent<CinemachinePOV>();
         noise = virtual_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        initial_camera_position = virtual_camera.transform.localPosition;
+        Camera.main.transform.position = raised_camera_transform.position;
 
         // Activate lantern by default
         lantern_behavior.ActivateLantern();
@@ -186,6 +215,10 @@ public class CharacterMovement : MonoBehaviour
         ApplySwingEffect();
 
 
+        // Camera position (crouch-normal) transition
+        Vector3 camera_target = is_crouch ? crouch_camera_transform.position : raised_camera_transform.position;
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, camera_target, camera_transition_speed * Time.deltaTime);
+
         // Camera noise transition
         if (noise != null)
         {
@@ -204,11 +237,16 @@ public class CharacterMovement : MonoBehaviour
                 target_camera_noise_amplitude_gain = 2.0f;
                 target_camera_noise_frecuency_gain = 2.0f;
             }
-            else if (is_stealth) 
+            else if (is_stealth)
             {
                 target_camera_noise_amplitude_gain = 0.8f;
                 target_camera_noise_frecuency_gain = 0.8f;
-            } else 
+            } else if (is_crouch) 
+            {
+                target_camera_noise_amplitude_gain = 0.6f;
+                target_camera_noise_frecuency_gain = 0.6f;
+            }
+            else
             {
                 target_camera_noise_amplitude_gain = 1.1f;
                 target_camera_noise_frecuency_gain = 1.1f;
