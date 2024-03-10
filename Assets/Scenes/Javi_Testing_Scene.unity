@@ -449,11 +449,51 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 98255043138362096, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2140104229450293144, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2723266925881808205, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 874e209986b19724aae36389bf19666d, type: 3}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 874e209986b19724aae36389bf19666d, type: 3}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f5fa6c540d0ff0b479855f9bf8a64f55, type: 3}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9679e7dd9fdf56f4c80ed12347589ad4, type: 3}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51b856c271dd7c54eabb43bfecafc8ca, type: 3}
+    - target: {fileID: 3925602586812431036, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: carpet_sounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: e7f264d3b5e682940b241f778b594f89, type: 3}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_RootOrder
