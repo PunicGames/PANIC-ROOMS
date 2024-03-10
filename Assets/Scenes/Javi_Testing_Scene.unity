@@ -518,6 +518,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4318917845796876344, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6206294044809674864, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: crouch_camera_transform

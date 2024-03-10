@@ -8,8 +8,12 @@ public class Lantern_Bahavior : MonoBehaviour
     [HideInInspector] Light spotlight;
     private bool activated = true;
     private float battery_amount = 100.0f;
-    private float battery_decrease_rate = 2.2f;
+    private float battery_decrease_rate = 2.0f;
     private float max_battery = 100.0f;
+    private float battery_recharge_amount = 30.0f;
+    private float light_intensity;
+    private float flicker_intensity = 0.2f;
+    private bool trigger_flicker = true;
 
     private InGameUI game_ui;
 
@@ -21,6 +25,7 @@ public class Lantern_Bahavior : MonoBehaviour
     private void Start()
     {
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
+        light_intensity = spotlight.intensity;
     }
 
     private void Update()
@@ -30,6 +35,19 @@ public class Lantern_Bahavior : MonoBehaviour
 
             // Decrease battery power if on
             battery_amount -= Time.deltaTime * battery_decrease_rate;
+
+            // Decrease light intensity
+            if (spotlight != null) { 
+                spotlight.intensity = battery_amount  * 0.01f * light_intensity;
+
+                // Random flicker
+                if (battery_amount <= flicker_intensity * max_battery) {
+                    if (trigger_flicker) {
+                        trigger_flicker = false;
+                        StartCoroutine(Flicker());
+                    }
+                }
+            }
 
             // Deactivate lantern if it runs out of battery
             if (battery_amount <= 0) {
@@ -53,7 +71,16 @@ public class Lantern_Bahavior : MonoBehaviour
     }
 
     public void RechargeBattery() {
-        battery_amount += 20;
+        battery_amount += battery_recharge_amount;
         if(battery_amount > max_battery) battery_amount = max_battery;
+    }
+
+
+    IEnumerator Flicker() {
+        spotlight.enabled = false;
+        yield return new WaitForSeconds(Random.Range(0.0f, 0.2f));
+        spotlight.enabled = true;
+        yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
+        trigger_flicker = true;
     }
 }
