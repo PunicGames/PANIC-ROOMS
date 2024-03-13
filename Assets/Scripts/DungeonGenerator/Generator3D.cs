@@ -107,7 +107,7 @@ public class Generator3D : MonoBehaviour {
         }
         stopwatch.Stop();
 
-        gameManager.RoomsCreated(rooms);
+        GameManager.RoomsCreated(rooms);
 
         UnityEngine.Debug.Log("Tries: " + tries);
         UnityEngine.Debug.Log("Tiempo transcurrido: "+ stopwatch.ElapsedMilliseconds + " milisegundos");

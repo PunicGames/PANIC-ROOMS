@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPrefab;
     public List<GameObject> keyPrefabs;
 
-    List<Room> _rooms;
+    static List<Room> _rooms;
 
     #region MonoBehaviour
     private void Awake()
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public void RoomsCreated(List<Room> rooms)
+    public static void RoomsCreated(List<Room> rooms)
     {
         _rooms = rooms;
 
