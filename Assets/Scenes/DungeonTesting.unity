@@ -344,12 +344,22 @@ PrefabInstance:
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
       propertyPath: seed
-      value: 55F5WQ95
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: additionalRoomChance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
       propertyPath: panicRooms.Array.size
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: additionalHallwayChance
+      value: 0.10000000149011612
       objectReference: {fileID: 0}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
