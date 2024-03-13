@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    // Prefabs
+    public GameObject playerPrefab;
+    public GameObject enemyPrefab;
+    public List<GameObject> keyPrefabs;
+
     List<Room> _rooms;
 
     #region MonoBehaviour

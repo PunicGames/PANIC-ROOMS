@@ -362,6 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8d05c207e870a4bb2686b23648654e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 0}
+  keyPrefab: []
 --- !u!4 &2132141494
 Transform:
   m_ObjectHideFlags: 0
@@ -388,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
       propertyPath: seed
-      value: ASBFOSAB
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
