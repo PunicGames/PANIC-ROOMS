@@ -494,6 +494,11 @@ PrefabInstance:
       propertyPath: carpet_sounds.Array.data[4]
       value: 
       objectReference: {fileID: 8300000, guid: e7f264d3b5e682940b241f778b594f89, type: 3}
+    - target: {fileID: 4318917845796876344, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6658071768607747333, guid: f4ce38f8f3a7c744a96003f3e766b4c1,
         type: 3}
       propertyPath: m_RootOrder

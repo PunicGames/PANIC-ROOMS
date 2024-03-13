@@ -136,6 +136,7 @@ public class EnemyBehavior : MonoBehaviour
 
         // Update LookAt to player
         this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
+        
 
         // Update distance to player
         distance_to_player = Vector3.Distance(this.transform.position, player_transform.position);
