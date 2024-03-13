@@ -65,6 +65,7 @@ public class Generator3D : MonoBehaviour {
 
     Dictionary<Vector3Int, Room> roomsDictionary;
     Dictionary<Room, List<(Vector3Int, bool)>> doorPlacement;
+    List<(Vector3Int, Quaternion, bool)> stairsToPlace;
 
     private NavMeshSurface navMeshSurface;
 
@@ -100,6 +101,7 @@ public class Generator3D : MonoBehaviour {
                 rooms = new List<Room>();
                 roomsDictionary = new Dictionary<Vector3Int, Room>();
                 doorPlacement = new Dictionary<Room, List<(Vector3Int, bool)>>();
+                stairsToPlace = new List<(Vector3Int, Quaternion, bool)>();
 
                 SetRooms();
                 Triangulate();
@@ -411,7 +413,8 @@ public class Generator3D : MonoBehaviour {
                             }
 
                             // Ajusta la posición si es necesario antes de colocar la escalera
-                            PlaceStairs(prev + horizontalOffset, orientation, up); // Usa la orientación calculada
+                            stairsToPlace.Add((prev + horizontalOffset, orientation, up));
+                            //PlaceStairs(prev + horizontalOffset, orientation, up); // Usa la orientación calculada
                         }
                     }
                 }
@@ -473,6 +476,7 @@ public class Generator3D : MonoBehaviour {
         }
 
         PlaceAllHallways();
+        PlaceAllStairs();
         PlaceAllRooms();
     }
 
@@ -543,6 +547,14 @@ public class Generator3D : MonoBehaviour {
                     }
                 }
     }   
+
+    void PlaceAllStairs()
+    {
+        foreach (var stair in stairsToPlace)
+        {
+            PlaceStairs(stair.Item1, stair.Item2, stair.Item3);
+        }
+    }
 
     void PlaceStairs(Vector3Int location, Quaternion orientation, bool up) {
         GameObject prefab = up ? upStairwayPrefab : downStairwayPrefab;
