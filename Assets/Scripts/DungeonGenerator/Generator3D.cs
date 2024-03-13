@@ -13,6 +13,8 @@ public struct PanicRoom
 }
 
 public class Generator3D : MonoBehaviour {
+
+    #region Attributes
     enum CellType {
         None,
         Room,
@@ -35,7 +37,7 @@ public class Generator3D : MonoBehaviour {
                 || (a.bounds.position.z >= (b.bounds.position.z + b.bounds.size.z)) || ((a.bounds.position.z + a.bounds.size.z) <= b.bounds.position.z));
         }
     }
-
+    Random random;
     public string seed;
 
     [SerializeField] Vector3Int size;
@@ -45,24 +47,18 @@ public class Generator3D : MonoBehaviour {
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
-    [SerializeField] Material redMaterial;
-    [SerializeField] Material blueMaterial;
-    [SerializeField] Material greenMaterial;
+    private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
 
-
-    Random random;
     Grid3D<CellType> grid;
     List<Room> rooms;
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
 
     private NavMeshSurface navMeshSurface;
+    #endregion
 
-    //TO-DO LIST
-    // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte. DONE 28/02/2024
-    // Es posible que se generen mazmorras que no estan conectadas con el resto, o que se generen 2 gupos de mazmorras
-
-    void Start()
+    #region MonoBehaviour
+    void Awake()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
 
@@ -83,7 +79,7 @@ public class Generator3D : MonoBehaviour {
         bool success = false;
         int maxTries = 10;
         int tries = 0;
-        while (!success || tries > maxTries)
+        while (!success && tries < maxTries)
         {
             try
             {
@@ -102,6 +98,7 @@ public class Generator3D : MonoBehaviour {
             }
             catch (System.Exception e)
             {
+                UnityEngine.Debug.Log(e.Message);
                 tries++;
                 for (int i = 0; i < transform.childCount; i++)
                 {
@@ -113,6 +110,10 @@ public class Generator3D : MonoBehaviour {
         UnityEngine.Debug.Log("Tries: " + tries);
         UnityEngine.Debug.Log("Tiempo transcurrido: "+ stopwatch.ElapsedMilliseconds + " milisegundos");
     }
+
+    #endregion
+
+    #region Methods
     public void PlaceRooms()
     {
         // Primero, colocar las habitaciones de 'firstRoomSizes'
@@ -467,8 +468,10 @@ public class Generator3D : MonoBehaviour {
                     }
                 }
     }
-        
-    private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
+
+    #endregion
+
+    #region PlacePrefabs
 
     void CheckRoom(Vector3Int position)
     {
@@ -478,15 +481,12 @@ public class Generator3D : MonoBehaviour {
 
             if (dRooms.TryGetValue(position + move, out var room))
             {
-                //room.GetComponent<DCubeTint>().material = greenMaterial;
-                //room.GetComponent<DCubeTint>().Start();
                 connectedRooms[room] = true;
                 room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
             }
             
         }
     }
-
 
     GameObject PlaceRoom(Vector3Int location, PanicRoom room)
     {
@@ -515,4 +515,6 @@ public class Generator3D : MonoBehaviour {
         go.transform.parent = transform;
         go.GetComponent<DCubeTint>().material = greenMaterial;
     }
+
+    #endregion
 }
