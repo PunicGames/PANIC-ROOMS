@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 // Singleton class to manage the game
 // Tasks High Level:
@@ -16,6 +17,13 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    // Prefabs
+    public GameObject playerPrefab;
+    public GameObject enemyPrefab;
+    public List<GameObject> keyPrefabs;
+
+    static List<Room> _rooms;
+
     #region MonoBehaviour
     private void Awake()
     {
@@ -29,5 +37,16 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+
+    public static void RoomsCreated(List<Room> rooms)
+    {
+        _rooms = rooms;
+
+        Debug.Log("Rooms created" + rooms.Count);
+
+        // Spawn the player
+        // Spawn the enemies
+        // Spawn the key-objects
+    }
 
 }

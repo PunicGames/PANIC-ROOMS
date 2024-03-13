@@ -23,27 +23,7 @@ public class Generator3D : MonoBehaviour {
         Stairs
     }
 
-    class Room {
-        public BoundsInt bounds;
-        public bool connected = false;
-        public Vector3Int location;
-        public GameObject prefab;
-
-        public Room(Vector3Int location, Vector3Int size, GameObject prefab) 
-        {
-            this.location = location;
-            this.prefab = prefab;
-            bounds = new BoundsInt(location, size);
-            connected = false;
-        }
-
-        public static bool Intersect(Room a, Room b) 
-        {
-            return !((a.bounds.position.x >= (b.bounds.position.x + b.bounds.size.x)) || ((a.bounds.position.x + a.bounds.size.x) <= b.bounds.position.x)
-                || (a.bounds.position.y >= (b.bounds.position.y + b.bounds.size.y)) || ((a.bounds.position.y + a.bounds.size.y) <= b.bounds.position.y)
-                || (a.bounds.position.z >= (b.bounds.position.z + b.bounds.size.z)) || ((a.bounds.position.z + a.bounds.size.z) <= b.bounds.position.z));
-        }
-    }
+    
     Random random;
     public string seed;
 
@@ -58,7 +38,7 @@ public class Generator3D : MonoBehaviour {
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
     private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
-    private readonly int MAX_TRIES = 10;
+    private readonly int MAX_TRIES = 32;
 
     Grid3D<CellType> grid;
     List<Room> rooms;
@@ -71,18 +51,24 @@ public class Generator3D : MonoBehaviour {
 
     private NavMeshSurface navMeshSurface;
 
+    private GameManager gameManager;
+
     #endregion
 
     #region MonoBehaviour
     void Awake()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
+        gameManager = GameManager.Instance;
 
         if (string.IsNullOrEmpty(seed))
         {
             string randomString = RandomSeed.GenerateRandomAlphanumericString(8);
-            UnityEngine.Debug.Log("SEED: \t"+ randomString);
-            random = new Random(randomString.GetHashCode());
+            int seedHash = randomString.GetHashCode();
+            
+            
+            UnityEngine.Debug.Log("SEED: " + randomString + "\n" + seedHash);
+            random = new Random(seedHash);
         }
         else
         {
@@ -120,6 +106,9 @@ public class Generator3D : MonoBehaviour {
             }
         }
         stopwatch.Stop();
+
+        GameManager.RoomsCreated(rooms);
+
         UnityEngine.Debug.Log("Tries: " + tries);
         UnityEngine.Debug.Log("Tiempo transcurrido: "+ stopwatch.ElapsedMilliseconds + " milisegundos");
     }
@@ -191,9 +180,9 @@ public class Generator3D : MonoBehaviour {
                 }
             }
         
-            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= size.x
-                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= size.y
-                || newRoom.bounds.zMin < 0 || newRoom.bounds.zMax >= size.z)
+            if (newRoom.Bounds.xMin < 0 || newRoom.Bounds.xMax >= size.x
+                || newRoom.Bounds.yMin < 0 || newRoom.Bounds.yMax >= size.y
+                || newRoom.Bounds.zMin < 0 || newRoom.Bounds.zMax >= size.z)
             {
                 add = false;
             }
@@ -203,7 +192,7 @@ public class Generator3D : MonoBehaviour {
                 rooms.Add(newRoom);
                 doorPlacement[newRoom] = new List<(Vector3Int, bool)>();
 
-                foreach (var pos in newRoom.bounds.allPositionsWithin)
+                foreach (var pos in newRoom.Bounds.allPositionsWithin)
                 {
                     grid[pos] = CellType.Room;
                     roomsDictionary[pos] = newRoom;
@@ -221,7 +210,7 @@ public class Generator3D : MonoBehaviour {
 
         foreach (var room in rooms)
         {
-            vertices.Add(new Vertex<Room>((Vector3)room.bounds.position + ((Vector3)room.bounds.size) / 2, room));
+            vertices.Add(new Vertex<Room>((Vector3)room.Bounds.position + ((Vector3)room.Bounds.size) / 2, room));
         }
 
         delaunay = Delaunay3D.Triangulate(vertices);
@@ -263,8 +252,8 @@ public class Generator3D : MonoBehaviour {
             var startRoom = (edge.U as Vertex<Room>).Item;
             var endRoom = (edge.V as Vertex<Room>).Item;
 
-            var startPosf = startRoom.bounds.center;
-            var endPosf = endRoom.bounds.center;
+            var startPosf = startRoom.Bounds.center;
+            var endPosf = endRoom.Bounds.center;
             var startPos = new Vector3Int((int)startPosf.x, (int)startPosf.y, (int)startPosf.z);
             var endPos = new Vector3Int((int)endPosf.x, (int)endPosf.y, (int)endPosf.z);
 
@@ -441,7 +430,7 @@ public class Generator3D : MonoBehaviour {
         
         foreach (var r in rooms)
         {
-            if (!r.connected)
+            if (!r.Connected)
             {
                 throw new System.Exception("Room not connected");
             }
@@ -457,8 +446,8 @@ public class Generator3D : MonoBehaviour {
 
             if (roomsDictionary.TryGetValue(position + move, out var room))
             {
-                room.connected = true;
-                doorPlacement[room].Add((position + move, i > 0));
+                room.Connected = true;
+                doorPlacement[room].Add((position + move, i > 1));
 
                 //room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
             }
@@ -476,7 +465,7 @@ public class Generator3D : MonoBehaviour {
     {
         foreach (var room in rooms)
         {
-            var roomObj = PlaceRoom(room.bounds.position, room.prefab);
+            var roomObj = PlaceRoom(room.Bounds.position, room.Prefab);
 
             foreach (var door in doorPlacement[room])
             {
@@ -531,6 +520,4 @@ public class Generator3D : MonoBehaviour {
 
     #endregion
     #endregion
-
-
 }
