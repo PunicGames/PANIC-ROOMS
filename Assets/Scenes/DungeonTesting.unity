@@ -348,8 +348,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
+      propertyPath: additionalRoomChance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
       propertyPath: panicRooms.Array.size
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
+        type: 3}
+      propertyPath: additionalHallwayChance
+      value: 0.10000000149011612
       objectReference: {fileID: 0}
     - target: {fileID: 3120578471097653222, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
@@ -566,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 9096809964705664262, guid: 215c7451243415247991b7bdf4088c56,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

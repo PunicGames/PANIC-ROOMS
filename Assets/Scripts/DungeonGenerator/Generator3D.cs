@@ -4,6 +4,7 @@ using UnityEngine;
 using Random = System.Random;
 using Graphs;
 using Unity.AI.Navigation;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 [System.Serializable]
 public struct PanicRoom
@@ -13,6 +14,8 @@ public struct PanicRoom
 }
 
 public class Generator3D : MonoBehaviour {
+
+    #region Attributes
     enum CellType {
         None,
         Room,
@@ -22,10 +25,16 @@ public class Generator3D : MonoBehaviour {
 
     class Room {
         public BoundsInt bounds;
+        public bool connected = false;
+        public Vector3Int location;
+        public GameObject prefab;
 
-        public Room(Vector3Int location, Vector3Int size) 
+        public Room(Vector3Int location, Vector3Int size, GameObject prefab) 
         {
+            this.location = location;
+            this.prefab = prefab;
             bounds = new BoundsInt(location, size);
+            connected = false;
         }
 
         public static bool Intersect(Room a, Room b) 
@@ -35,34 +44,37 @@ public class Generator3D : MonoBehaviour {
                 || (a.bounds.position.z >= (b.bounds.position.z + b.bounds.size.z)) || ((a.bounds.position.z + a.bounds.size.z) <= b.bounds.position.z));
         }
     }
-
+    Random random;
     public string seed;
 
     [SerializeField] Vector3Int size;
-    Dictionary<Vector3Int, GameObject> dRooms;
-    Dictionary<GameObject, bool> connectedRooms;
+
+    [SerializeField, Range(0,1)] double additionalRoomChance = 0.5;
+    [SerializeField, Range(0,1)] double additionalHallwayChance = 0.1;
+    
+    // Prefabs
     [SerializeField] List<PanicRoom> panicRooms, additionalRooms;
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
-    [SerializeField] Material redMaterial;
-    [SerializeField] Material blueMaterial;
-    [SerializeField] Material greenMaterial;
+    private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
+    private readonly int MAX_TRIES = 10;
 
-
-    Random random;
     Grid3D<CellType> grid;
     List<Room> rooms;
     Delaunay3D delaunay;
     HashSet<Prim.Edge> selectedEdges;
 
+    Dictionary<Vector3Int, Room> roomsDictionary;
+    Dictionary<Room, List<(Vector3Int, bool)>> doorPlacement;
+    List<(Vector3Int, Quaternion, bool)> stairsToPlace;
+
     private NavMeshSurface navMeshSurface;
 
-    //TO-DO LIST
-    // Es posible que se consulten posiciones sobre el grid3D que no existen. Añadir funcionalidad para que lo soporte. DONE 28/02/2024
-    // Es posible que se generen mazmorras que no estan conectadas con el resto, o que se generen 2 gupos de mazmorras
+    #endregion
 
-    void Start()
+    #region MonoBehaviour
+    void Awake()
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
 
@@ -81,70 +93,81 @@ public class Generator3D : MonoBehaviour {
         stopwatch.Start();
 
         bool success = false;
-        int maxTries = 10;
         int tries = 0;
-        while (!success || tries > maxTries)
+        while (!success && tries < MAX_TRIES)
         {
             try
             {
                 grid = new Grid3D<CellType>(size, Vector3Int.zero);
                 rooms = new List<Room>();
-                dRooms = new Dictionary<Vector3Int, GameObject>();
-                connectedRooms = new Dictionary<GameObject, bool>();
+                roomsDictionary = new Dictionary<Vector3Int, Room>();
+                doorPlacement = new Dictionary<Room, List<(Vector3Int, bool)>>();
+                stairsToPlace = new List<(Vector3Int, Quaternion, bool)>();
 
-                PlaceRooms();
+                SetRooms();
                 Triangulate();
                 CreateHallways();
                 PathfindHallways();
+                BuildDungeon();
 
                 navMeshSurface?.BuildNavMesh();
                 success = true;
             }
             catch (System.Exception e)
             {
+                UnityEngine.Debug.Log(e.Message);
                 tries++;
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    Destroy(transform.GetChild(i).gameObject);
-                }
             }
         }
         stopwatch.Stop();
         UnityEngine.Debug.Log("Tries: " + tries);
         UnityEngine.Debug.Log("Tiempo transcurrido: "+ stopwatch.ElapsedMilliseconds + " milisegundos");
     }
-    public void PlaceRooms()
-    {
-        // Primero, colocar las habitaciones de 'firstRoomSizes'
 
-        int roomCount = 0;
+    #endregion
+
+    #region Methods
+    void BuildDungeon()
+    {
+        PlaceAllRooms();
+        PlaceAllHallways();
+        PlaceAllStairs();
+    }
+
+    public void SetRooms()
+    {
         foreach (PanicRoom room in panicRooms)
         {
-            PlaceRoomAtRandomLocation(room);
-            roomCount++;
+            SetRoomAtRandomLocation(room);
         }
 
         foreach (PanicRoom room in additionalRooms)
         {
             if (ShouldPlaceRoom())
             {
-                PlaceRoomAtRandomLocation(room);
+                SetRoomAtRandomLocation(room);
             }
         }
     }
 
-    bool ShouldPlaceRoom()
+    #region ShouldPlace
+    bool ShouldPlace(double value)
     {
-        return random.NextDouble() < 0.5;
+        return random.NextDouble() < value;
     }
 
+    bool ShouldPlaceRoom()
+    {
+        return ShouldPlace(additionalRoomChance);
+    }
 
     bool ShouldPlaceHallway()
     {
-        return random.NextDouble() < 0.10;
+        return ShouldPlace(additionalHallwayChance);
     }
+    #endregion
 
-    void PlaceRoomAtRandomLocation(PanicRoom room)
+    void SetRoomAtRandomLocation(PanicRoom room)
     {
         Vector3Int roomSize = room.size;
         while (true) 
@@ -156,8 +179,8 @@ public class Generator3D : MonoBehaviour {
             );
 
             bool add = true;
-            Room newRoom = new Room(location, roomSize);
-            Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2));
+            Room newRoom = new Room(location, roomSize, room.prefab);
+            Room buffer = new Room(location + new Vector3Int(-1, 0, -1), roomSize + new Vector3Int(2, 0, 2), null);
 
             foreach (var r in rooms)
             {
@@ -178,13 +201,12 @@ public class Generator3D : MonoBehaviour {
             if (add)
             {
                 rooms.Add(newRoom);
-                GameObject placedRoom = PlaceRoom(newRoom.bounds.position, room);
-                connectedRooms.Add(placedRoom, false);
+                doorPlacement[newRoom] = new List<(Vector3Int, bool)>();
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin)
                 {
                     grid[pos] = CellType.Room;
-                    dRooms[pos] = placedRoom;
+                    roomsDictionary[pos] = newRoom;
                 }
                 return;
             }
@@ -192,6 +214,7 @@ public class Generator3D : MonoBehaviour {
 
     }
 
+    //  vvvv AS ORIGINAL vvvv
     void Triangulate()
     {
         List<Vertex> vertices = new List<Vertex>();
@@ -204,7 +227,8 @@ public class Generator3D : MonoBehaviour {
         delaunay = Delaunay3D.Triangulate(vertices);
     }
 
-    void CreateHallways() {
+    void CreateHallways()
+    {
         List<Prim.Edge> edges = new List<Prim.Edge>();
 
         foreach (var edge in delaunay.Edges) 
@@ -212,16 +236,9 @@ public class Generator3D : MonoBehaviour {
             edges.Add(new Prim.Edge(edge.U, edge.V));
         }
 
-
         List<Prim.Edge> minimumSpanningTree = Prim.MinimumSpanningTree(edges, edges[0].U);
 
-
         selectedEdges = new HashSet<Prim.Edge>(minimumSpanningTree);
-
-        foreach (var edge in selectedEdges)
-        {
-            UnityEngine.Debug.DrawLine(edge.U.Position, edge.V.Position, Color.red, 1000);
-        }
 
         var remainingEdges = new HashSet<Prim.Edge>(edges);
         remainingEdges.ExceptWith(selectedEdges);
@@ -234,6 +251,7 @@ public class Generator3D : MonoBehaviour {
             }
         }
     }
+    //  ^^^^ AS ORIGINAL ^^^^
 
     void PathfindHallways() 
     {
@@ -250,7 +268,7 @@ public class Generator3D : MonoBehaviour {
             var startPos = new Vector3Int((int)startPosf.x, (int)startPosf.y, (int)startPosf.z);
             var endPos = new Vector3Int((int)endPosf.x, (int)endPosf.y, (int)endPosf.z);
 
-            bool pathFound = false;
+            //bool pathFound = false;
 
             var path = aStar.FindPath(startPos, endPos, (DungeonPathfinder3D.Node a, DungeonPathfinder3D.Node b) =>
             {
@@ -329,23 +347,6 @@ public class Generator3D : MonoBehaviour {
                         var prev = path[i - 1];
 
                         var delta = current - prev;
-                        /*
-                        if (delta.y != 0) {
-                            int xDir = Mathf.Clamp(delta.x, -1, 1);
-                            int zDir = Mathf.Clamp(delta.z, -1, 1);
-                            Vector3Int verticalOffset = new Vector3Int(0, delta.y, 0);
-                            Vector3Int horizontalOffset = new Vector3Int(xDir, 0, zDir);
-                            
-                            grid[prev + horizontalOffset] = CellType.Stairs;
-                            grid[prev + horizontalOffset * 2] = CellType.Stairs;
-                            grid[prev + verticalOffset + horizontalOffset] = CellType.Stairs;
-                            grid[prev + verticalOffset + horizontalOffset * 2] = CellType.Stairs;
-
-                            PlaceStairs(prev + horizontalOffset);
-                            PlaceStairs(prev + horizontalOffset * 2);
-                            PlaceStairs(prev + verticalOffset + horizontalOffset);
-                            PlaceStairs(prev + verticalOffset + horizontalOffset * 2);
-                        }*/
 
                         if (delta.y != 0)
                         {
@@ -366,7 +367,6 @@ public class Generator3D : MonoBehaviour {
 
                             if (Mathf.Abs(delta.x) > Mathf.Abs(delta.z))
                             {
-                                // Movimiento principal en el eje x
                                 orientation = delta.x > 0 ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, 270, 0);
 
                                 if (delta.x > 0)
@@ -378,17 +378,14 @@ public class Generator3D : MonoBehaviour {
                                 else
                                 {
                                     orientation = Quaternion.Euler(0, 270, 0);
-
                                 }
                             }
                             else
                             {
-                                // Movimiento principal en el eje z
                                 if (delta.z < 0)
                                 {
                                     orientation = Quaternion.Euler(0, 180, 0);
                                     horizontalOffset += new Vector3Int(1, 0, 0);
-
                                 }
                                 else
                                 {
@@ -397,18 +394,16 @@ public class Generator3D : MonoBehaviour {
                                 }
                             }
 
-                            // Ajusta la posición si es necesario antes de colocar la escalera
-                            PlaceStairs(prev + horizontalOffset, orientation, up); // Usa la orientación calculada
+                            stairsToPlace.Add((prev + horizontalOffset, orientation, up));
+                            //PlaceStairs(prev + horizontalOffset, orientation, up); // Usa la orientación calculada
                         }
                     }
                 }
 
-                List<Vector3Int> transitionHallways = new List<Vector3Int>(); // Lista para guardar las posiciones de los pasillos de transición
+                List<Vector3Int> transitionHallways = new List<Vector3Int>();
 
-                // Asegúrate de tener al menos 2 celdas en el camino para comparar
                 if (path.Count > 1)
                 {
-                    // Comenzar desde 1 ya que vamos a comparar cada posición con la anterior
                     for (int i = 1; i < path.Count; i++)
                     {
                         Vector3Int currentPos = path[i];
@@ -438,64 +433,60 @@ public class Generator3D : MonoBehaviour {
                     CheckRoom(pos);
                 }
 
-                pathFound = true;
             }
-
-            if (!pathFound)
-            {
+            else 
                 throw new System.Exception("No path found");
-            }
-
+            
         }
         
-        foreach (var connectedRoom in connectedRooms)
+        foreach (var r in rooms)
         {
-            if (!connectedRoom.Value)
+            if (!r.connected)
             {
                 throw new System.Exception("Room not connected");
             }
         }
-
-        for (int i = 0; i < size.x; i++)
-            for (int j = 0; j < size.y; j++)
-                for (int k = 0; k < size.z; k++)
-                {
-                    Vector3Int pos = new Vector3Int(i, j, k);
-                    if (grid[pos] == CellType.Hallway)
-                    {
-                        PlaceHallway(pos);
-                    }
-                }
     }
-        
-    private readonly Vector3Int[] testPos = { Vector3Int.right, Vector3Int.left, Vector3Int.forward, Vector3Int.back };
+    #region PlacePrefabs
 
     void CheckRoom(Vector3Int position)
     {
-        for( int i = 0; i < testPos.Length; i++ )
+        for (int i = 0; i < testPos.Length; i++)
         {
             Vector3Int move = testPos[i];
 
-            if (dRooms.TryGetValue(position + move, out var room))
+            if (roomsDictionary.TryGetValue(position + move, out var room))
             {
-                //room.GetComponent<DCubeTint>().material = greenMaterial;
-                //room.GetComponent<DCubeTint>().Start();
-                connectedRooms[room] = true;
-                room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
+                room.connected = true;
+                doorPlacement[room].Add((position + move, i > 0));
+
+                //room.GetComponent<WallController>()?.MakeDoor(position + move, i > 1);
             }
-            
+
         }
     }
-
-
-    GameObject PlaceRoom(Vector3Int location, PanicRoom room)
+    GameObject PlaceRoom(Vector3Int location, GameObject obj)
     {
-        GameObject go = Instantiate(room.prefab, location, Quaternion.identity);
+        GameObject go = Instantiate(obj, location, Quaternion.identity);
         go.transform.parent = transform;
         return go;
     }
 
-    void PlaceHallway(Vector3Int location) {
+    void PlaceAllRooms()
+    {
+        foreach (var room in rooms)
+        {
+            var roomObj = PlaceRoom(room.bounds.position, room.prefab);
+
+            foreach (var door in doorPlacement[room])
+            {
+                roomObj.GetComponent<WallController>()?.MakeDoor(door.Item1, door.Item2);
+            }
+        }
+    }
+
+    void PlaceHallway(Vector3Int location)
+    {
         GameObject go = Instantiate(hallwayPrefab, location, Quaternion.identity);
         go.transform.parent = transform;
         for (int i = 0; i < testPos.Length; i++)
@@ -508,11 +499,38 @@ public class Generator3D : MonoBehaviour {
         }
     }
 
-    void PlaceStairs(Vector3Int location, Quaternion orientation, bool up) {
+    void PlaceAllHallways()
+    {
+        for (int i = 0; i < size.x; i++)
+            for (int j = 0; j < size.y; j++)
+                for (int k = 0; k < size.z; k++)
+                {
+                    Vector3Int pos = new Vector3Int(i, j, k);
+                    if (grid[pos] == CellType.Hallway)
+                    {
+                        PlaceHallway(pos);
+                    }
+                }
+    }
+
+    void PlaceAllStairs()
+    {
+        foreach (var stair in stairsToPlace)
+        {
+            PlaceStairs(stair.Item1, stair.Item2, stair.Item3);
+        }
+    }
+
+    void PlaceStairs(Vector3Int location, Quaternion orientation, bool up)
+    {
         GameObject prefab = up ? upStairwayPrefab : downStairwayPrefab;
-        
+
         GameObject go = Instantiate(prefab, location, orientation);
         go.transform.parent = transform;
-        go.GetComponent<DCubeTint>().material = greenMaterial;
     }
+
+    #endregion
+    #endregion
+
+
 }
