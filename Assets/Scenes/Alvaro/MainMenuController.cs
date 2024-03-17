@@ -9,8 +9,8 @@ public class MainMenuController : MonoBehaviour
     public string gameSceneName;
 
     // GameObjects de la pantalla de carga
-    public GameObject loadingScreen; // Referencia al GameObject de la pantalla de carga
-    public Slider loadingSlider; // Referencia al Slider que muestra el progreso
+    public GameObject loadingScreen;
+    public Slider loadingSlider;
 
     public TextMeshProUGUI titleMenu;
 
@@ -56,8 +56,6 @@ public class MainMenuController : MonoBehaviour
         // Mientras la escena no haya terminado de cargar
         while (!asyncLoad.isDone)
         {
-            // Actualiza el valor del slider con el progreso de la carga
-            // El progreso de asyncLoad va de 0 a 0.9, por eso se divide entre 0.9 para normalizarlo a 1
             loadingSlider.value = asyncLoad.progress / 0.9f;
             yield return null; // Espera un frame antes de continuar
         }
