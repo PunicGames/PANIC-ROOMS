@@ -7,26 +7,22 @@ public class OpenLinkScript : MonoBehaviour
     [SerializeField] private string url3;
     [SerializeField] private string url4;
 
-    // Método llamado al pulsar el primer botón
-    public void OpenInstagram()
+    public void OpenUrl1()
     {
         Application.OpenURL(url1);
     }
 
-    // Método llamado al pulsar el segundo botón
-    public void OpenTwitter()
+    public void OpenUrl2()
     {
         Application.OpenURL(url2);
     }
 
-    // Método llamado al pulsar el tercer botón
-    public void OpenItchio()
+    public void OpenUrl3()
     {
         Application.OpenURL(url3);
     }
 
-    // Método llamado al pulsar el cuarto botón
-    public void OpenYoutube()
+    public void OpenUrl4()
     {
         Application.OpenURL(url4);
     }
