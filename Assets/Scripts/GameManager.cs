@@ -74,16 +74,17 @@ public class GameManager : MonoBehaviour
     public void InitializePlayer() {
 
         // Check premature errors
-        SpawnRoom spawn_room = dungeon_generator.GetAditionalRooms()[0].prefab.GetComponent<SpawnRoom>();
+        SpawnRoom spawn_room = dungeon_generator.GetInstantiatedPanicRooms()[0].GetComponent<SpawnRoom>();
+
         if(spawn_room == null)
         {
-            throw new System.NullReferenceException("Can't instantiate player. In dungeon generator, the List of additional rooms" +
+            throw new System.NullReferenceException("Can't instantiate player. In dungeon generator, the List of panic rooms" +
                                                     " is intended to have the first one with a SpawnRoom Script");
         }
 
         // Instantiate
-        Vector3 spawn_location = spawn_room.GetRandomLocationPosition();
-        Instantiate(playerPrefab, spawn_location, Quaternion.identity);
+        Transform spawn_location = spawn_room.GetRandomLocationPosition();
+        Instantiate(playerPrefab, spawn_location.position, spawn_location.localRotation);
 
         // Instantiate player dependencies
         GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>().InitPlayerDependencies();

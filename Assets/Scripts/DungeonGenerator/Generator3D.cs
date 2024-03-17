@@ -34,6 +34,7 @@ public class Generator3D : MonoBehaviour {
     
     // Prefabs
     [SerializeField] List<PanicRoom> panicRooms, additionalRooms;
+    [SerializeField] List<GameObject> instantiatedPanicRooms;
     [SerializeField] GameObject hallwayPrefab;
     [SerializeField] GameObject upStairwayPrefab, downStairwayPrefab;
 
@@ -60,6 +61,7 @@ public class Generator3D : MonoBehaviour {
     {
         navMeshSurface = GetComponent<NavMeshSurface>();
         gameManager = GameManager.Instance;
+        instantiatedPanicRooms = new List<GameObject>();
 
         if (string.IsNullOrEmpty(seed))
         {
@@ -458,6 +460,7 @@ public class Generator3D : MonoBehaviour {
     {
         GameObject go = Instantiate(obj, location, Quaternion.identity);
         go.transform.parent = transform;
+        instantiatedPanicRooms.Add(go);
         return go;
     }
 
@@ -520,13 +523,8 @@ public class Generator3D : MonoBehaviour {
 
     #endregion
 
-    public List<PanicRoom> GetPanicRooms() {
-        return panicRooms;
-    }
-
-    public List<PanicRoom> GetAditionalRooms()
-    {
-        return additionalRooms;
+    public List<GameObject> GetInstantiatedPanicRooms() {
+        return instantiatedPanicRooms;
     }
     #endregion
 }

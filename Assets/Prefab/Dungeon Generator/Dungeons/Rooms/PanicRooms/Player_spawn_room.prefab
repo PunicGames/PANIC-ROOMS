@@ -1173,7 +1173,6 @@ MonoBehaviour:
   spawn_positions:
   - {fileID: 2046946277150602678}
   - {fileID: 1415256143340073412}
-  dad_positions: {fileID: 5930855172222205988}
 --- !u!1001 &224314198892489391
 PrefabInstance:
   m_ObjectHideFlags: 0
