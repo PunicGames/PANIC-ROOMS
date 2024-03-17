@@ -17,11 +17,6 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Slider battery_slider;
     private CharacterMovement character_movement;
 
-    private void Start()
-    {
-        character_movement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
-    }
-
     public void PauseMenu() {
         //Debug.Log("Pause menu");
         pause_ui.active = true;
@@ -34,7 +29,10 @@ public class InGameUI : MonoBehaviour
         //Debug.Log("Unpause menu");
         ingame_ui.active = true;
         pause_ui.active = false;
-        character_movement.SetPauseMenu(false);
+
+        if (character_movement != null) { 
+            character_movement.SetPauseMenu(false);
+        }
 
     }
 
@@ -77,4 +75,8 @@ public class InGameUI : MonoBehaviour
         lost_ui.active = true;
     }
 
+    public void InitPlayerDependencies() {
+        character_movement = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>();
+        Debug.Log("UI Dependencies Initialized");
+    }
 }

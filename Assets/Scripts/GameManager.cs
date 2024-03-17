@@ -19,7 +19,11 @@ public class GameManager : MonoBehaviour
 
     // Prefabs
     public GameObject playerPrefab;
+    [SerializeField] private Transform player_init_pos;
     public GameObject enemyPrefab;
+    [SerializeField] private Transform enemy_init_pos;
+
+
     public List<GameObject> keyPrefabs;
 
     static List<Room> _rooms;
@@ -38,6 +42,17 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        // TODO: Move to RoomsCreated() in the future
+        { 
+            // Instantiate player
+            InitializePlayer();
+            // Testing
+            StartCoroutine(SpawnEnemy());
+        }
+    }
+
     public static void RoomsCreated(List<Room> rooms)
     {
         _rooms = rooms;
@@ -47,6 +62,21 @@ public class GameManager : MonoBehaviour
         // Spawn the player
         // Spawn the enemies
         // Spawn the key-objects
+    }
+
+    private void InitializePlayer() {
+        // Instantiate player and dependencies
+        Instantiate(playerPrefab, player_init_pos.position, Quaternion.identity);
+        GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>().InitPlayerDependencies();
+    }
+
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Instantiate(enemyPrefab, enemy_init_pos.position, Quaternion.identity);
+
+        // Init player dependencies to enemy instance
+        playerPrefab.GetComponent<CharacterCollectionSystem>().InitEnemyDependencies();
     }
 
 }
