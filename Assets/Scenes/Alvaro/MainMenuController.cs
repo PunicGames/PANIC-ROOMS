@@ -1,10 +1,17 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     public string gameSceneName;
+
+    // GameObjects de la pantalla de carga
+    public GameObject loadingScreen; // Referencia al GameObject de la pantalla de carga
+    public Slider loadingSlider; // Referencia al Slider que muestra el progreso
+
     public TextMeshProUGUI titleMenu;
 
     // GameObjects de los menús
@@ -35,7 +42,25 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(gameSceneName);
+        StartCoroutine(LoadSceneAsync(gameSceneName));
+    }
+
+    IEnumerator LoadSceneAsync(string sceneToLoad)
+    {
+        // Desactiva el menú actual y muestra la pantalla de carga
+        currentMenu.SetActive(false);
+        loadingScreen.SetActive(true);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad);
+
+        // Mientras la escena no haya terminado de cargar
+        while (!asyncLoad.isDone)
+        {
+            // Actualiza el valor del slider con el progreso de la carga
+            // El progreso de asyncLoad va de 0 a 0.9, por eso se divide entre 0.9 para normalizarlo a 1
+            loadingSlider.value = asyncLoad.progress / 0.9f;
+            yield return null; // Espera un frame antes de continuar
+        }
     }
 
     public void CustomGameButtonClicked()
