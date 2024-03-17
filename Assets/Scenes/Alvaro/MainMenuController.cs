@@ -1,23 +1,40 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     public string gameSceneName;
+    public TextMeshProUGUI titleMenu;
 
-    // GameObjects de los menús que quieras activar/desactivar
+    // GameObjects de los menús
     public GameObject mainMenu;
     public GameObject customGameMenu;
     public GameObject optionsMenu;
     public GameObject creditsMenu;
 
-    public TextMeshProUGUI titleMenu;
+    // GameObjects para los menús de créditos
+    public GameObject PGCreditsMenu;
+    public GameObject JRCreditsMenu;
+    public GameObject JSCreditsMenu;
+    public GameObject AOCreditsMenu;
+    public GameObject AECreditsMenu;
+
+    private GameObject currentMenu; // Almacena el menú actualmente activo
+    private GameObject previousMenu; // Almacena el menú anteriormente activo
+
+    private string previousTitle; // Almacena el título anterior
+
+    void Start()
+    {
+        // Inicializar el menú principal como el menú actual
+        currentMenu = mainMenu;
+        previousMenu = null; // No hay menú anterior al inicio
+        mainMenu.SetActive(true); // Asegúrate de que el menú principal esté activo al inicio
+    }
 
     public void PlayGame()
     {
-        // Carga la escena del juego
         SceneManager.LoadScene(gameSceneName);
     }
 
@@ -36,23 +53,57 @@ public class MainMenuController : MonoBehaviour
         SwitchMenu(creditsMenu, "CREDITS");
     }
 
-    private void SwitchMenu(GameObject menuToActivate, string title)
+    // Métodos para los botones de créditos específicos
+    public void AOCreditsButtonClicked()
     {
-        // Desactiva el menú principal y activa el menú pasado como parámetro
-        mainMenu.SetActive(false);
-        menuToActivate.SetActive(true);
-
-        // Actualiza el texto del título
-        titleMenu.text = title;
+        SwitchMenu(AOCreditsMenu, "ALVARO OLAVARRIA");
     }
 
-    // Puedes llamar a este método desde otros scripts para volver al menú principal
-    public void ReturnToMainMenu()
+    public void AECreditsButtonClicked()
     {
-        customGameMenu.SetActive(false);
-        optionsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-        mainMenu.SetActive(true);
-        titleMenu.text = "MAIN MENU";
+        SwitchMenu(AECreditsMenu, "ANTONIO ESPINOSA");
+    }
+
+    public void JRCreditsButtonClicked()
+    {
+        SwitchMenu(JRCreditsMenu, "JAVIER RAJA");
+    }
+
+    public void JSCreditsButtonClicked()
+    {
+        SwitchMenu(JSCreditsMenu, "JAVIER SERRANO");
+    }
+
+    public void PGCreditsButtonClicked()
+    {
+        SwitchMenu(PGCreditsMenu, "PUNIC GAMES");
+    }
+
+    private void SwitchMenu(GameObject menuToActivate, string title)
+    {
+        if (currentMenu != menuToActivate)
+        {
+            // Antes de cambiar, almacenar el menú y título actuales como anteriores
+            previousMenu = currentMenu;
+            previousTitle = titleMenu.text;
+
+            currentMenu.SetActive(false); // Desactivar el menú actual
+            currentMenu = menuToActivate; // Actualizar el menú actual
+            currentMenu.SetActive(true); // Activar el nuevo menú
+
+            titleMenu.text = title; // Actualizar el título
+        }
+    }
+
+    public void ReturnToPreviousMenu()
+    {
+        if (previousMenu != null)
+        {
+            currentMenu.SetActive(false); // Desactivar el menú actual
+            currentMenu = previousMenu; // Cambiar al menú anterior
+            currentMenu.SetActive(true); // Activar el menú anterior
+
+            titleMenu.text = previousTitle; // Restablecer el título anterior
+        }
     }
 }
