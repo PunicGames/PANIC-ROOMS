@@ -519,5 +519,14 @@ public class Generator3D : MonoBehaviour {
     }
 
     #endregion
+
+    public List<PanicRoom> GetPanicRooms() {
+        return panicRooms;
+    }
+
+    public List<PanicRoom> GetAditionalRooms()
+    {
+        return additionalRooms;
+    }
     #endregion
 }
