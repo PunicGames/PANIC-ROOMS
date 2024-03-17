@@ -83,7 +83,6 @@ public class MainMenuController : MonoBehaviour
     {
         if (currentMenu != menuToActivate)
         {
-            // Antes de cambiar, almacenar el menú y título actuales como anteriores
             previousMenu = currentMenu;
             previousTitle = titleMenu.text;
 
