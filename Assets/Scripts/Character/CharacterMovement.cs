@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     // *** Movement related variables ***
         // Basic movement
     private Vector2 player_translation;
-    private float translation_speed = 1.0f;
+    private float translation_speed = 0.5f;
     private bool is_running = false;
     private bool is_stealth = false;
     private bool is_crouch = false;
@@ -81,14 +81,14 @@ public class CharacterMovement : MonoBehaviour
             is_crouch = false;
 
             // Values related with running movement
-            translation_speed = 2.7f;
+            translation_speed = 1.20f;
 
             // Apply sounds variations
             character_sounds_manager.LoadRunningSound();
         }
         else {
             // Values related with normal movement
-            translation_speed = 1.0f;
+            translation_speed = 0.5f;
 
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
@@ -105,7 +105,7 @@ public class CharacterMovement : MonoBehaviour
             is_crouch = false;
 
             // Values related with stealth movement
-            translation_speed = 0.6f;
+            translation_speed = 0.3f;
 
             // Apply sounds variations
             character_sounds_manager.LoadStealthSound();
@@ -113,7 +113,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else {
             // Values related with normal movement
-            translation_speed = 1.0f;
+            translation_speed = 0.5f;
 
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
@@ -129,14 +129,14 @@ public class CharacterMovement : MonoBehaviour
             is_stealth = false;
 
             // Values related with stealth movement
-            translation_speed = 0.5f;
+            translation_speed = 0.25f;
 
             // Apply sounds variations. Stealth is fine for crouching
             character_sounds_manager.LoadStealthSound();
         }
         else {
             // Values related with normal movement
-            translation_speed = 1.0f;
+            translation_speed = 0.5f;
 
             // Apply sounds variations
             character_sounds_manager.LoadWalkingSound();
@@ -234,7 +234,7 @@ public class CharacterMovement : MonoBehaviour
         {
             if (is_running)
             {
-                target_camera_noise_amplitude_gain = 2.0f;
+                target_camera_noise_amplitude_gain = 1.4f;
                 target_camera_noise_frecuency_gain = 2.0f;
             }
             else if (is_stealth)
