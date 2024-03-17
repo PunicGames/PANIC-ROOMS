@@ -28,8 +28,6 @@ public class CharacterCollectionSystem : MonoBehaviour
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
         sprayUI.UpdateNumbersLeft(max_points);
-        enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
-        
     }
 
     private void Update()
@@ -53,7 +51,9 @@ public class CharacterCollectionSystem : MonoBehaviour
             num_points = max_points;
         }
 
-        enemy_stats.UpdateStats(num_points);
+        if (enemy_stats != null) { 
+            enemy_stats.UpdateStats(num_points);
+        }
     }
 
     public void SetPoint(int new_point) { 
@@ -79,7 +79,9 @@ public class CharacterCollectionSystem : MonoBehaviour
             //Update spray paint UI
             sprayUI.UpdateNumbersLeft(max_points - num_points);
             // Update enemy stats
-            enemy_stats.UpdateStats(num_points);
+            if (enemy_stats != null) { 
+                enemy_stats.UpdateStats(num_points);
+            }
 
             // Check win condition
             CheckWinCondition();
@@ -165,5 +167,10 @@ public class CharacterCollectionSystem : MonoBehaviour
         {
             character_movement.WinGame();
         }
+    }
+
+    public void InitEnemyDependencies() {
+        Debug.Log("Enemy Dependencies Initialized");
+        enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
     }
 }
