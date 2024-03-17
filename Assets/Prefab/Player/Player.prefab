@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418127676565750131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.43400002, z: 0}
+  m_LocalPosition: {x: 0, y: 0.434, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2723266925881808205}
   - component: {fileID: 6021309635966318369}
   - component: {fileID: 98255043138362096}
+  - component: {fileID: 6370553333927153897}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -239,14 +240,14 @@ Transform:
   m_GameObject: {fileID: 2140104229450293144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.29302916, y: 0.29302916, z: 0.29302916}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9108722482995755278}
   - {fileID: 7342016975892914895}
   - {fileID: 1309015781056810217}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4631786007621857783
 MeshFilter:
@@ -400,11 +401,12 @@ MonoBehaviour:
   noise_audio_source: {fileID: 6021309635966318369}
   noise_sound: {fileID: 8300000, guid: 2f9c39584fe441a409796cb337b37599, type: 3}
   moving_audio_source: {fileID: 2723266925881808205}
-  walking_sounds:
-  - {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
-  - {fileID: 8300000, guid: eacebd693b549034fa3581c142747d57, type: 3}
-  running_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
-  stealth_sound: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  carpet_sounds:
+  - {fileID: 8300000, guid: 874e209986b19724aae36389bf19666d, type: 3}
+  - {fileID: 8300000, guid: f5fa6c540d0ff0b479855f9bf8a64f55, type: 3}
+  - {fileID: 8300000, guid: 9679e7dd9fdf56f4c80ed12347589ad4, type: 3}
+  - {fileID: 8300000, guid: 51b856c271dd7c54eabb43bfecafc8ca, type: 3}
+  - {fileID: 8300000, guid: e7f264d3b5e682940b241f778b594f89, type: 3}
   lantern_audio_source: {fileID: 98255043138362096}
   lantern_click_sound: {fileID: 8300000, guid: 741624b4117eeb249a9b7c879cadcaa0, type: 3}
   min_pitch: 0.5
@@ -419,7 +421,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0bf8b41280eca1e42bf594bf7b4adac1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 874e209986b19724aae36389bf19666d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -613,7 +615,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 741624b4117eeb249a9b7c879cadcaa0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -697,6 +699,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &6370553333927153897
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140104229450293144}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 0, y: 0, z: 0}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1 &2619555830781894314
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +954,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8183609759341536282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.43400002, z: 0}
+  m_LocalPosition: {x: 0, y: 0.434, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1084,6 +1113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_InnerSpotAngle
       value: 26.27523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468361500402769667, guid: 8f1798daab948e0408b2b49b5cc08901,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3507040434676514457, guid: 8f1798daab948e0408b2b49b5cc08901,
         type: 3}
