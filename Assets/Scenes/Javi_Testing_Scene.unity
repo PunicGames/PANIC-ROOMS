@@ -1229,6 +1229,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5969301996118811866, guid: 3e502247c2875ba4b80d39771b773039,
     type: 3}
   enemy_init_pos: {fileID: 1582190648}
+  dungeon_generator: {fileID: 3120578469558189168}
   keyPrefabs: []
 --- !u!4 &736608095
 Transform:
@@ -2719,7 +2720,7 @@ MonoBehaviour:
       type: 3}
   additionalRooms:
   - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
+    prefab: {fileID: 7893673706923132279, guid: 4f836abf51b49b54f9266ef64fecdbcc,
       type: 3}
   - size: {x: 2, y: 1, z: 6}
     prefab: {fileID: 7893673706923132279, guid: 400512560d3854c46a64e4cadebc5384,
