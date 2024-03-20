@@ -19,9 +19,7 @@ public class GameManager : MonoBehaviour
 
     // Prefabs
     public GameObject playerPrefab;
-    [SerializeField] private Transform player_init_pos;
     public GameObject enemyPrefab;
-    [SerializeField] private Transform enemy_init_pos;
 
     // Dungeon generator
     [SerializeField] private Generator3D dungeon_generator;
@@ -30,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     // Rooms
     static List<Room> _rooms;
+
+    // Other variables
+    private int num_collected_colletibles = 0;
 
     #region MonoBehaviour
     private void Awake()
@@ -63,10 +64,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Rooms created" + rooms.Count);
 
         // Spawn the player
-        _instance.InitializePlayer();
+        _instance.UpdateWorldState(0);
+
         // Spawn the enemies
         // TODO: spawn enemy not here but when first object is collected
-        _instance.SpawnEnemy();
+        //_instance.SpawnEnemy();
         // Spawn the key-objects
 
     }
@@ -97,10 +99,78 @@ public class GameManager : MonoBehaviour
     IEnumerator InitializeEnemy()
     {
         yield return new WaitForSeconds(1.0f);
-        Instantiate(enemyPrefab, enemy_init_pos.position, Quaternion.identity);
+        SpawnRoom spawn_room = dungeon_generator.GetInstantiatedPanicRooms()[0].GetComponent<SpawnRoom>();
+        Transform spawn_location = spawn_room.GetRandomLocationPosition();
+        Instantiate(enemyPrefab, spawn_location.position, Quaternion.identity);
 
-        // Init player dependencies to enemy instance
+        // Solve dependencies
         playerPrefab.GetComponent<CharacterCollectionSystem>().InitEnemyDependencies();
+    }
+
+    private void SpawnCollectibles() {
+
+        List<GameObject> rooms = dungeon_generator.GetInstantiatedPanicRooms();
+
+        for (int i = 1; i < rooms.Count; i++) { 
+            SpawnCollectible spawn_collectible = rooms[i].GetComponent<SpawnCollectible>();
+            
+            if (spawn_collectible != null)
+            {
+                spawn_collectible.SpawnCollectibles();
+            }
+        
+        }
+
+
+    }
+
+    private void SpawnBatteries()
+    {
+
+        List<GameObject> rooms = dungeon_generator.GetInstantiatedPanicRooms();
+
+        for (int i = 1; i < rooms.Count; i++)
+        {
+            SpawnBatteries spawn_batteries = rooms[i].GetComponent<SpawnBatteries>();
+
+            if (spawn_batteries != null)
+            {
+                spawn_batteries._SpawnBatteries();
+            }
+
+        }
+
+
+    }
+
+    public void UpdateWorldState(int num_collectibles) {
+        switch (num_collectibles) {
+            case 0:
+                _instance.InitializePlayer();
+                _instance.SpawnCollectibles();
+                _instance.SpawnBatteries();
+                break;
+            case 1:
+                _instance.SpawnEnemy();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            default:
+                break;
+
+        }
     }
 
 }

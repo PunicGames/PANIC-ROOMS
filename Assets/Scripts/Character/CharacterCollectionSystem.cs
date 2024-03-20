@@ -83,8 +83,11 @@ public class CharacterCollectionSystem : MonoBehaviour
                 enemy_stats.UpdateStats(num_points);
             }
 
+            // Update Game Manager state
+            GameManager.Instance.UpdateWorldState(num_points);
+
             // Check win condition
-            CheckWinCondition();
+            //CheckWinCondition();
         }
         // Check bateries
         else {

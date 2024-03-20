@@ -14,7 +14,6 @@ public class EnemyBehavior : MonoBehaviour
     // Detection
     private MeshRenderer enemy_mesh;
     private float catch_distance;
-    public GameObject enemy_cam;
     public EnemyRayCasting enemy_ray_caster;
 
     // Movement
@@ -23,7 +22,7 @@ public class EnemyBehavior : MonoBehaviour
     private float distance_to_player;
 
     private bool trigger_teleport = false;
-    private float teleportation_chance;
+    private float teleportation_chance = 1.0f;
     private float teleport_distance;
 
     // Player related
@@ -47,34 +46,23 @@ public class EnemyBehavior : MonoBehaviour
     // Others
     private bool kill_player = false;
     private EnemyStats enemy_stats;
+    private bool fully_spawned = false;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        enemy_mesh = GetComponent<MeshRenderer>();
-        enemy_nav_mesh = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        player_camera = player.GetComponentInChildren<Camera>();
-        character_movement = player.GetComponent<CharacterMovement>();
-        player_transform = player.GetComponent<Transform>();
-        enemy_ray_caster = GetComponent<EnemyRayCasting>();
-        enemy_ray_caster.SetPlayerTransform(player_transform);
-        enemy_transform = GetComponent<Transform>();
-        enemy_camera.enabled = false;
-        enemy_stats = GetComponent<EnemyStats>();
-
-        // Set initial values
-        enemy_stats.UpdateStats(0);
+        InitPlayerDependencies();
+        enemy_stats.UpdateStats(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!fully_spawned) return;
+
 
         // Kill player if health below 0
         if (character_movement.GetHealth() <= 0) {
-            if (!kill_player) // Just a trigger to run KillPlayer() once
+        if (!kill_player) // Just a trigger to run KillPlayer() once
             {
                 KillPlayer();
                 kill_player = true;
@@ -150,7 +138,7 @@ public class EnemyBehavior : MonoBehaviour
         static_sound.volume = static_volume;
     }
 
-    private void TeleportToNewPosition() {
+    public void TeleportToNewPosition(int max_samples=500) {
 
         // Teleport at random ocassions, not only when enemy goes out of frustum.
         float random_teleport_sample = Random.Range(0.0f, 1.0f);
@@ -161,7 +149,6 @@ public class EnemyBehavior : MonoBehaviour
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(player_camera);
         bool found_spot = false;
         int current_sample = 0;
-        int max_samples = 50;
         RaycastHit hit;
 
         while (!found_spot && (current_sample < max_samples))
@@ -170,6 +157,7 @@ public class EnemyBehavior : MonoBehaviour
             Vector2 random_point_in_disk = Random.insideUnitCircle.normalized * teleport_distance;
             Vector3 random_direction = new Vector3(random_point_in_disk.x, 0, random_point_in_disk.y);
             random_position = player_transform.position + random_direction;
+
 
             // Cast a ray downwards from the randomPosition to find the ground
             if (Physics.Raycast(random_position + Vector3.up, Vector3.down, out hit, Mathf.Infinity))
@@ -191,6 +179,8 @@ public class EnemyBehavior : MonoBehaviour
             // Accumulate num samples to keep control
             current_sample++;
         }
+
+        Debug.Log(found_spot);
 
         // Teleport the enemy to the new position
         if (found_spot) { 
@@ -250,6 +240,23 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         // Kill or whatever...
         character_movement.LoseGame();
+    }
+
+    public void InitPlayerDependencies() {
+        player = GameObject.FindGameObjectWithTag("Player");
+        player_camera = player.GetComponentInChildren<Camera>();
+        character_movement = player.GetComponent<CharacterMovement>();
+        player_transform = player.GetComponent<Transform>();
+
+        enemy_mesh = GetComponent<MeshRenderer>();
+        enemy_nav_mesh = GetComponent<NavMeshAgent>();
+        enemy_ray_caster = GetComponent<EnemyRayCasting>();
+        enemy_ray_caster.SetPlayerTransform(player_transform);
+        enemy_transform = GetComponent<Transform>();
+        enemy_camera.enabled = false;
+        enemy_stats = GetComponent<EnemyStats>();
+
+        fully_spawned = true;
     }
 
 
