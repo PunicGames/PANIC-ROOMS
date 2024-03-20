@@ -9,7 +9,7 @@ public class CharacterCollectionSystem : MonoBehaviour
     private GameObject[] bateries;
     private int num_points = 0;
     private int max_points = 8;
-    private float min_distance_to_collect = 2.0f;
+    private float min_distance_to_collect = 0.5f;
 
     private EnemyStats enemy_stats;
     private CharacterMovement character_movement;
@@ -83,8 +83,11 @@ public class CharacterCollectionSystem : MonoBehaviour
                 enemy_stats.UpdateStats(num_points);
             }
 
+            // Update Game Manager state
+            GameManager.Instance.UpdateWorldState(num_points);
+
             // Check win condition
-            CheckWinCondition();
+            //CheckWinCondition();
         }
         // Check bateries
         else {
