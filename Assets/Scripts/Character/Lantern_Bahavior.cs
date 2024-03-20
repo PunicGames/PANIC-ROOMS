@@ -8,7 +8,7 @@ public class Lantern_Bahavior : MonoBehaviour
     [HideInInspector] Light spotlight;
     private bool activated = true;
     private float battery_amount = 100.0f;
-    private float battery_decrease_rate = 2.0f;
+    private float battery_decrease_rate = 1.0f;
     private float max_battery = 100.0f;
     private float battery_recharge_amount = 30.0f;
     private float light_intensity;

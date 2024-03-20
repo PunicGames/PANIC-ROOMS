@@ -66,11 +66,6 @@ public class GameManager : MonoBehaviour
         // Spawn the player
         _instance.UpdateWorldState(0);
 
-        // Spawn the enemies
-        // TODO: spawn enemy not here but when first object is collected
-        //_instance.SpawnEnemy();
-        // Spawn the key-objects
-
     }
 
     public void InitializePlayer() {

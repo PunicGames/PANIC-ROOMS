@@ -180,7 +180,7 @@ public class EnemyBehavior : MonoBehaviour
             current_sample++;
         }
 
-        Debug.Log(found_spot);
+        Debug.Log("Did enemy found a new spot for teleportation? " + found_spot);
 
         // Teleport the enemy to the new position
         if (found_spot) { 
