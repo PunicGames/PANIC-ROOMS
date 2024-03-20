@@ -234,8 +234,8 @@ public class CharacterMovement : MonoBehaviour
         {
             if (is_running)
             {
-                target_camera_noise_amplitude_gain = 1.4f;
-                target_camera_noise_frecuency_gain = 2.0f;
+                target_camera_noise_amplitude_gain = 1.3f;
+                target_camera_noise_frecuency_gain = 1.7f;
             }
             else if (is_stealth)
             {

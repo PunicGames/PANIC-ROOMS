@@ -2584,7 +2584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: JAVI
-  size: {x: 60, y: 5, z: 60}
+  size: {x: 60, y: 6, z: 60}
   additionalRoomChance: 0.5
   additionalHallwayChance: 0.10000000149011612
   panicRooms:
@@ -2594,29 +2594,26 @@ MonoBehaviour:
   - size: {x: 6, y: 1, z: 6}
     prefab: {fileID: 7893673706923132279, guid: 1cf113c8176c0d14b9b611bd575c220f,
       type: 3}
-  - size: {x: 5, y: 2, z: 5}
-    prefab: {fileID: 7893673706923132279, guid: 3ea4689ab7cec4246b888dbe2fc0f3c2,
-      type: 3}
-  - size: {x: 4, y: 2, z: 4}
-    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
-      type: 3}
-  - size: {x: 4, y: 2, z: 4}
-    prefab: {fileID: 7893673706923132279, guid: c578b368e049f5e4f92f8ed61ba42886,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
-      type: 3}
-  - size: {x: 5, y: 2, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+  - size: {x: 5, y: 5, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 1bc0d01da5073cd41b4d3e32f65a8be5,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
+    prefab: {fileID: 7893673706923132279, guid: e71cfde6e6a12eb42aa6c9a050e7eac7,
+      type: 3}
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 0644d6432abdda341b36c24e054ab03b,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
+      type: 3}
+  - size: {x: 5, y: 2, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
     prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
