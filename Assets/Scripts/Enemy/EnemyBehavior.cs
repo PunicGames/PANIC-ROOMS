@@ -76,7 +76,7 @@ public class EnemyBehavior : MonoBehaviour
 
             // Stop enemie's movement in case its kinda close. We dont want to stop its
             // movement being really far, even if its inside the frustum
-            if (distance_to_player < 20.0f)
+            if (distance_to_player < 10.0f)
             {
                 enemy_nav_mesh.enabled = false;
             }
