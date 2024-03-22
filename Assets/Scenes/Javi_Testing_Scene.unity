@@ -1873,6 +1873,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1006385324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006385326}
+  - component: {fileID: 1006385325}
+  m_Layer: 0
+  m_Name: PostProcess Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1006385325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006385324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 1
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &1006385326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006385324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.376133, y: 2.7246084, z: 48.73032}
+  m_LocalScale: {x: 9.7063, y: 9.7063, z: 9.7063}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1038779681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3950088589357438453, guid: 3040c5dca5fd9d842b96bb601842411f,
@@ -2726,16 +2775,16 @@ MonoBehaviour:
     prefab: {fileID: 7893673706923132279, guid: 4f836abf51b49b54f9266ef64fecdbcc,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 1cf113c8176c0d14b9b611bd575c220f,
+    prefab: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
       type: 3}
   - size: {x: 5, y: 5, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 1bc0d01da5073cd41b4d3e32f65a8be5,
+    prefab: {fileID: 7893673706923132279, guid: e72701303d215f54d9d49f466fe95e60,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: e71cfde6e6a12eb42aa6c9a050e7eac7,
+    prefab: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
       type: 3}
   - size: {x: 2, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: 0644d6432abdda341b36c24e054ab03b,
+    prefab: {fileID: 7893673706923132279, guid: c4f05aaebe4b050498a135a02ea89a8d,
       type: 3}
   - size: {x: 5, y: 2, z: 6}
     prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
@@ -2750,10 +2799,10 @@ MonoBehaviour:
     prefab: {fileID: 7893673706923132279, guid: 7a9df79dd9999fc4a92e73a7872ab76e,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
+    prefab: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
-    prefab: {fileID: 7893673706923132279, guid: fb324e33095525a49a052206f2eb144e,
+    prefab: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
       type: 3}
   additionalRooms:
   - size: {x: 2, y: 1, z: 6}
@@ -3328,3 +3377,4 @@ SceneRoots:
   - {fileID: 8681980373160535796}
   - {fileID: 1759296384}
   - {fileID: 1004125576}
+  - {fileID: 1006385326}
