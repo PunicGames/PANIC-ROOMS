@@ -3564,7 +3564,7 @@ RectTransform:
   m_Father: {fileID: 5961182057294683412}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5051,7 +5051,7 @@ RectTransform:
   m_Father: {fileID: 2371871161460746336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9334,7 +9334,7 @@ RectTransform:
   m_Father: {fileID: 8323440686061272964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9912,7 +9912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac550a8f4f580a54686990661a0d7b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Tony
+  gameSceneName: Javi_Testing_Scene
   loadingScreen: {fileID: 5211788118117934972}
   loadingSlider: {fileID: 1994982258227923322}
   titleMenu: {fileID: 1241397108421789092}
@@ -14223,7 +14223,7 @@ RectTransform:
   m_Father: {fileID: 793581659324675172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14391,7 +14391,7 @@ RectTransform:
   m_Father: {fileID: 2320508864538996392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
