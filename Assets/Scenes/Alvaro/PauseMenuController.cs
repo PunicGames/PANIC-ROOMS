@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
-    public string gameSceneName;
+    public string menuSceneName;
 
     // GameObjects de la pantalla de carga
     public GameObject loadingScreen;
@@ -33,7 +33,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void SwitchScene()
     {
-        StartCoroutine(LoadSceneAsync(gameSceneName));
+        StartCoroutine(LoadSceneAsync(menuSceneName));
     }
 
     IEnumerator LoadSceneAsync(string sceneToLoad)
