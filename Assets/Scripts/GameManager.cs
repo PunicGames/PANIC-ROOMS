@@ -102,48 +102,32 @@ public class GameManager : MonoBehaviour
         playerPrefab.GetComponent<CharacterCollectionSystem>().InitEnemyDependencies();
     }
 
-    private void SpawnCollectibles() {
+   
 
-        List<GameObject> rooms = dungeon_generator.GetInstantiatedPanicRooms();
-
-        for (int i = 1; i < rooms.Count; i++) { 
-            SpawnCollectible spawn_collectible = rooms[i].GetComponent<SpawnCollectible>();
-            
-            if (spawn_collectible != null)
-            {
-                spawn_collectible.SpawnCollectibles();
-            }
-        
-        }
-
-
-    }
-
-    private void SpawnBatteries()
+    private void SetupRooms()
     {
-
         List<GameObject> rooms = dungeon_generator.GetInstantiatedPanicRooms();
 
         for (int i = 1; i < rooms.Count; i++)
         {
-            SpawnBatteries spawn_batteries = rooms[i].GetComponent<SpawnBatteries>();
+            SpawnObjects spawner = rooms[i].GetComponent<SpawnObjects>();
 
-            if (spawn_batteries != null)
+            if (spawner != null)
             {
-                spawn_batteries._SpawnBatteries();
+                spawner.SpawnCollectible();
+                spawner.SpawnBattery();
             }
 
         }
-
-
     }
+
+   
 
     public void UpdateWorldState(int num_collectibles) {
         switch (num_collectibles) {
             case 0:
                 _instance.InitializePlayer();
-                _instance.SpawnCollectibles();
-                _instance.SpawnBatteries();
+                _instance.SetupRooms();
                 break;
             case 1:
                 _instance.SpawnEnemy();

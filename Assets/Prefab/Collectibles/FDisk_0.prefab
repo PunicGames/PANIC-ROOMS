@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3350758485587492911}
   - component: {fileID: 7389404228860522600}
+  - component: {fileID: 5724218437438474707}
   m_Layer: 0
   m_Name: FDisk_0
   m_TagString: Collectible
@@ -52,8 +53,35 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.20375083, y: 0.02, z: 0.20184107}
-  m_Center: {x: -0.0005310431, y: 0.01, z: 0.0016182053}
+  m_Size: {x: 0.050809145, y: 0.00932646, z: 0.05213135}
+  m_Center: {x: -0.0013301085, y: 0.003974626, z: 0.0002684377}
+--- !u!54 &5724218437438474707
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414473247741307758}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7585152576070866639
 PrefabInstance:
   m_ObjectHideFlags: 0
