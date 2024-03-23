@@ -379,6 +379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI-MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 5428545439846844941, guid: a55b95978d662f74db0132dd6ec3e88f,
+        type: 3}
+      propertyPath: gameSceneName
+      value: Tony2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

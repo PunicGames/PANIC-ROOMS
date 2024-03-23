@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UI-testing.unity
     guid: 56cb51af17550cb46b7007fd58b42f4e
   - enabled: 1
-    path: Assets/Scenes/Tony.unity
-    guid: 1e1f2567cb93cc948b1a4cb3947aec59
-  - enabled: 1
-    path: Assets/Scenes/Javi_Testing_Scene.unity
-    guid: ca9c7df2521c999478b8921b811fb06e
+    path: Assets/Scenes/Tony2.unity
+    guid: a97c72dcfe20d79419b27db237f56cc5
   m_configObjects: {}
