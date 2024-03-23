@@ -18,8 +18,17 @@ public class CameraMaterialToggle : MonoBehaviour
     void Start()
     {
         objectRenderer = GetComponent<Renderer>();
-        // Inicializa con el material inactivo
-        objectRenderer.material = inactiveMaterial;
+        // Asegúrate de que el array de materiales tenga al menos 2 elementos
+        if (objectRenderer.materials.Length < 2)
+        {
+            Debug.LogError("El objeto no tiene suficientes materiales.");
+            return;
+        }
+
+        // Inicializa el material en el índice 1 con el material inactivo
+        var materials = objectRenderer.materials;
+        materials[1] = inactiveMaterial;
+        objectRenderer.materials = materials; // Es importante reasignar el array modificado de nuevo al renderer
     }
 
     // Update se llama una vez por frame
@@ -31,8 +40,10 @@ public class CameraMaterialToggle : MonoBehaviour
             // Invertir el estado de activación de la cámara
             targetCamera.enabled = !targetCamera.enabled;
 
-            // Cambiar el material del objeto dependiendo del estado de la cámara
-            objectRenderer.material = targetCamera.enabled ? activeMaterial : inactiveMaterial;
+            // Cambiar el material del elemento 1 en el array de materiales dependiendo del estado de la cámara
+            var materials = objectRenderer.materials;
+            materials[1] = targetCamera.enabled ? activeMaterial : inactiveMaterial;
+            objectRenderer.materials = materials; // Reasignar el array modificado
         }
     }
 }
