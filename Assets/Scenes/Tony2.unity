@@ -424,8 +424,8 @@ MonoBehaviour:
   - size: {x: 5, y: 2, z: 5}
     prefab: {fileID: 7893673706923132279, guid: 22c08230c193e7942bbfd85365d887c0,
       type: 3}
-  - size: {x: 5, y: 2, z: 5}
-    prefab: {fileID: 7893673706923132279, guid: 22c08230c193e7942bbfd85365d887c0,
+  - size: {x: 2, y: 1, z: 6}
+    prefab: {fileID: 7893673706923132279, guid: 65ac0e120fc6dfd43a521942bb6ae57d,
       type: 3}
   - size: {x: 6, y: 1, z: 6}
     prefab: {fileID: 7893673706923132279, guid: 60e171708b8d71c40bc604782718a6e8,
@@ -497,6 +497,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[10]
+      value: 
+      objectReference: {fileID: 2800000, guid: ef5143e188d564748882f4af127d9254, type: 3}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[11]
+      value: 
+      objectReference: {fileID: 2800000, guid: 6330e561c7f37b44995ec4bbfc6f2fd4, type: 3}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[12]
+      value: 
+      objectReference: {fileID: 2800000, guid: 6ef3b7c578668ad458ce4bca5f7ce1e7, type: 3}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[13]
+      value: 
+      objectReference: {fileID: 2800000, guid: 7baa2543af794a34185119773524e74b, type: 3}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[14]
+      value: 
+      objectReference: {fileID: 2800000, guid: d5bd1b2fe3d83d449b93e221914cb0b2, type: 3}
+    - target: {fileID: -5339450159467952302, guid: d7884f9b3507cf8418bb3c5d34ab5327,
+        type: 3}
+      propertyPath: m_numbers.Array.data[15]
+      value: 
+      objectReference: {fileID: 2800000, guid: 3f52a7346a889a24783d144d9dc7ee8d, type: 3}
     - target: {fileID: 159836872350726306, guid: d7884f9b3507cf8418bb3c5d34ab5327,
         type: 3}
       propertyPath: m_AnchorMax.y

@@ -1148,8 +1148,8 @@ Transform:
   m_GameObject: {fileID: 5969301996118811866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9242554, y: 1.05, z: 35.942677}
-  m_LocalScale: {x: 0.7343201, y: 2.0101, z: 0.6892045}
+  m_LocalPosition: {x: 6.9007, y: 1.2991, z: 36.075}
+  m_LocalScale: {x: 0.20837495, y: 0.5703976, z: 0.19557269}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9034163400522128893}
@@ -1210,7 +1210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd2d657d5d4f42478fe69f97b3b01f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_cam: {fileID: 0}
   enemy_ray_caster: {fileID: 6585314165840733624}
   enemy_transform: {fileID: 3264843739831243250}
   player_transform: {fileID: 0}
