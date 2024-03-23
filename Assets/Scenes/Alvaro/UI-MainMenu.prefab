@@ -3375,10 +3375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: https://www.instagram.com/punicgames/?igsh=MXNjeXozYXJ5ajhjeA%3D%3D
-  url2: https://twitter.com/PunicGames?t=maejd-koZ1RIbubCBy5beQ&s=09
-  url3: https://punicgames.itch.io/
-  url4: https://www.youtube.com/@punicgames1114
+  url1: 
+  url2: 
+  url3: 
+  url4: 
 --- !u!1 &1933762087761003244
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,7 +4063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7913942654835022371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4102,10 +4102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: https://www.instagram.com/punicgames/?igsh=MXNjeXozYXJ5ajhjeA%3D%3D
-  url2: https://twitter.com/PunicGames?t=maejd-koZ1RIbubCBy5beQ&s=09
-  url3: https://punicgames.itch.io/
-  url4: https://www.youtube.com/@punicgames1114
+  url1: 
+  url2: 
+  url3: 
+  url4: 
 --- !u!1 &2645462386132211046
 GameObject:
   m_ObjectHideFlags: 0
@@ -12834,10 +12834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: https://www.instagram.com/punicgames/?igsh=MXNjeXozYXJ5ajhjeA%3D%3D
-  url2: https://twitter.com/PunicGames?t=maejd-koZ1RIbubCBy5beQ&s=09
-  url3: https://punicgames.itch.io/
-  url4: https://www.youtube.com/@punicgames1114
+  url1: 
+  url2: 
+  url3: 
+  url4: 
 --- !u!1 &7305837038871204207
 GameObject:
   m_ObjectHideFlags: 0
