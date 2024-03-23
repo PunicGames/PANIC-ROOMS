@@ -48,6 +48,7 @@ public class CharacterMovement : MonoBehaviour
 
 
     // *** Other componenets ***
+    [SerializeField] Animator animator;
     [SerializeField] CharacterSounds character_sounds_manager;
     public bool walk_sound_trigger = false;
     [SerializeField] private CharacterCollectionSystem character_collection_system;
@@ -201,6 +202,12 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
+
+        //Set animator
+        if(player_translation != Vector2.zero)
+            animator.SetBool("moving", true);
+        else
+            animator.SetBool("moving", false);
 
         // Apply basic translation (WASD)
         float translation_factor = Time.deltaTime * translation_speed;
