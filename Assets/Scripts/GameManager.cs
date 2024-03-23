@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
             {
                 spawner.SpawnCollectible();
                 spawner.SpawnBattery();
+                spawner.ArrangeAssets();
             }
 
         }

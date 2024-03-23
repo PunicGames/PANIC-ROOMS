@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4294089909363952751}
   - component: {fileID: 2006577366923607450}
   m_Layer: 7
-  m_Name: d
+  m_Name: event_collider
   m_TagString: Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
