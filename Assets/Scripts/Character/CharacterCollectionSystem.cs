@@ -8,7 +8,7 @@ public class CharacterCollectionSystem : MonoBehaviour
     private GameObject[] collectibles;
     private GameObject[] bateries;
     private int num_points = 0;
-    private int max_points = 8;
+    public int max_points = 8;
     private float min_distance_to_collect = 0.5f;
 
     private EnemyStats enemy_stats;
@@ -27,7 +27,7 @@ public class CharacterCollectionSystem : MonoBehaviour
         max_points = collectibles.Length;
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
-        sprayUI.UpdateNumbersLeft(max_points);
+
     }
 
     private void Update()
@@ -40,33 +40,45 @@ public class CharacterCollectionSystem : MonoBehaviour
         {
             game_ui.ActivateCollectInfo("Collect battery");
         }
-        else {
+        else
+        {
             game_ui.DeactivateCollectInfo();
         }
     }
-
-    public void IncrementPoint() { 
+    
+    public void IncrementPoint()
+    {
         num_points++;
-        if (num_points > max_points) { 
+        if (num_points > max_points)
+        {
             num_points = max_points;
         }
 
-        if (enemy_stats != null) { 
+        if (enemy_stats != null)
+        {
             enemy_stats.UpdateStats(num_points);
         }
     }
 
-    public void SetPoint(int new_point) { 
+    public void SetPoint(int new_point)
+    {
         num_points = new_point;
     }
 
-    public int GetPoints() {
+    public int GetPoints()
+    {
         return num_points;
     }
 
     public int GetMaxPoints()
     {
         return max_points;
+    }
+    public void SetMaxPoints(int max)
+    {
+        max_points = max;
+        sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
+        sprayUI.UpdateNumbersLeft(max_points);
     }
 
     public void CollectObject()
@@ -79,7 +91,8 @@ public class CharacterCollectionSystem : MonoBehaviour
             //Update spray paint UI
             sprayUI.UpdateNumbersLeft(max_points - num_points);
             // Update enemy stats
-            if (enemy_stats != null) { 
+            if (enemy_stats != null)
+            {
                 enemy_stats.UpdateStats(num_points);
             }
 
@@ -90,15 +103,18 @@ public class CharacterCollectionSystem : MonoBehaviour
             //CheckWinCondition();
         }
         // Check bateries
-        else {
-            if (CollectGenericObject(bateries, "Battery")) {
+        else
+        {
+            if (CollectGenericObject(bateries, "Battery"))
+            {
                 // Recargar linterna
                 lantern_behavior.RechargeBattery();
             }
         }
     }
 
-    private bool CollectGenericObject(GameObject[] objects, string tag) {
+    private bool CollectGenericObject(GameObject[] objects, string tag)
+    {
 
         for (int i = 0; i < objects.Length; i++)
         {
@@ -133,7 +149,8 @@ public class CharacterCollectionSystem : MonoBehaviour
     }
 
 
-    private bool DetectObjectUpdateUI(GameObject[] objects, string tag) {
+    private bool DetectObjectUpdateUI(GameObject[] objects, string tag)
+    {
 
         for (int i = 0; i < objects.Length; i++)
         {
@@ -149,7 +166,7 @@ public class CharacterCollectionSystem : MonoBehaviour
                     RaycastHit hit;
 
                     // If player is looking at the object
-                    if (Physics.Raycast(player_camera_transform.position, player_camera_transform.forward , out hit, min_distance_to_collect))
+                    if (Physics.Raycast(player_camera_transform.position, player_camera_transform.forward, out hit, min_distance_to_collect))
                     {
                         if (hit.collider.gameObject.CompareTag(tag) && hit.collider.gameObject == objects[i])
                         {
@@ -172,7 +189,8 @@ public class CharacterCollectionSystem : MonoBehaviour
         }
     }
 
-    public void InitEnemyDependencies() {
+    public void InitEnemyDependencies()
+    {
         Debug.Log("Enemy Dependencies Initialized");
         enemy_stats = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyStats>();
     }

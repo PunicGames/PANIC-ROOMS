@@ -209,6 +209,11 @@ public class CharacterMovement : MonoBehaviour
         else
             animator.SetBool("moving", false);
 
+        if (is_crouch)
+            animator.SetBool("crouched", true);
+        else
+            animator.SetBool("crouched", false);
+
         // Apply basic translation (WASD)
         float translation_factor = Time.deltaTime * translation_speed;
         transform.Translate(translation_factor * player_translation.x, 0, translation_factor * player_translation.y);
