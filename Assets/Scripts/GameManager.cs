@@ -24,13 +24,15 @@ public class GameManager : MonoBehaviour
     // Dungeon generator
     [SerializeField] private Generator3D dungeon_generator;
 
-    public List<GameObject> keyPrefabs;
+    //public List<GameObject> keyPrefabs;
 
     // Rooms
     static List<Room> _rooms;
 
-    // Other variables
-    private int num_collected_colletibles = 0;
+    // Collectibles
+    public List<GameObject> collectibles;
+    private int MAX_COLLECTIBLES;
+
 
     #region MonoBehaviour
     private void Awake()
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
+
         // TODO: Move to RoomsCreated() in the future
         {
             // Initialize player
@@ -68,12 +72,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void InitializePlayer() {
+    public void InitializePlayer()
+    {
 
         // Check premature errors
         SpawnRoom spawn_room = dungeon_generator.GetInstantiatedPanicRooms()[0].GetComponent<SpawnRoom>();
 
-        if(spawn_room == null)
+        if (spawn_room == null)
         {
             throw new System.NullReferenceException("Can't instantiate player. In dungeon generator, the List of panic rooms" +
                                                     " is intended to have the first one with a SpawnRoom Script");
@@ -81,13 +86,19 @@ public class GameManager : MonoBehaviour
 
         // Instantiate
         Transform spawn_location = spawn_room.GetRandomLocationPosition();
-        Instantiate(playerPrefab, spawn_location.position, spawn_location.localRotation);
+        GameObject player = Instantiate(playerPrefab, spawn_location.position, spawn_location.localRotation);
 
         // Instantiate player dependencies
         GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>().InitPlayerDependencies();
+
+        //Setup MAX points
+        MAX_COLLECTIBLES = collectibles.Count;
+        CharacterCollectionSystem collection = player.GetComponent<CharacterCollectionSystem>();
+        collection.SetMaxPoints(MAX_COLLECTIBLES);
     }
 
-    public void SpawnEnemy() {
+    public void SpawnEnemy()
+    {
         StartCoroutine(InitializeEnemy());
     }
 
@@ -102,7 +113,7 @@ public class GameManager : MonoBehaviour
         playerPrefab.GetComponent<CharacterCollectionSystem>().InitEnemyDependencies();
     }
 
-   
+
 
     private void SetupRooms()
     {
@@ -112,20 +123,23 @@ public class GameManager : MonoBehaviour
         {
             SpawnObjects spawner = rooms[i].GetComponent<SpawnObjects>();
 
-            if (spawner != null)
+            if (spawner)
             {
-                spawner.SpawnCollectible();
+                if (i <= MAX_COLLECTIBLES)
+                    spawner.SpawnCollectible(collectibles[i-1]);
                 spawner.SpawnBattery();
-                spawner.ArrangeAssets();
+                spawner.SpawnAssets();
             }
 
         }
     }
 
-   
 
-    public void UpdateWorldState(int num_collectibles) {
-        switch (num_collectibles) {
+
+    public void UpdateWorldState(int num_collectibles)
+    {
+        switch (num_collectibles)
+        {
             case 0:
                 _instance.InitializePlayer();
                 _instance.SetupRooms();

@@ -10,7 +10,7 @@ public class SprayNumBehaviour : MonoBehaviour
    
     public void UpdateNumbersLeft(int number)
     {
-        Debug.Log(number);
+        //Debug.Log(number);
         m_current = number;
         m_material.SetTexture("_Albedo", m_numbers[m_current]);
         m_material.SetTexture("_Opacity", m_numbers[m_current]);
