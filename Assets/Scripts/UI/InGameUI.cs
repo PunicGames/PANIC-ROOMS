@@ -13,8 +13,6 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private GameObject win_ui;
     [SerializeField] private GameObject lost_ui;
     [SerializeField] private TextMeshProUGUI collect_ui;
-    [SerializeField] private Slider health_slider;
-    [SerializeField] private Slider battery_slider;
     private CharacterMovement character_movement;
 
     public void PauseMenu() {
@@ -45,15 +43,6 @@ public class InGameUI : MonoBehaviour
         // Go main menu
         SceneManager.LoadScene("UI-testing");
         //Debug.Log("Coming back to main menu");
-    }
-
-    public void UpdateHealth(float health_player) {
-        health_slider.value = health_player;
-    }
-
-    public void UpdateBattery(float current_battery)
-    {
-        battery_slider.value = current_battery;
     }
 
     public void ActivateCollectInfo(string message) {

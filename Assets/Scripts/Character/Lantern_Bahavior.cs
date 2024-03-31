@@ -62,8 +62,6 @@ public class Lantern_Bahavior : MonoBehaviour
                 battery_amount = 0;
                 DeactivateLantern();
             }
-
-            game_ui.UpdateBattery(battery_amount);
         }
     }
 

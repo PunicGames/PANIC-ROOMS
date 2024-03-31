@@ -290,7 +290,6 @@ public class CharacterMovement : MonoBehaviour
 
     public void SetHealth(float new_value) {
         player_health = new_value;
-        game_ui.UpdateHealth(player_health);
     }
 
     public float GetHealth() {
