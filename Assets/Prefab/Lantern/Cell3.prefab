@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1206371471243851}
   - component: {fileID: 2873505992737443457}
   - component: {fileID: 3728158112437139476}
-  - component: {fileID: 7913355816190486812}
+  - component: {fileID: 8093703821211592442}
   m_Layer: 0
   m_Name: Cell3
   m_TagString: Battery
@@ -114,8 +114,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &7913355816190486812
-MeshCollider:
+--- !u!65 &8093703821211592442
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,10 +132,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6023738981709457774, guid: 55f7740ff14cf7f4199e0e54f92ffacb, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.25020108, y: 0.1, z: 0.21992807}
+  m_Center: {x: -0.0029108971, y: 0, z: -0.006986119}
 --- !u!1 &5768929263867939355
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,10 +144,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5046150988484001716}
-  - component: {fileID: 3882777210747590008}
+  - component: {fileID: 8847473146678598087}
   m_Layer: 7
-  m_Name: event_collider
-  m_TagString: Battery
+  m_Name: physics_collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,8 +167,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4011461132501759470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3882777210747590008
-BoxCollider:
+--- !u!64 &8847473146678598087
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,6 +185,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.25020108, y: 0.1, z: 0.21992807}
-  m_Center: {x: -0.0029108971, y: 0, z: -0.006986119}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6023738981709457774, guid: 55f7740ff14cf7f4199e0e54f92ffacb, type: 3}

@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.050809145, y: 0.0039216676, z: 0.05213135}
-  m_Center: {x: -0.0013301085, y: 0.0012722298, z: 0.0002684377}
+  m_Size: {x: 0.1565118, y: 0.044013415, z: 0.15526451}
+  m_Center: {x: -0.0031179718, y: 0.0024943927, z: -0.0034921851}
 --- !u!54 &5724218437438474707
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 2326934844991522965}
   - component: {fileID: 5365772209096408510}
   m_Layer: 7
-  m_Name: event_collider
-  m_TagString: Collectible
+  m_Name: physics_collider
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,8 +134,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1565118, y: 0.044013415, z: 0.15526451}
-  m_Center: {x: -0.0031179718, y: 0.0024943927, z: -0.0034921851}
+  m_Size: {x: 0.049412806, y: 0.0044543124, z: 0.047683086}
+  m_Center: {x: 0.00025902916, y: 0.0020119662, z: 0.00060846505}
 --- !u!1001 &7585152576070866639
 PrefabInstance:
   m_ObjectHideFlags: 0
