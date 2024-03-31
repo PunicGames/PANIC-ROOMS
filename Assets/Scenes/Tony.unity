@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547a5b9f3c9562d469dd59dd043935a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: JAVI
+  seed: 
   size: {x: 60, y: 6, z: 60}
   additionalRoomChance: 0.5
   additionalHallwayChance: 0.10000000149011612
