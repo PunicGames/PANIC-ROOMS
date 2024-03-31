@@ -34,11 +34,11 @@ public class CharacterCollectionSystem : MonoBehaviour
     {
         if (DetectObjectUpdateUI(collectibles, "Collectible"))
         {
-            game_ui.ActivateCollectInfo("Collect collectible");
+            game_ui.ActivateCollectInfo("E: Collect disk");
         }
         else if (DetectObjectUpdateUI(bateries, "Battery"))
         {
-            game_ui.ActivateCollectInfo("Collect battery");
+            game_ui.ActivateCollectInfo("E: Take battery");
         }
         else
         {

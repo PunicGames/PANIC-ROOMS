@@ -309,7 +309,6 @@ public class CharacterMovement : MonoBehaviour
         menu_paused = true;
         UnlockCursor();
         game_ui.PauseMenu();
-        game_ui.WinGameUI();
     }
 
     public void LoseGame() {
@@ -321,7 +320,6 @@ public class CharacterMovement : MonoBehaviour
         menu_paused = true;
         UnlockCursor();
         game_ui.PauseMenu();
-        game_ui.LoseGameUI();
     }
 
 

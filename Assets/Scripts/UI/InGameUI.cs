@@ -10,8 +10,6 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] private GameObject pause_ui;
     [SerializeField] private GameObject ingame_ui;
-    [SerializeField] private GameObject win_ui;
-    [SerializeField] private GameObject lost_ui;
     [SerializeField] private TextMeshProUGUI collect_ui;
     private CharacterMovement character_movement;
 
@@ -52,16 +50,6 @@ public class InGameUI : MonoBehaviour
     public void DeactivateCollectInfo()
     {
         collect_ui.enabled = false;
-    }
-
-    public void WinGameUI() {
-        win_ui.active = true;
-        lost_ui.active = false;
-    }
-
-    public void LoseGameUI() {
-        win_ui.active = false;
-        lost_ui.active = true;
     }
 
     public void InitPlayerDependencies() {
