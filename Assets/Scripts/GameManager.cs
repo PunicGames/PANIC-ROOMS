@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
 
         //Setup MAX points
         MAX_COLLECTIBLES = collectibles.Count;
+        Debug.Log("COLLECTIBLES: " + MAX_COLLECTIBLES);
         CharacterCollectionSystem collection = player.GetComponent<CharacterCollectionSystem>();
         collection.SetMaxPoints(MAX_COLLECTIBLES);
     }
@@ -165,6 +166,18 @@ public class GameManager : MonoBehaviour
                 break;
 
         }
+    }
+
+    private void UnlockEnd() { 
+        
+    }
+
+    public void WinGame() { 
+        
+    }
+
+    public void LoseGame() { 
+        
     }
 
 }
