@@ -223,7 +223,7 @@
                 {
                     "name": "",
                     "id": "8b0cf734-c599-4f75-89d2-552fc56e3c0a",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/c",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
