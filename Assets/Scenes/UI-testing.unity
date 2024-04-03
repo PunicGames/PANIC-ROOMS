@@ -284,11 +284,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2511482509331709339, guid: a55b95978d662f74db0132dd6ec3e88f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2760474314828638824, guid: a55b95978d662f74db0132dd6ec3e88f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -393,16 +388,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI-MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 5428545439846844941, guid: a55b95978d662f74db0132dd6ec3e88f,
-        type: 3}
-      propertyPath: gameSceneName
-      value: Tony
-      objectReference: {fileID: 0}
-    - target: {fileID: 6764046896273994796, guid: a55b95978d662f74db0132dd6ec3e88f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
