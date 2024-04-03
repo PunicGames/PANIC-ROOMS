@@ -77,6 +77,11 @@ public class MainMenuController : MonoBehaviour
         SwitchMenu(creditsMenu, "CREDITS");
     }
 
+    public void MainMenuButtonClicked()
+    {
+        SwitchMenu(mainMenu, "MAIN MENU");
+    }
+
     // Métodos para los botones de créditos específicos
     public void AOCreditsButtonClicked()
     {

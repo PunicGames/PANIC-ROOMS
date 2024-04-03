@@ -17,6 +17,7 @@ public class PauseMenuController : MonoBehaviour
     // GameObjects de los menús
     public GameObject pauseMenu;
     public GameObject optionsMenu;
+    public GameObject winButton;
 
     private GameObject currentMenu; // Almacena el menú actualmente activo
     private GameObject previousMenu; // Almacena el menú anteriormente activo
@@ -83,5 +84,11 @@ public class PauseMenuController : MonoBehaviour
 
             titleMenu.text = previousTitle; // Restablecer el título anterior
         }
+    }
+
+    public void EnableWinButton()
+    {
+        winButton.SetActive(true);
+        print("Win condition is enabled");
     }
 }

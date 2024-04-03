@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: MainMenuButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1804,7 +1804,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: CreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2092,7 +2092,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: AOCreditsButtonClicked
+        m_MethodName: JSCreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2897,7 +2897,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: AOCreditsButtonClicked
+        m_MethodName: JRCreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4063,7 +4063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7913942654835022371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6444,7 +6444,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: AOCreditsButtonClicked
+        m_MethodName: AECreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6597,7 +6597,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: CreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6750,7 +6750,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: CreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10065,7 +10065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac550a8f4f580a54686990661a0d7b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Javi_Testing_Scene
+  gameSceneName: Tony
   loadingScreen: {fileID: 5211788118117934972}
   loadingSlider: {fileID: 1994982258227923322}
   titleMenu: {fileID: 1241397108421789092}
@@ -11223,7 +11223,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: CreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14161,7 +14161,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: ReturnToPreviousMenu
+        m_MethodName: CreditsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
