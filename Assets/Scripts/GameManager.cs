@@ -150,7 +150,6 @@ public class GameManager : MonoBehaviour
                 break;
             case 1:
                 _instance.SpawnEnemy();
-                pauseMenuController.EnableWinButton();
                 break;
             case 2:
                 break;
@@ -163,6 +162,7 @@ public class GameManager : MonoBehaviour
             case 6:
                 break;
             case 7:
+                pauseMenuController.EnableWinButton();
                 break;
             case 8:
                 break;
