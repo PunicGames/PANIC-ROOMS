@@ -40,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
 
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
-    bool activate_lantern = true;
+    bool activate_lantern = false;
 
     // *** UI ***
     private InGameUI game_ui;

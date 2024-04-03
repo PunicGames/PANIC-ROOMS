@@ -6,9 +6,9 @@ using UnityEngine;
 public class Lantern_Bahavior : MonoBehaviour
 {
     [HideInInspector] Light spotlight;
-    private bool activated = true;
+    private bool activated = false;
     private float battery_amount = 100.0f;
-    private float battery_decrease_rate = 1.0f;
+    private float battery_decrease_rate = 0.7f;
     private float max_battery = 100.0f;
     private float battery_recharge_amount = 30.0f;
     private float light_intensity;
@@ -34,6 +34,8 @@ public class Lantern_Bahavior : MonoBehaviour
         if (flicker_sound_clips.Length > 0) {
             flicker_sound.clip = flicker_sound_clips[0];
         }
+
+        DeactivateLantern();
     }
 
     private void Update()

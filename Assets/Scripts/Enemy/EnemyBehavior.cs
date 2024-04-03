@@ -24,6 +24,8 @@ public class EnemyBehavior : MonoBehaviour
     private bool trigger_teleport = false;
     private float teleportation_chance = 1.0f;
     private float teleport_distance;
+    private float teleport_timer;
+    private Coroutine teleport_coroutine;
 
     // Player related
     private GameObject player;
@@ -89,14 +91,24 @@ public class EnemyBehavior : MonoBehaviour
             }
 
             // If there's direct vision between enemy and player
-            if (enemy_ray_caster.DetectPlayer() == true) {
+            if (enemy_ray_caster.DetectPlayer() == true)
+            {
 
                 DecreaseSanity();
 
                 // Enable trigger to teleport again
                 trigger_teleport = true;
-            }
 
+                // Reset coroutine in case there was a previous one running
+                if (teleport_coroutine != null)
+                {
+                    // If the coroutine is already running, stop it and restart it
+                    StopCoroutine(teleport_coroutine);
+                }
+            }
+            else {
+                IncreaseSanity();
+            }
         }
         else {
             enemy_nav_mesh.enabled = true; // Enable enemie's movement
@@ -106,7 +118,12 @@ public class EnemyBehavior : MonoBehaviour
 
             // Teleportation
             if (trigger_teleport) {
-                TeleportToNewPosition();
+                if (teleport_coroutine != null)
+                {
+                    // If the coroutine is already running, stop it and restart it
+                    StopCoroutine(teleport_coroutine);
+                }
+                teleport_coroutine = StartCoroutine(TeleportAfterDelay(teleport_timer));
                 trigger_teleport = false;
             }
 
@@ -138,7 +155,12 @@ public class EnemyBehavior : MonoBehaviour
         static_sound.volume = static_volume;
     }
 
-    public void TeleportToNewPosition(int max_samples=500) {
+    IEnumerator TeleportAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        TeleportToNewPosition();
+    }
+    public void TeleportToNewPosition(int max_samples=750) {
 
         // Teleport at random ocassions, not only when enemy goes out of frustum.
         float random_teleport_sample = Random.Range(0.0f, 1.0f);
@@ -150,7 +172,7 @@ public class EnemyBehavior : MonoBehaviour
         bool found_spot = false;
         int current_sample = 0;
         RaycastHit hit;
-
+        
         while (!found_spot && (current_sample < max_samples))
         {
             // Generate a random direction at a specified distance in a disk centered in player
@@ -169,7 +191,6 @@ public class EnemyBehavior : MonoBehaviour
                     random_position = hit.point;
 
                     // Check if new position is not in frustum
-                    this.transform.position = random_position;
                     if (!GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds)) { 
                         found_spot = true;
                     }
@@ -283,6 +304,11 @@ public class EnemyBehavior : MonoBehaviour
     public void SetTeleportDistance(float new_value) 
     {
         teleport_distance = new_value;
+    }
+
+    public void SetTeleportTimer(float new_value)
+    {
+        teleport_timer = new_value;
     }
 
 }
