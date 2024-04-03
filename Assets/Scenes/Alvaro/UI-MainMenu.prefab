@@ -353,7 +353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  Instagram'
+  m_text: '  GITHUB'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 1033860018509316978}
   - component: {fileID: 42552216689380942}
   m_Layer: 5
-  m_Name: Instagram
+  m_Name: Github
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7342929554154575278}
         m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
-        m_MethodName: OpenInstagram
+        m_MethodName: OpenUrl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -794,13 +794,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc787dce06a943409f37af18b25c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonText: {fileID: 2193590483763759440}
+  buttonText: {fileID: 6954729686702390446}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  INSTAGRAM'
-  hoverText: '> INSTAGRAM'
+  normalText: '  GITHUB'
+  hoverText: '> GITHUB'
 --- !u!1 &524662121533704292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,14 +1353,13 @@ GameObject:
   - component: {fileID: 3881349078583572817}
   - component: {fileID: 6354178966853618444}
   - component: {fileID: 7025862262483354640}
-  - component: {fileID: 6919314403988699437}
   m_Layer: 5
   m_Name: Youtube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4901394362679169190
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1464,12 +1463,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2511482509331709339}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1494,22 +1493,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  YOUTUBE'
   hoverText: '> YOUTUBE'
---- !u!114 &6919314403988699437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887217952015258598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &951544559025230933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,14 +1506,13 @@ GameObject:
   - component: {fileID: 3480036792025635300}
   - component: {fileID: 6881404812692937320}
   - component: {fileID: 2595959918877539287}
-  - component: {fileID: 7911915296068249665}
   m_Layer: 5
   m_Name: itchio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5846726968327314447
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1634,7 +1616,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2511482509331709339}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -1664,22 +1646,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  ITCHIO'
   hoverText: '> ITCHIO'
---- !u!114 &7911915296068249665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951544559025230933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &986326170170095039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3089,7 +3055,6 @@ GameObject:
   - component: {fileID: 6300766457262147089}
   - component: {fileID: 1451518109714038327}
   - component: {fileID: 1414590611799560385}
-  - component: {fileID: 2940292053971903493}
   m_Layer: 5
   m_Name: Youtube
   m_TagString: Untagged
@@ -3199,13 +3164,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 782365852067003423}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 3406215909650020999}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3230,22 +3195,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  YOUTUBE'
   hoverText: '> YOUTUBE'
---- !u!114 &2940292053971903493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727743438699304023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &1741822522937716127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,10 +3324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
+  url1: https://github.com/Javisda
+  url2: https://github.com/Javisda
+  url3: https://github.com/Javisda
+  url4: https://github.com/Javisda
 --- !u!1 &1933762087761003244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,7 +3476,6 @@ GameObject:
   - component: {fileID: 872227408229043702}
   - component: {fileID: 3761018958386419884}
   - component: {fileID: 4238038957069928171}
-  - component: {fileID: 1042149987514595390}
   m_Layer: 5
   m_Name: Web
   m_TagString: Untagged
@@ -3668,22 +3616,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  WEB'
   hoverText: '> WEB'
---- !u!114 &1042149987514595390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2020585286269059454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &2081080334581287981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4102,10 +4034,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
+  url1: https://github.com/tuicher
+  url2: https://github.com/tuicher
+  url3: https://github.com/tuicher
+  url4: https://github.com/tuicher
 --- !u!1 &2645462386132211046
 GameObject:
   m_ObjectHideFlags: 0
@@ -4365,14 +4297,13 @@ GameObject:
   - component: {fileID: 2832016095216990801}
   - component: {fileID: 3010487955803562320}
   - component: {fileID: 4287101927587247921}
-  - component: {fileID: 2871509824913087154}
   m_Layer: 5
   m_Name: Twitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9179589679596389016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4475,9 +4406,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7169602793119051747}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 7342929554154575278}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4506,22 +4437,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  TWITTER'
   hoverText: '> TWITTER'
---- !u!114 &2871509824913087154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2869293903596866961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &2995511690767213417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4646,7 +4561,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3406215909650020999}
         m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
-        m_MethodName: OpenInstagram
+        m_MethodName: OpenUrl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5620,7 +5535,7 @@ GameObject:
   - component: {fileID: 5679670200018963053}
   - component: {fileID: 1928995170204379076}
   m_Layer: 5
-  m_Name: Instagram
+  m_Name: Github
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5730,7 +5645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6650824610517068233}
         m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
-        m_MethodName: OpenInstagram
+        m_MethodName: OpenUrl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5757,8 +5672,8 @@ MonoBehaviour:
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  INSTAGRAM'
-  hoverText: '> INSTAGRAM'
+  normalText: '  GITHUB'
+  hoverText: '> GITHUB'
 --- !u!1 &3433538076250909354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,14 +7187,13 @@ GameObject:
   - component: {fileID: 4527244875636200635}
   - component: {fileID: 2523834558684772177}
   - component: {fileID: 6341529460360970693}
-  - component: {fileID: 1250312895635510705}
   m_Layer: 5
   m_Name: Youtube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &102951693784188860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7383,12 +7297,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1874627687972135399}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7413,22 +7327,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  YOUTUBE'
   hoverText: '> YOUTUBE'
---- !u!114 &1250312895635510705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074614674744238560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &4137949906285452118
 GameObject:
   m_ObjectHideFlags: 0
@@ -7494,7 +7392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  github'
+  m_text: '  INSTAGRAM'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -7577,14 +7475,13 @@ GameObject:
   - component: {fileID: 5411187577832164664}
   - component: {fileID: 3442895702811176641}
   - component: {fileID: 928941235028821768}
-  - component: {fileID: 4086033296993702163}
   m_Layer: 5
   m_Name: itchio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5612328437149711816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7688,7 +7585,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1874627687972135399}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -7718,22 +7615,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  ITCHIO'
   hoverText: '> ITCHIO'
---- !u!114 &4086033296993702163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189480399443024733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &4286832716429725220
 GameObject:
   m_ObjectHideFlags: 0
@@ -9308,7 +9189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  Instagram'
+  m_text: '  GITHUB'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -9542,7 +9423,6 @@ GameObject:
   - component: {fileID: 4023645728431357106}
   - component: {fileID: 7587786016854964577}
   - component: {fileID: 4027580151989183021}
-  - component: {fileID: 2859356675050309594}
   m_Layer: 5
   m_Name: Twitter
   m_TagString: Untagged
@@ -9683,22 +9563,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  TWITTER'
   hoverText: '> TWITTER'
---- !u!114 &2859356675050309594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5187933073891462081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &5200906891502719048
 GameObject:
   m_ObjectHideFlags: 0
@@ -10091,14 +9955,13 @@ GameObject:
   - component: {fileID: 6699466228560784130}
   - component: {fileID: 5986358102076378817}
   - component: {fileID: 1922165415987560559}
-  - component: {fileID: 5666466189284009641}
   m_Layer: 5
   m_Name: Twitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4639661204977600814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10202,7 +10065,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1874627687972135399}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -10232,22 +10095,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  TWITTER'
   hoverText: '> TWITTER'
---- !u!114 &5666466189284009641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5324338861289983170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &5339937658735263182
 GameObject:
   m_ObjectHideFlags: 0
@@ -10313,7 +10160,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  Instagram'
+  m_text: '  GITHUB'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -10514,8 +10361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: https://www.instagram.com/alvaroolav_dev/?igsh=MXVjbzJqMXFqcmN3bA%3D%3D
-  url2: https://github.com/Alvaroolav3D
+  url1: https://github.com/Alvaroolav3D
+  url2: https://www.instagram.com/alvaroolav_dev/?igsh=MXVjbzJqMXFqcmN3bA%3D%3D
   url3: https://alvaroolav3d.github.io/
   url4: https://x.com/lvarolavarria?t=BtkYBCVJCSW16tOAR1TbLw&s=09
 --- !u!1 &5897326574183317674
@@ -10568,14 +10415,13 @@ GameObject:
   - component: {fileID: 4849811235225001037}
   - component: {fileID: 4735623721533915257}
   - component: {fileID: 251323194885013387}
-  - component: {fileID: 4166372065068617882}
   m_Layer: 5
   m_Name: Youtube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3611369769346549931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10678,13 +10524,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7169602793119051747}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 7342929554154575278}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10709,22 +10555,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  YOUTUBE'
   hoverText: '> YOUTUBE'
---- !u!114 &4166372065068617882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969149361534933453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &6030486508586491063
 GameObject:
   m_ObjectHideFlags: 0
@@ -11265,7 +11095,6 @@ GameObject:
   - component: {fileID: 6068919035887414642}
   - component: {fileID: 1277776621957868877}
   - component: {fileID: 5418211548411324891}
-  - component: {fileID: 799530430727150554}
   m_Layer: 5
   m_Name: itchio
   m_TagString: Untagged
@@ -11375,9 +11204,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 782365852067003423}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 3406215909650020999}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11406,22 +11235,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  ITCHIO'
   hoverText: '> ITCHIO'
---- !u!114 &799530430727150554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235153596279836053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &6322523138699014765
 GameObject:
   m_ObjectHideFlags: 0
@@ -11571,7 +11384,7 @@ GameObject:
   - component: {fileID: 2032232289301121741}
   - component: {fileID: 7993483554400802337}
   m_Layer: 5
-  m_Name: Instagram
+  m_Name: Github
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11703,13 +11516,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc787dce06a943409f37af18b25c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonText: {fileID: 167213883028327371}
+  buttonText: {fileID: 6954729686702390446}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  INSTAGRAM'
-  hoverText: '> INSTAGRAM'
+  normalText: '  GITHUB'
+  hoverText: '> GITHUB'
 --- !u!1 &6449573070191521047
 GameObject:
   m_ObjectHideFlags: 0
@@ -11799,9 +11612,8 @@ GameObject:
   - component: {fileID: 8745114643169733375}
   - component: {fileID: 2563213961108866384}
   - component: {fileID: 9074354961133796754}
-  - component: {fileID: 7593620302482186455}
   m_Layer: 5
-  m_Name: Github
+  m_Name: Instagram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11933,29 +11745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc787dce06a943409f37af18b25c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonText: {fileID: 3708800557073714471}
+  buttonText: {fileID: 167213883028327371}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  GITHUB'
-  hoverText: '> GITHUB'
---- !u!114 &7593620302482186455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6736664598791256694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
+  normalText: '  INSTAGRAM'
+  hoverText: '> INSTAGRAM'
 --- !u!1 &6764046896273994796
 GameObject:
   m_ObjectHideFlags: 0
@@ -12834,10 +12630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
+  url1: https://github.com/AEspinosaDev
+  url2: https://github.com/AEspinosaDev
+  url3: https://github.com/AEspinosaDev
+  url4: https://github.com/AEspinosaDev
 --- !u!1 &7305837038871204207
 GameObject:
   m_ObjectHideFlags: 0
@@ -13475,14 +13271,13 @@ GameObject:
   - component: {fileID: 1436335360345313254}
   - component: {fileID: 5695406854025238217}
   - component: {fileID: 6192139782356536119}
-  - component: {fileID: 21337465437391121}
   m_Layer: 5
   m_Name: Twitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1391804572221081386
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13586,7 +13381,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2511482509331709339}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -13616,22 +13411,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  TWITTER'
   hoverText: '> TWITTER'
---- !u!114 &21337465437391121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7732726320166809397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &7823666534432774260
 GameObject:
   m_ObjectHideFlags: 0
@@ -14736,7 +14515,7 @@ GameObject:
   - component: {fileID: 3990115553986366795}
   - component: {fileID: 9040976819951739359}
   m_Layer: 5
-  m_Name: Instagram
+  m_Name: Github
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14846,7 +14625,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3464947746377467810}
         m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
-        m_MethodName: OpenInstagram
+        m_MethodName: OpenUrl1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14868,13 +14647,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc787dce06a943409f37af18b25c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonText: {fileID: 7086152602757298306}
+  buttonText: {fileID: 6954729686702390446}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  INSTAGRAM'
-  hoverText: '> INSTAGRAM'
+  normalText: '  GITHUB'
+  hoverText: '> GITHUB'
 --- !u!1 &8480562664475950375
 GameObject:
   m_ObjectHideFlags: 0
@@ -14940,7 +14719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  Instagram'
+  m_text: '  GITHUB'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -15023,7 +14802,6 @@ GameObject:
   - component: {fileID: 829422537494813214}
   - component: {fileID: 7163763907839331962}
   - component: {fileID: 4251547748671054194}
-  - component: {fileID: 262989943531251858}
   m_Layer: 5
   m_Name: Twitter
   m_TagString: Untagged
@@ -15133,9 +14911,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 782365852067003423}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 3406215909650020999}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15164,22 +14942,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  TWITTER'
   hoverText: '> TWITTER'
---- !u!114 &262989943531251858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8564193382692957794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &8623728018574350109
 GameObject:
   m_ObjectHideFlags: 0
@@ -15883,14 +15645,13 @@ GameObject:
   - component: {fileID: 1516824893794726594}
   - component: {fileID: 6214065758007758221}
   - component: {fileID: 6324809102585891014}
-  - component: {fileID: 7465202394556385181}
   m_Layer: 5
   m_Name: itchio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1922972164531775225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15993,9 +15754,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7169602793119051747}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 7342929554154575278}
+        m_TargetAssemblyTypeName: OpenLinkScript, Assembly-CSharp
+        m_MethodName: OpenUrl3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16024,22 +15785,6 @@ MonoBehaviour:
   hoverFontStyle: 1
   normalText: '  ITCHIO'
   hoverText: '> ITCHIO'
---- !u!114 &7465202394556385181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8962696058867121632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179c47a0ba614684897b67fc3cd5dc40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url1: 
-  url2: 
-  url3: 
-  url4: 
 --- !u!1 &8974752344719905967
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class OpenLinkScript : MonoBehaviour
     public void OpenUrl1()
     {
         Application.OpenURL(url1);
+        print("hola");
     }
 
     public void OpenUrl2()
