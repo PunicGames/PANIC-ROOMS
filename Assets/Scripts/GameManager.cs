@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> collectibles;
     private int MAX_COLLECTIBLES;
 
+    // Win condition connection
+    [SerializeField] PauseMenuController pauseMenuController;
+
 
     #region MonoBehaviour
     private void Awake()
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 1:
                 _instance.SpawnEnemy();
+                pauseMenuController.EnableWinButton();
                 break;
             case 2:
                 break;
