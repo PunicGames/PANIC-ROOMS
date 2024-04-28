@@ -63,6 +63,8 @@ public class Generator3D : MonoBehaviour {
         gameManager = GameManager.Instance;
         instantiatedPanicRooms = new List<GameObject>();
 
+        seed = PlayerPrefs.GetString("Seed");
+        print(seed);
         if (string.IsNullOrEmpty(seed))
         {
             string randomString = RandomSeed.GenerateRandomAlphanumericString(8);

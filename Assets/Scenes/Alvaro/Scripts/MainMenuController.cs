@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
     public Slider loadingSlider;
 
     public TextMeshProUGUI titleMenu;
+    public TMP_InputField seed;
 
     // GameObjects de los menús
     public GameObject mainMenu;
@@ -42,9 +43,16 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        PlayerPrefs.SetString("Seed", "");
         StartCoroutine(LoadSceneAsync(gameSceneName));
     }
 
+    public void PlayCustomGame()
+    {
+        PlayerPrefs.SetString("Seed", seed.text);
+        StartCoroutine(LoadSceneAsync(gameSceneName));
+        print("Seed: " + seed.text);
+    }
     IEnumerator LoadSceneAsync(string sceneToLoad)
     {
         // Desactiva el menú actual y muestra la pantalla de carga

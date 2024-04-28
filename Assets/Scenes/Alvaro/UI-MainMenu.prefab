@@ -9933,6 +9933,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 5211788118117934972}
   loadingSlider: {fileID: 1994982258227923322}
   titleMenu: {fileID: 1241397108421789092}
+  seed: {fileID: 0}
   mainMenu: {fileID: 6764046896273994796}
   customGameMenu: {fileID: 1741822522937716127}
   optionsMenu: {fileID: 8245932064164917889}
