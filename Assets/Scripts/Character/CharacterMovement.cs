@@ -122,7 +122,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void OnCrouch(InputValue input) {
-        is_crouch = input.isPressed;
+        is_crouch = !is_crouch;
 
         if (is_crouch)
         {
@@ -236,6 +236,12 @@ public class CharacterMovement : MonoBehaviour
         {
             noise.m_AmplitudeGain = Mathf.Lerp(noise.m_AmplitudeGain, target_camera_noise_amplitude_gain, Time.deltaTime * camera_noise_transition_speed);
             noise.m_FrequencyGain = Mathf.Lerp(noise.m_FrequencyGain, target_camera_noise_frecuency_gain, Time.deltaTime * camera_noise_transition_speed);
+        }
+
+
+        // Check if out of bounds (z-death)
+        if (transform.position.y <= -1.0f) {
+            GameManager.Instance.RealocatePlayer();
         }
     }
 

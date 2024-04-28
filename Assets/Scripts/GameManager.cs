@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     // Prefabs
     public GameObject playerPrefab;
+    private Transform player_transform;
+    public GameObject player_instance;
     public GameObject enemyPrefab;
 
     // Dungeon generator
@@ -89,7 +91,8 @@ public class GameManager : MonoBehaviour
 
         // Instantiate
         Transform spawn_location = spawn_room.GetRandomLocationPosition();
-        GameObject player = Instantiate(playerPrefab, spawn_location.position, spawn_location.localRotation);
+        player_transform = spawn_location;
+        player_instance = Instantiate(playerPrefab, player_transform.position, player_transform.localRotation);
 
         // Instantiate player dependencies
         GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>().InitPlayerDependencies();
@@ -97,13 +100,18 @@ public class GameManager : MonoBehaviour
         //Setup MAX points
         MAX_COLLECTIBLES = collectibles.Count;
         Debug.Log("COLLECTIBLES: " + MAX_COLLECTIBLES);
-        CharacterCollectionSystem collection = player.GetComponent<CharacterCollectionSystem>();
+        CharacterCollectionSystem collection = player_instance.GetComponent<CharacterCollectionSystem>();
         collection.SetMaxPoints(MAX_COLLECTIBLES);
     }
 
     public void SpawnEnemy()
     {
         StartCoroutine(InitializeEnemy());
+    }
+
+    public void RealocatePlayer() {
+        player_instance.transform.position = player_transform.position;
+        player_instance.transform.localRotation = player_transform.localRotation;
     }
 
     IEnumerator InitializeEnemy()
