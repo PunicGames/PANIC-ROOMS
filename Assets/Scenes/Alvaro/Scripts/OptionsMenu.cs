@@ -16,6 +16,12 @@ public class OptionsMenu : MonoBehaviour
         SaveSettings();
     }
 
+    private void Update()
+    {
+        // Aplicar las configuraciones en el juego
+        ApplySettings();
+    }
+
     public void SaveSettings()
     {
         // Guardar las configuraciones actuales
