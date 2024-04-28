@@ -5,7 +5,18 @@ public class DateTimeDisplay : MonoBehaviour
 {
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI dateText;
+    public TextMeshProUGUI seedText;
 
+    public GameManager gameManager;
+
+    private void Start()
+    {
+        if (gameManager != null)
+        {
+            print("gameManager detected");
+            seedText.text = "SEED: " + gameManager.actualSeed;
+        }
+    }
     void Update()
     {
         // Actualiza el texto con la hora actual del sistema

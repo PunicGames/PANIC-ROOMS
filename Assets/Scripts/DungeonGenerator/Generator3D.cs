@@ -70,13 +70,14 @@ public class Generator3D : MonoBehaviour {
             string randomString = RandomSeed.GenerateRandomAlphanumericString(8);
             int seedHash = randomString.GetHashCode();
             
-            
             UnityEngine.Debug.Log("SEED: " + randomString + "\n" + seedHash);
             random = new Random(seedHash);
+            gameManager.actualSeed = randomString;
         }
         else
         {
             random = new Random(seed.GetHashCode());
+            gameManager.actualSeed = seed;
         }
 
         Stopwatch stopwatch = new Stopwatch();

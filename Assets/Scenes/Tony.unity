@@ -167,6 +167,16 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 736608094}
+    - target: {fileID: 3845190004655741776, guid: 44b9ac5edcd2f884fad029b98f5e4200,
+        type: 3}
+      propertyPath: seedText
+      value: 
+      objectReference: {fileID: 554995900}
+    - target: {fileID: 3845190004655741776, guid: 44b9ac5edcd2f884fad029b98f5e4200,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 736608094}
     - target: {fileID: 7258830422728972815, guid: 44b9ac5edcd2f884fad029b98f5e4200,
         type: 3}
       propertyPath: m_Pivot.x
@@ -295,6 +305,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d80949b36eca84897fdb5c70a3d796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &554995900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7410187970374255982, guid: 44b9ac5edcd2f884fad029b98f5e4200,
+    type: 3}
+  m_PrefabInstance: {fileID: 554995897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &736608093
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +361,7 @@ MonoBehaviour:
   - {fileID: 2414473247741307758, guid: 70986d2021c366442bea7fb7167ea0ce, type: 3}
   - {fileID: 2414473247741307758, guid: 2712fc19d74b63a4380b1ae1cee46b21, type: 3}
   pauseMenuController: {fileID: 554995899}
+  actualSeed: 
 --- !u!4 &736608095
 Transform:
   m_ObjectHideFlags: 0

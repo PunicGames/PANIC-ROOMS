@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     // Win condition connection
     [SerializeField] PauseMenuController pauseMenuController;
 
+    // Seed
+    public string actualSeed;
+
 
     #region MonoBehaviour
     private void Awake()
