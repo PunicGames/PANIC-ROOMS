@@ -37,6 +37,11 @@ public class CharacterMovement : MonoBehaviour
     // *** Stats ***
     private float player_health = 100;
     private bool finished_round = true;
+    private float tension = 0.0f;
+    private float base_tension = 0.0f;
+    private float movement_tension = 0.0f;
+    private float max_tension = 100.0f;
+    private float min_tension = 0.0f;
 
     // *** Lantern ***
     [SerializeField] Lantern_Bahavior lantern_behavior;
@@ -243,6 +248,10 @@ public class CharacterMovement : MonoBehaviour
         if (transform.position.y <= -1.0f) {
             GameManager.Instance.RealocatePlayer();
         }
+
+        // Manage tension
+        if (is_running && !IsMoving()) IncreaseTension(3.0f * Time.deltaTime);
+        else IncreaseTension((-1) * 3.0f * Time.deltaTime);
     }
 
 
@@ -280,20 +289,22 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Not moving
-        if (player_translation.x == 0 && player_translation.y == 0)
+        if (IsMoving())
         {
             target_camera_noise_amplitude_gain = 0.5f;
             target_camera_noise_frecuency_gain = 0.5f;
         }
 
         // Reset walk sound trigger if stopped
-        if (player_translation.x == 0 && player_translation.y == 0 && walk_sound_trigger)
+        if (IsMoving() && walk_sound_trigger)
         {
             walk_sound_trigger = false;
         }
     }
 
-
+    private bool IsMoving() {
+        return player_translation.x == 0 && player_translation.y == 0;
+    }
     public void SetHealth(float new_value) {
         player_health = new_value;
     }
@@ -328,6 +339,33 @@ public class CharacterMovement : MonoBehaviour
         game_ui.PauseMenu();
     }
 
+    private void IncreaseTension(float _tension) {
+        movement_tension += _tension;
+        if (movement_tension > GetMaxTension()) movement_tension = GetMaxTension();
+        if(movement_tension < GetMinTension()) movement_tension = GetMinTension();
+
+        tension = movement_tension + base_tension;
+
+        if (tension > GetMaxTension()) tension = GetMaxTension();
+        if (tension < GetMinTension()) tension = GetMinTension();
+
+        Debug.Log("Tension: " + tension);
+    }
+    public float GetTension() {
+        return tension;
+    }
+    public float GetMaxTension()
+    {
+        return max_tension;
+    }
+    public float GetMinTension()
+    {
+        return min_tension;
+    }
+    public void SetBaseTension(float val)
+    {
+        base_tension = val;
+    }
 
     private void LockCursor()
     {

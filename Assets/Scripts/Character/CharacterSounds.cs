@@ -17,6 +17,9 @@ public class CharacterSounds : MonoBehaviour
     public float min_pitch = 0.5f;
     public float max_pitch = 1.0f;
 
+    public AudioSource heartbeat_audio_source;
+    public AudioClip heartbeat_sound;
+
     private CharacterMovement character_movement;
 
     private void Start()
@@ -27,6 +30,7 @@ public class CharacterSounds : MonoBehaviour
         // Set noises
         noise_audio_source.clip = noise_sound;
         lantern_audio_source.clip = lantern_click_sound;
+        heartbeat_audio_source.clip = heartbeat_sound;
         LoadWalkingSound();
 
 
@@ -35,6 +39,8 @@ public class CharacterSounds : MonoBehaviour
 
 
         // Play sounds
+        heartbeat_audio_source.loop = true;
+        heartbeat_audio_source.Play();
         noise_audio_source.Play();
 
     }
@@ -48,6 +54,39 @@ public class CharacterSounds : MonoBehaviour
             moving_audio_source.Stop();
         }
 
+        float tension = character_movement.GetTension();
+        float t;
+        if (tension <= 40)
+        {
+            heartbeat_audio_source.volume = 0.0f;
+            heartbeat_audio_source.pitch = 1.0f;
+            moving_audio_source.volume = 1.0f;
+            lantern_audio_source.volume = 1.0f;
+        }
+        else if (tension >= 60)
+        {
+            heartbeat_audio_source.volume = tension * 0.01f;
+            heartbeat_audio_source.pitch = 1.0f + heartbeat_audio_source.volume * 0.5f;
+            moving_audio_source.volume = 1.0f - heartbeat_audio_source.volume * 2.0f;
+            if (moving_audio_source.volume < 0.1f) moving_audio_source.volume = 0.1f;
+            lantern_audio_source.volume = 1.0f - heartbeat_audio_source.volume * 2.0f;
+            if (lantern_audio_source.volume < 0.1f) lantern_audio_source.volume = 0.1f;
+        }
+        else
+        {
+            t = (tension - 40.0f) / (60.0f - 40.0f); // Normalize tension between 30 and 50 to a 0-1 scale
+            float initialHeartbeatVolume = 0.0f;
+            float targetHeartbeatVolume = tension * 0.01f;
+            float initialHeartbeatPitch = 1.0f;
+            float targetHeartbeatPitch = 1.0f + targetHeartbeatVolume * 0.5f;
+            float initialMovingVolume = 1.0f;
+            float targetMovingVolume = 1.0f - targetHeartbeatVolume * 2.0f;
+
+            heartbeat_audio_source.volume = Mathf.Lerp(initialHeartbeatVolume, targetHeartbeatVolume, t);
+            heartbeat_audio_source.pitch = Mathf.Lerp(initialHeartbeatPitch, targetHeartbeatPitch, t);
+            moving_audio_source.volume = Mathf.Lerp(initialMovingVolume, targetMovingVolume, t);
+            lantern_audio_source.volume = Mathf.Lerp(initialMovingVolume, targetMovingVolume, t);
+        }
     }
 
     public void PlayMovingSound()
