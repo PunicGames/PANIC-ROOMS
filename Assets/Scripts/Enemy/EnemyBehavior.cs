@@ -15,6 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     private MeshRenderer enemy_mesh;
     private float catch_distance;
     public EnemyRayCasting enemy_ray_caster;
+    private bool player_in_sight = false;
 
     // Movement
     public Transform enemy_transform;
@@ -93,7 +94,7 @@ public class EnemyBehavior : MonoBehaviour
             // If there's direct vision between enemy and player
             if (enemy_ray_caster.DetectPlayer() == true)
             {
-
+                player_in_sight = true;
                 DecreaseSanity();
 
                 // Enable trigger to teleport again
@@ -107,10 +108,13 @@ public class EnemyBehavior : MonoBehaviour
                 }
             }
             else {
+                player_in_sight = false;
                 IncreaseSanity();
             }
         }
         else {
+            player_in_sight = false;
+
             enemy_nav_mesh.enabled = true; // Enable enemie's movement
             enemy_nav_mesh.speed = enemy_speed;
             enemy_destination = player_transform.position;
@@ -152,7 +156,10 @@ public class EnemyBehavior : MonoBehaviour
         }
 
         // Update sounds
-        static_sound.volume = static_volume;
+        static_sound.volume = static_volume * 0.5f;
+
+        // Update tension
+        UpdatePlayerTension();
     }
 
     IEnumerator TeleportAfterDelay(float delay)
@@ -280,6 +287,17 @@ public class EnemyBehavior : MonoBehaviour
         fully_spawned = true;
     }
 
+    private void UpdatePlayerTension() {
+        float tension = 0.0f;
+
+        // Adjust tension depending on player's health
+        tension += (100.0f - character_movement.GetHealth()) * 0.5f;
+
+        // Adjust tension based on in-sight enemy
+        if (player_in_sight) tension += 10.0f;
+
+        character_movement.SetBaseTension(tension);
+    }
 
     public void SetHealthIncreaseRate(float new_value) 
     {
