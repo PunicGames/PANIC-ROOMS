@@ -225,7 +225,9 @@ public class CharacterMovement : MonoBehaviour
 
 
         // Apply player rotation (MOUSE)
-        Vector2 delta_look = camera_movement * camera_horizontal_sensitivity * Time.deltaTime;
+        float custom_sensitivity = PlayerPrefs.GetFloat("RotationSpeed");
+
+        Vector2 delta_look = camera_movement * camera_horizontal_sensitivity * custom_sensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up, delta_look.x);
 
         // Apply camera swing effect
