@@ -7750,7 +7750,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 6
+  m_CharacterLimit: 8
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -9933,7 +9933,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 5211788118117934972}
   loadingSlider: {fileID: 1994982258227923322}
   titleMenu: {fileID: 1241397108421789092}
-  seed: {fileID: 0}
+  seed: {fileID: 4390445278636964400}
   mainMenu: {fileID: 6764046896273994796}
   customGameMenu: {fileID: 1741822522937716127}
   optionsMenu: {fileID: 8245932064164917889}
@@ -12547,7 +12547,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5428545439846844941}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: PlayCustomGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
