@@ -43,10 +43,13 @@ public class CameraMaterialToggle : MonoBehaviour
         targetCamera = _cam;
     }
 
-    public void SwitchTV()
+    public void SwitchTV(bool distance = true)
     {
         able_to_switch = !able_to_switch;
         var materials = objectRenderer.materials;
+
+        // Shut down by distance 
+        if (!distance && able_to_switch) able_to_switch = false;
 
         if (able_to_switch)
         {

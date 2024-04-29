@@ -14,15 +14,19 @@ public class CharacterCollectionSystem : MonoBehaviour
 
     private EnemyStats enemy_stats;
     private CharacterMovement character_movement;
+    private CharacterSounds character_sounds;
     [SerializeField] private Lantern_Bahavior lantern_behavior;
     [SerializeField] private Transform player_camera_transform;
 
     private SprayNumBehaviour sprayUI;
     private InGameUI game_ui;
 
+
+
     private void Start()
     {
         character_movement = GetComponent<CharacterMovement>();
+        character_sounds = GetComponent<CharacterSounds>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         bateries = GameObject.FindGameObjectsWithTag("Battery");
         secondary_cams = GameObject.FindGameObjectsWithTag("TV");
@@ -49,6 +53,8 @@ public class CharacterCollectionSystem : MonoBehaviour
         {
             game_ui.DeactivateCollectInfo();
         }
+
+        DeactivateTvByDistance();
     }
     
     public void IncrementPoint()
@@ -95,8 +101,13 @@ public class CharacterCollectionSystem : MonoBehaviour
             float distance_to_object = Vector3.Distance(player_camera_transform.position, secondary_cams[i].transform.position);
             if (distance_to_object < min_distance_to_collect)
             {
-                if(secondary_cams[i].GetComponent<CameraMaterialToggle>().isActiveAndEnabled)
+                if (secondary_cams[i].GetComponent<CameraMaterialToggle>().isActiveAndEnabled) {
+                    character_sounds.PlayRemoteControl1();
                     secondary_cams[i].GetComponent<CameraMaterialToggle>().SwitchTV();
+                }
+                else {
+                    character_sounds.PlayRemoteControl2();
+                }
             }
         }
     }
@@ -198,6 +209,21 @@ public class CharacterCollectionSystem : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void DeactivateTvByDistance() {
+        for (int i = 0; i < secondary_cams.Length; i++)
+        {
+            // If the object is near
+            float distance_to_object = Vector3.Distance(player_camera_transform.position, secondary_cams[i].transform.position);
+            if (distance_to_object > 3.0f)
+            {
+                if (secondary_cams[i].GetComponent<CameraMaterialToggle>().isActiveAndEnabled)
+                {
+                    secondary_cams[i].GetComponent<CameraMaterialToggle>().SwitchTV(false);
+                }
+            }
+        }
     }
 
 

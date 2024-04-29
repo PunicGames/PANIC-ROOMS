@@ -20,6 +20,10 @@ public class CharacterSounds : MonoBehaviour
     public AudioSource heartbeat_audio_source;
     public AudioClip heartbeat_sound;
 
+    [SerializeField] private AudioSource remote_control_audio_source;
+    [SerializeField] private AudioClip remote_1_sound;
+    [SerializeField] private AudioClip remote_2_sound;
+
     private CharacterMovement character_movement;
 
     private void Start()
@@ -31,6 +35,7 @@ public class CharacterSounds : MonoBehaviour
         noise_audio_source.clip = noise_sound;
         lantern_audio_source.clip = lantern_click_sound;
         heartbeat_audio_source.clip = heartbeat_sound;
+        remote_control_audio_source.clip = remote_1_sound;
         LoadWalkingSound();
 
 
@@ -135,6 +140,16 @@ public class CharacterSounds : MonoBehaviour
         lantern_audio_source.Play();
     }
 
+    public void PlayRemoteControl1() {
+        remote_control_audio_source.Stop();
+        remote_control_audio_source.clip = remote_2_sound;
+        remote_control_audio_source.Play();
+    }
+    public void PlayRemoteControl2() {
+        remote_control_audio_source.Stop();
+        remote_control_audio_source.clip = remote_1_sound;
+        remote_control_audio_source.Play();
+    }
 
     private IEnumerator DetectSoundFinish(AudioSource audio_source)
     {
