@@ -157,7 +157,8 @@ public class GameManager : MonoBehaviour
         GameObject[] secondary_cam_objs = GameObject.FindGameObjectsWithTag("Secondary_Cam");
         GameObject[] secondary_tv_objs = GameObject.FindGameObjectsWithTag("TV");
 
-        if (secondary_cam_objs.Length > 0 && secondary_tv_objs.Length > 0) { 
+        if (secondary_cam_objs.Length > 0 && secondary_tv_objs.Length > 0)
+        {
             int idx_cam = Random.Range(0, secondary_cam_objs.Length);
             int idx_tv = Random.Range(0, secondary_tv_objs.Length);
 
@@ -169,7 +170,7 @@ public class GameManager : MonoBehaviour
             // Deactivate the rest cams
             for (int i = 0; i < secondary_cam_objs.Length; i++)
             {
-                if(i != idx_cam)
+                if (i != idx_cam)
                     secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
             }
 
@@ -178,6 +179,23 @@ public class GameManager : MonoBehaviour
             {
                 if (i != idx_tv)
                     secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+            }
+        }
+        else {
+            if (secondary_cam_objs.Length > 0) { 
+                // Deactivate all cams
+                for (int i = 0; i < secondary_cam_objs.Length; i++)
+                {
+                        secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
+                }
+            }
+
+            if (secondary_tv_objs.Length > 0) {
+                // Deactivate all tv's
+                for (int i = 0; i < secondary_tv_objs.Length; i++)
+                {
+                    secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+                }
             }
         }
     }
