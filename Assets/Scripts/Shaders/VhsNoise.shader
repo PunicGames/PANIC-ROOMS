@@ -148,9 +148,12 @@ Shader "Hidden/VhsNoise"
 
             float rnd(float2 noise)
             {
-                float a = frac(sin(dot(noise.xy,float2(0.0001,98.233)))*925895933.14159265359);
-                float b = frac(cos(dot(noise.xy,float2(10.998,98.233)))*12433.14159265359);;
-                return min(a , b);
+                // Añadir más irregularidad usando números primos y cambios en las frecuencias y fases
+                float a = frac(sin(dot(noise.xy, float2(12.9898, 78.233))) * 43758.5453123);
+                float b = frac(sin(dot(noise.xy, float2(0.1, 24.433))) * 1234.564567);
+
+                // Usar una combinación no lineal de a y b para disminuir la periodicidad
+                return frac(a * b * 95.233);
             }
 
             float noise (float2 p)
@@ -190,9 +193,9 @@ Shader "Hidden/VhsNoise"
                 float pNoise = perlinNoise(fragPos, uv);
 
                 float randSPD = rand(float2(0.0, fragPos.y + iTime));
-                float tcPhase = clamp( ( sin( uvn.y * 10.75 + randomOffset + (iTime + randomOffset * 0.005f)) - 0.98 ) * noise( float2( iTime, iTime ) ), 0.0, 0.01 ) * 2.5 * randomOffset;
+                float tcPhase = clamp( ( sin( uvn.y * 4.0 + randomOffset + (iTime + randomOffset * 0.005f)) - 0.98 ) * noise( float2( iTime, iTime ) ), 0.0, 0.01 ) * 7.5 * randomOffset;
                 float tcNoise = max( noise( float2( uvn.y * 25.0, iTime * 100.0 ) ) - 0.5, 0.0);
-                uvn.x = uvn.x - tcNoise * tcPhase * pNoise;
+                uvn.x = uvn.x - (tcNoise * tcPhase * pNoise) * 0.5;
     
                 float3 col = float3(0.0,0.0,0.0);
 
@@ -200,29 +203,29 @@ Shader "Hidden/VhsNoise"
                 float snPhase = smoothstep( 0.03, 0.0, uvn.y );
                 //uvn.y += snPhase * 0.7;
                 //uvn.x += snPhase * ( ( noise( float2( uv.y * 100.0, iTime * 10.0 ) ) - 0.5 ) * 0.2 );
+                float3 c = SAMPLE_TEXTURE2D(_MainTex, sampler_point_clamp, input.uv).xyz;
 
                 col = tex2D(uvn);
                 col *= 1.0 - tcPhase;
-                col = lerp(
-                col,
-                col.yzx,
-                snPhase
-                );
+
+                col = (c + col) * 0.5;
                 // ac beat
                 //col *= 1.0 + clamp( noise( float2( 0.0, uv.y + sin(iTime * 0.5f + randomOffset) * 0.2) ) * 0.6 - 0.25, 0.0, 0.1 );
                 //col *= 1.0 - vignette;
                 
-                float fNoise = rnd(input.uv * frac(abs(sin(_Time.y / 8.0)))) * _Intensity; 
+                float rNoise = rnd(input.uv * frac(abs(sin(_Time.y * 0.005)))) * _Intensity; 
+                float gNoise = rnd((float2(0.01,0.0) + input.uv) * frac(abs(sin(_Time.y * 0.005)))) * _Intensity;
+                float bNoise = rnd((float2(0.02,0.0) + input.uv) * frac(abs(sin(_Time.y * 0.005)))) * _Intensity; 
                 
                 float2 pos = input.uv;
                 pos -= 0.5;
-                float vignette = length(pos) - 0.4;
+                float vignette = length(pos) - 0.45;
                 vignette = 1.0 - smoothstep(0.0, 0.2, vignette);
     
-	            return float4( col.x - fNoise, col.y - fNoise, col.z - fNoise, 1.0 ) * vignette;
+	            return float4( col.x + rNoise, col.y + gNoise, col.z + bNoise, 1.0 ) * vignette;
             }
             ENDHLSL
-        }
+        } 
 
         
     }
