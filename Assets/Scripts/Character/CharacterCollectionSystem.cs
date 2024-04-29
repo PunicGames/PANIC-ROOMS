@@ -53,6 +53,8 @@ public class CharacterCollectionSystem : MonoBehaviour
         {
             game_ui.DeactivateCollectInfo();
         }
+
+        DeactivateTvByDistance();
     }
     
     public void IncrementPoint()
@@ -207,6 +209,21 @@ public class CharacterCollectionSystem : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void DeactivateTvByDistance() {
+        for (int i = 0; i < secondary_cams.Length; i++)
+        {
+            // If the object is near
+            float distance_to_object = Vector3.Distance(player_camera_transform.position, secondary_cams[i].transform.position);
+            if (distance_to_object > 3.0f)
+            {
+                if (secondary_cams[i].GetComponent<CameraMaterialToggle>().isActiveAndEnabled)
+                {
+                    secondary_cams[i].GetComponent<CameraMaterialToggle>().SwitchTV(false);
+                }
+            }
+        }
     }
 
 

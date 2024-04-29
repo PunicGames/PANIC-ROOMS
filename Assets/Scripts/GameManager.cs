@@ -157,44 +157,48 @@ public class GameManager : MonoBehaviour
         GameObject[] secondary_cam_objs = GameObject.FindGameObjectsWithTag("Secondary_Cam");
         GameObject[] secondary_tv_objs = GameObject.FindGameObjectsWithTag("TV");
 
-        if (secondary_cam_objs.Length > 0 && secondary_tv_objs.Length > 0)
-        {
-            int idx_cam = Random.Range(0, secondary_cam_objs.Length);
-            int idx_tv = Random.Range(0, secondary_tv_objs.Length);
+        bool single_cam = true;
 
-            // Set up tv to camera
-            Camera cam = secondary_cam_objs[idx_cam].GetComponent<Camera>();
-            CameraMaterialToggle cam_tog = secondary_tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
-            cam_tog.SetCameraTarget(cam);
-
-            // Deactivate the rest cams
-            for (int i = 0; i < secondary_cam_objs.Length; i++)
+        if (single_cam) { 
+            if (secondary_cam_objs.Length > 0 && secondary_tv_objs.Length > 0)
             {
-                if (i != idx_cam)
-                    secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
-            }
+                int idx_cam = Random.Range(0, secondary_cam_objs.Length);
+                int idx_tv = Random.Range(0, secondary_tv_objs.Length);
 
-            // Deactivate the rest tv's
-            for (int i = 0; i < secondary_tv_objs.Length; i++)
-            {
-                if (i != idx_tv)
-                    secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
-            }
-        }
-        else {
-            if (secondary_cam_objs.Length > 0) { 
-                // Deactivate all cams
+                // Set up tv to camera
+                Camera cam = secondary_cam_objs[idx_cam].GetComponent<Camera>();
+                CameraMaterialToggle cam_tog = secondary_tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
+                cam_tog.SetCameraTarget(cam);
+
+                // Deactivate the rest cams
                 for (int i = 0; i < secondary_cam_objs.Length; i++)
                 {
+                    if (i != idx_cam)
                         secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
                 }
-            }
 
-            if (secondary_tv_objs.Length > 0) {
-                // Deactivate all tv's
+                // Deactivate the rest tv's
                 for (int i = 0; i < secondary_tv_objs.Length; i++)
                 {
-                    secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+                    if (i != idx_tv)
+                        secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+                }
+            }
+            else {
+                if (secondary_cam_objs.Length > 0) { 
+                    // Deactivate all cams
+                    for (int i = 0; i < secondary_cam_objs.Length; i++)
+                    {
+                            secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
+                    }
+                }
+
+                if (secondary_tv_objs.Length > 0) {
+                    // Deactivate all tv's
+                    for (int i = 0; i < secondary_tv_objs.Length; i++)
+                    {
+                        secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+                    }
                 }
             }
         }
