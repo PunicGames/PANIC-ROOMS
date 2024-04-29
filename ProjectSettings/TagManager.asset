@@ -12,6 +12,8 @@ TagManager:
   - Collectible
   - Battery
   - GameManager
+  - Secondary_Cam
+  - TV
   layers:
   - Default
   - TransparentFX

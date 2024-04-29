@@ -74,7 +74,8 @@ public class CharacterMovement : MonoBehaviour
 
     public void OnJump(InputValue input)
     {
-        jump_trigger = input.isPressed;
+        //jump_trigger = input.isPressed;
+        character_collection_system.CheckTV();
     }
 
     public void OnRun(InputValue input)
@@ -349,7 +350,7 @@ public class CharacterMovement : MonoBehaviour
         if (tension > GetMaxTension()) tension = GetMaxTension();
         if (tension < GetMinTension()) tension = GetMinTension();
 
-        Debug.Log("Tension: " + tension);
+        //Debug.Log("Tension: " + tension);
     }
     public float GetTension() {
         return tension;
@@ -382,5 +383,4 @@ public class CharacterMovement : MonoBehaviour
         // Make the cursor visible
         Cursor.visible = true;
     }
-
 }
