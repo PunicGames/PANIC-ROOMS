@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("COLLECTIBLES: " + MAX_COLLECTIBLES);
         CharacterCollectionSystem collection = player_instance.GetComponent<CharacterCollectionSystem>();
         collection.SetMaxPoints(MAX_COLLECTIBLES);
+
     }
 
     public void SpawnEnemy()
@@ -149,6 +151,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void SetUpSecondaryCameras()
+    {
+        // Get full objects
+        GameObject[] secondary_cam_objs = GameObject.FindGameObjectsWithTag("Secondary_Cam");
+        GameObject[] secondary_tv_objs = GameObject.FindGameObjectsWithTag("TV");
+
+        if (secondary_cam_objs.Length > 0 && secondary_tv_objs.Length > 0) { 
+            int idx_cam = Random.Range(0, secondary_cam_objs.Length);
+            int idx_tv = Random.Range(0, secondary_tv_objs.Length);
+
+            // Set up tv to camera
+            Camera cam = secondary_cam_objs[idx_cam].GetComponent<Camera>();
+            CameraMaterialToggle cam_tog = secondary_tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
+            cam_tog.SetCameraTarget(cam);
+
+            // Deactivate the rest cams
+            for (int i = 0; i < secondary_cam_objs.Length; i++)
+            {
+                if(i != idx_cam)
+                    secondary_cam_objs[i].GetComponent<Camera>().enabled = false;
+            }
+
+            // Deactivate the rest tv's
+            for (int i = 0; i < secondary_tv_objs.Length; i++)
+            {
+                if (i != idx_tv)
+                    secondary_tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+            }
+        }
+    }
+
 
 
     public void UpdateWorldState(int num_collectibles)
@@ -158,6 +191,7 @@ public class GameManager : MonoBehaviour
             case 0:
                 _instance.InitializePlayer();
                 _instance.SetupRooms();
+                _instance.SetUpSecondaryCameras();
                 break;
             case 1:
                 _instance.SpawnEnemy();

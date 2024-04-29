@@ -14,6 +14,8 @@ public class CameraMaterialToggle : MonoBehaviour
     // Referencia al Renderer del GameObject para cambiar los materiales
     private Renderer objectRenderer;
 
+    private bool able_to_switch = false;
+
     // Start se llama antes de la primera actualización del frame
     void Start()
     {
@@ -31,19 +33,30 @@ public class CameraMaterialToggle : MonoBehaviour
         objectRenderer.materials = materials; // Es importante reasignar el array modificado de nuevo al renderer
     }
 
-    // Update se llama una vez por frame
-    void Update()
-    {
-        // Verificar si el jugador presionó la tecla espacio
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Invertir el estado de activación de la cámara
-            targetCamera.enabled = !targetCamera.enabled;
 
-            // Cambiar el material del elemento 1 en el array de materiales dependiendo del estado de la cámara
-            var materials = objectRenderer.materials;
-            materials[1] = targetCamera.enabled ? activeMaterial : inactiveMaterial;
-            objectRenderer.materials = materials; // Reasignar el array modificado
+
+
+
+
+
+    public void SetCameraTarget(Camera _cam) { 
+        targetCamera = _cam;
+    }
+
+    public void SwitchTV()
+    {
+        able_to_switch = !able_to_switch;
+        var materials = objectRenderer.materials;
+
+        if (able_to_switch)
+        {
+            targetCamera.enabled = true;
+            materials[1] = activeMaterial;
         }
+        else {
+            targetCamera.enabled = false;
+            materials[1] = inactiveMaterial;
+        }
+        objectRenderer.materials = materials;
     }
 }

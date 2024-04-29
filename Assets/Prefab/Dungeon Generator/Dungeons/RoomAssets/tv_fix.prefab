@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7430785617243007037}
   m_Layer: 0
   m_Name: tv_fix
-  m_TagString: Untagged
+  m_TagString: TV
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,10 +28,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5655562880204229913}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1.2174072, y: 1.0507779, z: 1.0891644}
-  m_LocalScale: {x: 0.024193, y: 0.024193, z: 0.024193}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1630463090928695700}
   m_Father: {fileID: 0}

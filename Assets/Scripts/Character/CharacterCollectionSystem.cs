@@ -7,6 +7,7 @@ public class CharacterCollectionSystem : MonoBehaviour
 {
     private GameObject[] collectibles;
     private GameObject[] bateries;
+    private GameObject[] secondary_cams;
     private int num_points = 0;
     public int max_points = 8;
     private float min_distance_to_collect = 0.5f;
@@ -24,6 +25,7 @@ public class CharacterCollectionSystem : MonoBehaviour
         character_movement = GetComponent<CharacterMovement>();
         collectibles = GameObject.FindGameObjectsWithTag("Collectible");
         bateries = GameObject.FindGameObjectsWithTag("Battery");
+        secondary_cams = GameObject.FindGameObjectsWithTag("TV");
         max_points = collectibles.Length;
         game_ui = GameObject.FindGameObjectWithTag("UI").GetComponent<InGameUI>();
         sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
@@ -39,6 +41,9 @@ public class CharacterCollectionSystem : MonoBehaviour
         else if (DetectObjectUpdateUI(bateries, "Battery"))
         {
             game_ui.ActivateCollectInfo("E: Take battery");
+        } 
+        else if (DetectObjectUpdateUI(secondary_cams, "TV")) {
+            game_ui.ActivateCollectInfo("Space: Activate tv");
         }
         else
         {
@@ -79,6 +84,21 @@ public class CharacterCollectionSystem : MonoBehaviour
         max_points = max;
         sprayUI = GameObject.FindGameObjectWithTag("UI").GetComponent<SprayNumBehaviour>();
         sprayUI.UpdateNumbersLeft(max_points);
+    }
+
+    public void CheckTV() {
+        // Activate TV's
+        for (int i = 0; i < secondary_cams.Length; i++)
+        {
+
+            // If the object is near
+            float distance_to_object = Vector3.Distance(player_camera_transform.position, secondary_cams[i].transform.position);
+            if (distance_to_object < min_distance_to_collect)
+            {
+                if(secondary_cams[i].GetComponent<CameraMaterialToggle>().isActiveAndEnabled)
+                    secondary_cams[i].GetComponent<CameraMaterialToggle>().SwitchTV();
+            }
+        }
     }
 
     public void CollectObject()
