@@ -46,6 +46,9 @@ public class EnemyBehavior : MonoBehaviour
     private float sound_increase_rate = 0.2f;
     private float sound_decrease_rate = 0.4f;
 
+    // VHS NOISE
+    [SerializeField] private VhsNoiseFeature vhs_noise_feature;
+
     // Others
     private bool kill_player = false;
     private EnemyStats enemy_stats;
@@ -142,6 +145,8 @@ public class EnemyBehavior : MonoBehaviour
             }
         }
 
+        // Update VHS Noise
+        SetVhsNoiseIntensity();
 
         // Update LookAt to player
         this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
@@ -160,6 +165,8 @@ public class EnemyBehavior : MonoBehaviour
 
         // Update tension
         UpdatePlayerTension();
+
+
     }
 
     IEnumerator TeleportAfterDelay(float delay)
@@ -327,6 +334,11 @@ public class EnemyBehavior : MonoBehaviour
     public void SetTeleportTimer(float new_value)
     {
         teleport_timer = new_value;
+    }
+
+    public void SetVhsNoiseIntensity()
+    {
+        vhs_noise_feature.setIntensity(static_volume);
     }
 
 }

@@ -1315,6 +1315,8 @@ MonoBehaviour:
   enemy_camera: {fileID: 4781244538721823489}
   enemy_audio_listener: {fileID: 2103588239067292712}
   static_sound: {fileID: 25211820100460907}
+  vhs_noise_feature: {fileID: 8849019263887991682, guid: c40be3174f62c4acf8c1216858c64956,
+    type: 2}
 --- !u!114 &326377350670319343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,8 +2220,8 @@ Camera:
   m_GameObject: {fileID: 9146453981446389668}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
