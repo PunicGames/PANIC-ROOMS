@@ -10,7 +10,7 @@ public class CharacterCollectionSystem : MonoBehaviour
     private GameObject[] secondary_cams;
     private int num_points = 0;
     public int max_points = 8;
-    private float min_distance_to_collect = 0.5f;
+    private float min_distance_to_collect = 0.7f;
 
     private EnemyStats enemy_stats;
     private CharacterMovement character_movement;
@@ -167,6 +167,7 @@ public class CharacterCollectionSystem : MonoBehaviour
                         if (hit.collider.gameObject.CompareTag(tag) && hit.collider.gameObject == objects[i])
                         {
                             objects[i].active = false;
+                            character_sounds.PlayPickUpSound();
 
                             // Stop checking
                             return true;
