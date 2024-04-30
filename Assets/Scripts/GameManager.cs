@@ -256,9 +256,9 @@ public class GameManager : MonoBehaviour
                 _instance.InitializePlayer();
                 _instance.SetupRooms();
                 //_instance.SetUpSecondaryCameras();
-                _instance.SpawnEnemy();
                 break;
             case 1:
+                _instance.SpawnEnemy();
                 break;
             case 2:
                 break;
