@@ -226,7 +226,5 @@ Shader "Hidden/VhsNoise"
             }
             ENDHLSL
         } 
-
-        
     }
 }

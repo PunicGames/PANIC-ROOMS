@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Active: 1
   settings:
     renderPassEvent: 550
-    intensity: 0.5
-    pixelizationFactor: 360
+    intensity: 0.013
+    pixelizationFactor: 480
