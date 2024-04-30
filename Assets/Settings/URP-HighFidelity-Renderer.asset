@@ -152,4 +152,5 @@ MonoBehaviour:
   settings:
     renderPassEvent: 550
     intensity: 0.013
+    deathNoise: 0.2
     pixelizationFactor: 480
