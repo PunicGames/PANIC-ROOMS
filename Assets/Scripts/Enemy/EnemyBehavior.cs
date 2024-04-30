@@ -149,7 +149,7 @@ public class EnemyBehavior : MonoBehaviour
         SetVhsNoiseIntensity();
 
         // Update LookAt to player
-        this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
+        //this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
         
 
         // Update distance to player
