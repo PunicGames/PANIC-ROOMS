@@ -128,6 +128,9 @@ public class GameManager : MonoBehaviour
 
         // Solve dependencies
         playerPrefab.GetComponent<CharacterCollectionSystem>().InitEnemyDependencies();
+
+        // Set up enemy cam-tv
+        _instance.SetUpEnemyTVCamera();
     }
 
 
@@ -205,18 +208,57 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void SetUpEnemyTVCamera()
+    {
+        GameObject enemy_cam = GameObject.FindGameObjectWithTag("Enemy_Cam");
+        GameObject[] tv_objs = GameObject.FindGameObjectsWithTag("TV");
 
-    public void UpdateWorldState(int num_collectibles)
+        Debug.Log("TV: " + tv_objs.Length);
+
+        if (tv_objs.Length > 0)
+        {
+            int idx_tv = Random.Range(0, tv_objs.Length);
+
+            // Set up tv to camera
+            Camera cam = enemy_cam.GetComponent<Camera>();
+            CameraMaterialToggle cam_tog = tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
+            cam_tog.SetCameraTarget(cam);
+
+
+            // Deactivate the rest tv's
+            for (int i = 0; i < tv_objs.Length; i++)
+            {
+                if (i != idx_tv)
+                    tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+            }
+            tv_objs[idx_tv].GetComponent<CameraMaterialToggle>().enabled = true;
+        }
+        else
+        {
+
+            if (tv_objs.Length > 0)
+            {
+                // Deactivate all tv's
+                for (int i = 0; i < tv_objs.Length; i++)
+                {
+                    tv_objs[i].GetComponent<CameraMaterialToggle>().enabled = false;
+                }
+            }
+        }
+    }
+
+
+        public void UpdateWorldState(int num_collectibles)
     {
         switch (num_collectibles)
         {
             case 0:
                 _instance.InitializePlayer();
                 _instance.SetupRooms();
-                _instance.SetUpSecondaryCameras();
+                //_instance.SetUpSecondaryCameras();
+                _instance.SpawnEnemy();
                 break;
             case 1:
-                _instance.SpawnEnemy();
                 break;
             case 2:
                 break;
