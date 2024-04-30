@@ -821,7 +821,7 @@ Transform:
   m_GameObject: {fileID: 4346161870233192881}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.45136532, z: -0, w: 0.8923393}
-  m_LocalPosition: {x: 0.27269745, y: 2.9250002, z: 0.30688763}
+  m_LocalPosition: {x: 0.34, y: 2.9250002, z: 0.384}
   m_LocalScale: {x: 1.0424, y: 1.0424, z: 1.0424}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1440,7 +1440,7 @@ Transform:
   m_GameObject: {fileID: 6262770313978358432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.45136532, z: -0, w: 0.8923393}
-  m_LocalPosition: {x: 4.764, y: 2.0170007, z: 0.219}
+  m_LocalPosition: {x: 4.675, y: 2.0170007, z: 0.338}
   m_LocalScale: {x: 1.0424, y: 1.0424, z: 1.0424}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2242,8 +2242,6 @@ MonoBehaviour:
   - {fileID: 5924617074659261454}
   - {fileID: 2366803107815439867}
   - {fileID: 3702040993153546201}
-  m_collectibles:
-  - {fileID: 2414473247741307758, guid: 5e9e0520e572ea646a623f95b4d28381, type: 3}
   m_batterySpawnPoints:
   - {fileID: 1541614493430641154}
   - {fileID: 2294838226797199406}
@@ -3373,8 +3371,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0975118, y: 2.0837555, z: 0.23489508}
-  m_Center: {x: 0.0025629057, y: -0.027656866, z: 0.11744755}
+  m_Size: {x: 3.1379406, y: 2.1428432, z: 4.6003795}
+  m_Center: {x: 0.0041180374, y: -0.0043326374, z: 2.3001907}
 --- !u!1 &6842408639026560315 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6159819195323411483, guid: 7a3446c431cdf584bb68de0bc50d1d94,

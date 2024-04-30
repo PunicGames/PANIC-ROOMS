@@ -385,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 2462144666982482532}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.45136532, z: -0, w: 0.8923393}
-  m_LocalPosition: {x: 1.846, y: 0.049999952, z: 3.301}
+  m_LocalPosition: {x: 2.778, y: 0.049999952, z: 2.629}
   m_LocalScale: {x: 1.0424, y: 1.0424, z: 1.0424}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1871,6 +1871,59 @@ MonoBehaviour:
   m_Offset: {x: 0.0001547756, y: -0.000015460784, z: 0.22934955}
   m_Size: {x: 0.3, y: 0.3, z: 0.5}
   m_FadeFactor: 1
+--- !u!1 &7515747032605517438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7295948608969330914}
+  - component: {fileID: 5426792944542624660}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7295948608969330914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515747032605517438}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.18803728, w: 0.98216194}
+  m_LocalPosition: {x: 1.486, y: 0.013, z: 3.233}
+  m_LocalScale: {x: 1.2180599, y: 0.4073047, z: 0.3636}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5930855172222205988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.677}
+--- !u!65 &5426792944542624660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7515747032605517438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7572224265018769667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,6 +2067,7 @@ Transform:
   - {fileID: 2903157423132416323}
   - {fileID: 5542319908600812940}
   - {fileID: 4775131099244106191}
+  - {fileID: 7295948608969330914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7257551759973764385
