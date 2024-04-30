@@ -291,10 +291,10 @@ public class EnemyBehavior : MonoBehaviour
         float tension = 0.0f;
 
         // Adjust tension depending on player's health
-        tension += (100.0f - character_movement.GetHealth()) * 0.5f;
+        tension += (100.0f - character_movement.GetHealth()) * 1.0f;
 
         // Adjust tension based on in-sight enemy
-        if (player_in_sight) tension += 10.0f;
+        if (player_in_sight) tension += 20.0f;
 
         character_movement.SetBaseTension(tension);
     }
