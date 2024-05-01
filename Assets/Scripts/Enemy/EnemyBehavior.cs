@@ -98,6 +98,7 @@ public class EnemyBehavior : MonoBehaviour
             if (enemy_ray_caster.DetectPlayer() == true)
             {
                 player_in_sight = true;
+                this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
                 DecreaseSanity();
 
                 // Enable trigger to teleport again
