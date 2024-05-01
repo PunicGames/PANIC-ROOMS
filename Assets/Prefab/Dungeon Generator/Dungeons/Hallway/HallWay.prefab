@@ -359,6 +359,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5930855172222205988}
     m_Modifications:
+    - target: {fileID: 4823880625024716009, guid: c7f87108a45a31948b5863a3b79fb122,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5930855172222205988, guid: c7f87108a45a31948b5863a3b79fb122,
         type: 3}
       propertyPath: m_RootOrder
@@ -413,6 +418,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631872167428449834, guid: c7f87108a45a31948b5863a3b79fb122,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0508
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631872167428449834, guid: c7f87108a45a31948b5863a3b79fb122,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631872167428449834, guid: c7f87108a45a31948b5863a3b79fb122,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631872167428449834, guid: c7f87108a45a31948b5863a3b79fb122,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 7893673706923132279, guid: c7f87108a45a31948b5863a3b79fb122,
         type: 3}
@@ -537,7 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce7d2c0a72b8cb4d81f1b8bcd2577dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_light: {fileID: 12293462940289323}
+  m_lights:
+  - {fileID: 12293462940289323}
   m_ceiling: {fileID: 3946889606663930359}
   m_offMaterial: {fileID: 2100000, guid: b0d209e360d17134cb0f0583da131a10, type: 2}
   m_onMaterial: {fileID: 2100000, guid: 2562df092a1335c4884383e5a3edb650, type: 2}
@@ -616,10 +642,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7131861619366615280, guid: 8ff7e8ae4b5cb6e45b37435ddac71ada,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7893673706923132279, guid: 8ff7e8ae4b5cb6e45b37435ddac71ada,
         type: 3}
       propertyPath: m_Name
       value: DungeonWall zNeg
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935580489385079347, guid: 8ff7e8ae4b5cb6e45b37435ddac71ada,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0513
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935580489385079347, guid: 8ff7e8ae4b5cb6e45b37435ddac71ada,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935580489385079347, guid: 8ff7e8ae4b5cb6e45b37435ddac71ada,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
