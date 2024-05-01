@@ -1066,6 +1066,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 3006293952775963331}
   dateText: {fileID: 367233557938784850}
+  seedText: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &2696536197692187720
 GameObject:
   m_ObjectHideFlags: 0
