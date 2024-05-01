@@ -8,7 +8,7 @@ public class VhsNoiseFeature : ScriptableRendererFeature
     {
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
         
-        public float intensity = 0.01f;
+        public float intensity = 0.013f;
         public float deathNoise = 0.2f;
         public int pixelizationFactor = 188;
     }
@@ -16,6 +16,8 @@ public class VhsNoiseFeature : ScriptableRendererFeature
     [SerializeField] private VhsNoiseSettings settings;
 
     private VhsNoisePass vhsNoisePass;
+
+    private readonly float defaultIntensity = 0.013f;
 
     public override void Create()
     {
@@ -33,6 +35,6 @@ public class VhsNoiseFeature : ScriptableRendererFeature
 
     public void setIntensity(float intensity)
     {
-        settings.intensity = settings.intensity + (intensity * settings.deathNoise);
+        settings.intensity = defaultIntensity + (intensity * settings.deathNoise);
     }
 }
