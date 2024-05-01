@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noise_audio_source: {fileID: 6021309635966318369}
-  noise_sound: {fileID: 8300000, guid: 2f9c39584fe441a409796cb337b37599, type: 3}
+  noise_sound: {fileID: 8300000, guid: 1ac4f0b7f1125a44b82295bdc3b9e676, type: 3}
   moving_audio_source: {fileID: 2723266925881808205}
   carpet_sounds:
   - {fileID: 8300000, guid: 874e209986b19724aae36389bf19666d, type: 3}
@@ -1258,7 +1258,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f9c39584fe441a409796cb337b37599, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 962cf3a5a21ec7646928e85803a42b93, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
