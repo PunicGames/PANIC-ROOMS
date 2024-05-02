@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraMaterialToggle : MonoBehaviour
 {
     [SerializeField]
-    private Camera targetCamera; // Arrastra aquí tu cámara
+    private GameObject targetCamera; // Arrastra aquí tu cámara
 
     [SerializeField]
     private Material activeMaterial; // Asigna aquí el material para cuando la cámara está activada
@@ -39,7 +39,7 @@ public class CameraMaterialToggle : MonoBehaviour
 
 
 
-    public void SetCameraTarget(Camera _cam) { 
+    public void SetCameraTarget(GameObject _cam) { 
         targetCamera = _cam;
     }
 
@@ -53,11 +53,14 @@ public class CameraMaterialToggle : MonoBehaviour
 
         if (able_to_switch)
         {
-            targetCamera.enabled = true;
+            targetCamera.SetActive(true);
+            targetCamera.GetComponentInChildren<Light>().enabled = true;
+
             materials[1] = activeMaterial;
         }
         else {
-            targetCamera.enabled = false;
+            targetCamera.SetActive(false);
+            targetCamera.GetComponentInChildren<Light>().enabled = false;
             materials[1] = inactiveMaterial;
         }
         objectRenderer.materials = materials;

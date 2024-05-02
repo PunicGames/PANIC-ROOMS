@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
                 int idx_tv = Random.Range(0, secondary_tv_objs.Length);
 
                 // Set up tv to camera
-                Camera cam = secondary_cam_objs[idx_cam].GetComponent<Camera>();
+                GameObject cam = secondary_cam_objs[idx_cam];
                 CameraMaterialToggle cam_tog = secondary_tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
                 cam_tog.SetCameraTarget(cam);
 
@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
             int idx_tv = Random.Range(0, tv_objs.Length);
 
             // Set up tv to camera
-            Camera cam = enemy_cam.GetComponent<Camera>();
+            GameObject cam = enemy_cam;
             CameraMaterialToggle cam_tog = tv_objs[idx_tv].GetComponent<CameraMaterialToggle>();
             cam_tog.SetCameraTarget(cam);
 

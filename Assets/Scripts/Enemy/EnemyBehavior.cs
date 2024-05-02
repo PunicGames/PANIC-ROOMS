@@ -67,8 +67,9 @@ public class EnemyBehavior : MonoBehaviour
 
 
         // Kill player if health below 0
-        if (character_movement.GetHealth() <= 0) {
-        if (!kill_player) // Just a trigger to run KillPlayer() once
+        if (character_movement.GetHealth() <= 0)
+        {
+            if (!kill_player) // Just a trigger to run KillPlayer() once
             {
                 KillPlayer();
                 kill_player = true;
@@ -86,7 +87,8 @@ public class EnemyBehavior : MonoBehaviour
             {
                 enemy_nav_mesh.enabled = false;
             }
-            else {
+            else
+            {
                 // If its inside the frustum but kinda far, we activate again persecution
                 enemy_nav_mesh.enabled = true;
                 enemy_nav_mesh.speed = enemy_speed;
@@ -111,12 +113,14 @@ public class EnemyBehavior : MonoBehaviour
                     StopCoroutine(teleport_coroutine);
                 }
             }
-            else {
+            else
+            {
                 player_in_sight = false;
                 IncreaseSanity();
             }
         }
-        else {
+        else
+        {
             player_in_sight = false;
 
             enemy_nav_mesh.enabled = true; // Enable enemie's movement
@@ -125,7 +129,8 @@ public class EnemyBehavior : MonoBehaviour
             enemy_nav_mesh.SetDestination(enemy_destination);
 
             // Teleportation
-            if (trigger_teleport) {
+            if (trigger_teleport)
+            {
                 if (teleport_coroutine != null)
                 {
                     // If the coroutine is already running, stop it and restart it
@@ -138,10 +143,14 @@ public class EnemyBehavior : MonoBehaviour
             // If enemy is not close enough to player
             if (distance_to_player > catch_distance)
             {
-                IncreaseSanity();
+                if (!enemy_ray_caster.DetectPlayer())
+                {
+                    IncreaseSanity();
+                }
             }
             // If enemy is so close to player even if it's not in sight
-            else {
+            else
+            {
                 DecreaseSanity();
             }
         }
@@ -151,12 +160,13 @@ public class EnemyBehavior : MonoBehaviour
 
         // Update LookAt to player
         //this.transform.LookAt(new Vector3(player_transform.position.x, this.transform.position.y, player_transform.position.z));
-        
+
 
         // Update distance to player
         distance_to_player = Vector3.Distance(this.transform.position, player_transform.position);
 
-        if (distance_to_player <= catch_distance) {
+        if (distance_to_player <= catch_distance)
+        {
             float current_health = character_movement.GetHealth();
             character_movement.SetHealth(current_health - health_decrease_rate * Time.deltaTime);
         }
@@ -175,7 +185,8 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(delay);
         TeleportToNewPosition();
     }
-    public void TeleportToNewPosition(int max_samples=750) {
+    public void TeleportToNewPosition(int max_samples = 750)
+    {
 
         // Teleport at random ocassions, not only when enemy goes out of frustum.
         float random_teleport_sample = Random.Range(0.0f, 1.0f);
@@ -187,7 +198,7 @@ public class EnemyBehavior : MonoBehaviour
         bool found_spot = false;
         int current_sample = 0;
         RaycastHit hit;
-        
+
         while (!found_spot && (current_sample < max_samples))
         {
             // Generate a random direction at a specified distance in a disk centered in player
@@ -206,7 +217,8 @@ public class EnemyBehavior : MonoBehaviour
                     random_position = hit.point;
 
                     // Check if new position is not in frustum
-                    if (!GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds)) { 
+                    if (!GeometryUtility.TestPlanesAABB(planes, enemy_mesh.bounds))
+                    {
                         found_spot = true;
                     }
                 }
@@ -219,13 +231,15 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log("Did enemy found a new spot for teleportation? " + found_spot);
 
         // Teleport the enemy to the new position
-        if (found_spot) { 
+        if (found_spot)
+        {
             transform.position = random_position;
         }
     }
 
 
-    private void IncreaseSanity() {
+    private void IncreaseSanity()
+    {
         // Increase sanity
         float current_health = character_movement.GetHealth();
         character_movement.SetHealth(current_health + health_increase_rate * Time.deltaTime);
@@ -241,7 +255,8 @@ public class EnemyBehavior : MonoBehaviour
             static_volume = 0;
         }
     }
-    private void DecreaseSanity() {
+    private void DecreaseSanity()
+    {
 
         // Decrease sanity
         float current_health = character_movement.GetHealth();
@@ -256,7 +271,8 @@ public class EnemyBehavior : MonoBehaviour
     }
 
 
-    private void KillPlayer() {
+    private void KillPlayer()
+    {
 
         // Enable nav mesh to prevent errors
         enemy_nav_mesh.enabled = true;
@@ -272,13 +288,15 @@ public class EnemyBehavior : MonoBehaviour
         StartCoroutine(PlayKillAnimation());
     }
 
-    IEnumerator PlayKillAnimation() { 
+    IEnumerator PlayKillAnimation()
+    {
         yield return new WaitForSeconds(2.0f);
         // Kill or whatever...
         character_movement.LoseGame();
     }
 
-    public void InitPlayerDependencies() {
+    public void InitPlayerDependencies()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
         player_camera = player.GetComponentInChildren<Camera>();
         character_movement = player.GetComponent<CharacterMovement>();
@@ -295,7 +313,8 @@ public class EnemyBehavior : MonoBehaviour
         fully_spawned = true;
     }
 
-    private void UpdatePlayerTension() {
+    private void UpdatePlayerTension()
+    {
         float tension = 0.0f;
 
         // Adjust tension depending on player's health
@@ -307,19 +326,19 @@ public class EnemyBehavior : MonoBehaviour
         character_movement.SetBaseTension(tension);
     }
 
-    public void SetHealthIncreaseRate(float new_value) 
+    public void SetHealthIncreaseRate(float new_value)
     {
         health_increase_rate = new_value;
     }
-    public void SetHealthDecreaseRate(float new_value) 
+    public void SetHealthDecreaseRate(float new_value)
     {
         health_decrease_rate = new_value;
     }
-    public void SetCatchDistance(float new_value) 
+    public void SetCatchDistance(float new_value)
     {
         catch_distance = new_value;
     }
-    public void SetSpeed(float new_value) 
+    public void SetSpeed(float new_value)
     {
         enemy_speed = new_value;
     }
@@ -327,7 +346,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         teleportation_chance = new_value;
     }
-    public void SetTeleportDistance(float new_value) 
+    public void SetTeleportDistance(float new_value)
     {
         teleport_distance = new_value;
     }
