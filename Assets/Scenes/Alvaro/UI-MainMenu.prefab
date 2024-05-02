@@ -3269,8 +3269,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es un texto de prueba que serra utilizado para mostrar una peque\xF1a
-    descripcicion del videojuego o usuario en especifico.\n"
+  m_text: "I am happy to have crowned my education with this Title. Excited to start
+    my professional\_career."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -8700,8 +8700,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es un texto de prueba que serra utilizado para mostrar una peque\xF1a
-    descripcicion del videojuego o usuario en especifico.\n"
+  m_text: Indie videogame made by Punic Games. Take a look at our other frenetic
+    videogame Gears of Hell.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -9556,8 +9556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es un texto de prueba que serra utilizado para mostrar una peque\xF1a
-    descripcicion del videojuego o usuario en especifico.\n"
+  m_text: "This game makes me sick, and that's what we wanted\_to\_achieve."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -13393,7 +13392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  itchio'
+  m_text: '  INSTAGRAM'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -13745,9 +13744,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   url1: https://github.com/AEspinosaDev
-  url2: https://github.com/AEspinosaDev
-  url3: https://github.com/AEspinosaDev
-  url4: https://github.com/AEspinosaDev
+  url2: https://www.instagram.com/tonyespinosa_3d/?igsh=MWh1MTFnMzJkZjhlYw%3D%3D
+  url3: https://www.instagram.com/tonyespinosa_3d/?igsh=MWh1MTFnMzJkZjhlYw%3D%3D
+  url4: https://www.instagram.com/tonyespinosa_3d/?igsh=MWh1MTFnMzJkZjhlYw%3D%3D
 --- !u!1 &7305837038871204207
 GameObject:
   m_ObjectHideFlags: 0
@@ -16136,8 +16135,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es un texto de prueba que serra utilizado para mostrar una peque\xF1a
-    descripcicion del videojuego o usuario en especifico.\n"
+  m_text: "\"What a misfortune it is for a man to age without having appreciated
+    the beauty and strength of which the body\_is\_capable.\""
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
@@ -16761,12 +16760,12 @@ GameObject:
   - component: {fileID: 6214065758007758221}
   - component: {fileID: 6324809102585891014}
   m_Layer: 5
-  m_Name: itchio
+  m_Name: Instagram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1922972164531775225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16898,8 +16897,8 @@ MonoBehaviour:
   hoverColor: {r: 0, g: 0, b: 0, a: 1}
   normalFontStyle: 0
   hoverFontStyle: 1
-  normalText: '  ITCHIO'
-  hoverText: '> ITCHIO'
+  normalText: '  INSTAGRAM'
+  hoverText: '> INSTAGRAM'
 --- !u!1 &8974752344719905967
 GameObject:
   m_ObjectHideFlags: 0
@@ -16979,8 +16978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es un texto de prueba que serra utilizado para mostrar una peque\xF1a
-    descripcicion del videojuego o usuario en especifico.\n"
+  m_text: Proud with working on an indie videogame inspired by the great Franz Kafka
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 782b8bf266bac764b965ff49ae1a329a, type: 2}
   m_sharedMaterial: {fileID: -12112145977380074, guid: 782b8bf266bac764b965ff49ae1a329a,
