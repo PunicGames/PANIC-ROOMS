@@ -39,6 +39,7 @@ public class MainMenuController : MonoBehaviour
         currentMenu = mainMenu;
         previousMenu = null; // No hay menú anterior al inicio
         mainMenu.SetActive(true); // Asegúrate de que el menú principal esté activo al inicio
+        PlayerPrefs.SetFloat("RotationSpeed", 1.0f);
     }
 
     public void PlayGame()
