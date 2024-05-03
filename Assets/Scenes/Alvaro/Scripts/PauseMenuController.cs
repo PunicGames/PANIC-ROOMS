@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -57,6 +58,12 @@ public class PauseMenuController : MonoBehaviour
     public void OptionsButtonClicked()
     {
         SwitchMenu(optionsMenu, "OPTIONS");
+    }
+
+    public void winButtonClicked()
+    {
+        PlayerPrefs.SetInt("Win", 1);
+        SwitchScene();
     }
 
     private void SwitchMenu(GameObject menuToActivate, string title)
