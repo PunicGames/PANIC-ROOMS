@@ -41,7 +41,7 @@ public class MainMenuController : MonoBehaviour
         mainMenu.SetActive(true); // Asegúrate de que el menú principal esté activo al inicio
 
         PlayerPrefs.SetFloat("Volume", 0.75f);
-        PlayerPrefs.SetFloat("RotationSpeed", 1.0f);
+        PlayerPrefs.SetFloat("RotationSpeed", 0.75f);
         PlayerPrefs.SetInt("Win", 0);
     }
 

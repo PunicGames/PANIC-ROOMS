@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3350758485587492911}
   - component: {fileID: 5724218437438474707}
   - component: {fileID: 6372395652191301912}
+  - component: {fileID: 6732126669147522002}
   m_Layer: 0
   m_Name: FDisk_Hole
   m_TagString: Untagged
@@ -82,6 +83,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.050023448, y: 0.0039737914, z: 0.047356337}
   m_Center: {x: -0.00042025736, y: 0.00093256374, z: 0.00019941002}
+--- !u!114 &6732126669147522002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2414473247741307758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d5f91ad28406346b3283c584315dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3665601931160187795
 GameObject:
   m_ObjectHideFlags: 0

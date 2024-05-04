@@ -9,6 +9,12 @@ public class WinVideoPlayer : MonoBehaviour
     public VideoPlayer finalVideo;
     public GameObject videoplayer;
 
+
+    private void Awake()
+    {
+        finalVideo.url = System.IO.Path.Combine(Application.streamingAssetsPath, "video_fixed.mp4");
+    }
+
     // Start is called before the first frame update
     void Start()
     {

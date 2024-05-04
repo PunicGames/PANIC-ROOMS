@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnObjects : MonoBehaviour
 {
     [SerializeField] private Transform[] m_collectibleSpawnPoints;
+    private Transform initial_positions;
 
     [SerializeField] private Transform[] m_batterySpawnPoints;
     [SerializeField] private GameObject[] m_batteries;
@@ -14,10 +15,18 @@ public class SpawnObjects : MonoBehaviour
 
     const float MAX_FORCE = 3.0f;
 
+    private void Update()
+    {
+        
+    }
+
     public void SpawnCollectible(GameObject collectible)
     {
         int idx = Random.Range(0, m_collectibleSpawnPoints.Length);
         GameObject instance = Instantiate(collectible, m_collectibleSpawnPoints[idx].position, m_collectibleSpawnPoints[idx].localRotation);
+        DiskBehavior disk_behavior = instance.GetComponent<DiskBehavior>();
+        disk_behavior.SetInititalPos(m_collectibleSpawnPoints[idx]);
+
 
         //Apply force in random direction
         Launch(instance);
